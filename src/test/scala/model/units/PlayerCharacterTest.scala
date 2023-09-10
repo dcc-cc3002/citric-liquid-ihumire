@@ -1,5 +1,5 @@
 package cl.uchile.dcc.citric
-package model
+package model.units
 
 import scala.util.Random
 
