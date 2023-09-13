@@ -39,6 +39,7 @@ import scala.util.Random
   */
 class PlayerCharacter(val name: String,
               val maxHp: Int,
+              var currHp: Int,
               val attack: Int,
               val defense: Int,
               val evasion: Int,
