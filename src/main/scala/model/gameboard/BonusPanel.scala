@@ -5,7 +5,7 @@ import model.units.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
-class HomePanel extends Panel {
+class BonusPanel extends Panel {
   /** Array of the characters currently positioned on this panel.
    *
    * In the game, multiple characters might be on the same panel at once, e.g., if multiple players
@@ -44,58 +44,8 @@ class HomePanel extends Panel {
     characters.remove(index)
   }
 
-  def healCharacter(player: PlayerCharacter): Unit = {
-    if (player.maxHp == player.currHp) {
-      player.currHp = player.maxHp
-    }
-    else {
-      player.currHp += 1
-    }
+  def giveStars(player: PlayerCharacter, roll :Int): Unit = {
+    val toGive: Int = math.min(roll * player.currNorma, roll * 3)
+    player.currStars += toGive
   }
-
-  def normaCheck(player: PlayerCharacter): Unit = {
-
-    if (player.currNorma == 1) {
-      if ((player.currStars >= 10) || (player.currVictories >= 1)){
-        player.currNorma += 1
-      }
-    }
-
-    else if(player.currNorma == 2) {
-      if ((player.currRoad == 1) && (player.currStars >= 30)) {
-        player.currNorma += 1
-      }
-      else if ((player.currRoad == 2) && (player.currVictories >= 3)){
-        player.currNorma += 1
-      }
-    }
-
-    else if (player.currNorma == 3) {
-      if ((player.currRoad == 1) && (player.currStars >= 70)) {
-        player.currNorma += 1
-      }
-      else if ((player.currRoad == 2) && (player.currVictories >= 6)) {
-        player.currNorma += 1
-      }
-    }
-
-    else if (player.currNorma == 4) {
-      if ((player.currRoad == 1) && (player.currStars >= 120)) {
-        player.currNorma += 1
-      }
-      else if ((player.currRoad == 2) &&  (player.currVictories >= 10)) {
-        player.currNorma += 1
-      }
-    }
-
-    else if (player.currNorma == 5) {
-      if ((player.currRoad == 1) && (player.currStars >= 200)) {
-        player.currNorma += 1
-      }
-      else if ((player.currRoad == 2) && (player.currVictories >= 14)) {
-        player.currNorma += 1
-      }
-    }
-  }
-
 }

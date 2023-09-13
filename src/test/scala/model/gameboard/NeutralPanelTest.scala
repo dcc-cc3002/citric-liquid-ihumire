@@ -12,8 +12,8 @@ class NeutralPanelTest extends FunSuite {
   var neutral: NeutralPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    player1 = new PlayerCharacter("Molly", 10, 10,5, 5, 0)
-    player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6)
+    player1 = new PlayerCharacter("Molly", 10, 10,5, 5, 0, 2, 50, 5, 1)
+    player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 20, 2, 0)
     neutral = new NeutralPanel
   }
 

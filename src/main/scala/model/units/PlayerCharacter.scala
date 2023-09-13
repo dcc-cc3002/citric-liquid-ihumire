@@ -43,10 +43,16 @@ class PlayerCharacter(val name: String,
               val attack: Int,
               val defense: Int,
               val evasion: Int,
+              var currNorma: Int,
+              var currStars: Int,
+              var currVictories: Int,
+              var currRoad: Int,
               val randomNumberGenerator: Random = new Random()) {
 
   /** Rolls a dice and returns a value between 1 to 6. */
   def rollDice(): Int = {
     randomNumberGenerator.nextInt(6) + 1
   }
+
+  // define norma clear in the future for question about the road to go.
 }
