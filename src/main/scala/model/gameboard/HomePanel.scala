@@ -55,6 +55,13 @@ class HomePanel extends Panel {
     characters.remove(index)
   }
 
+  /** Heals a character from the list of characters currently on this panel.
+   *
+   * This might be invoked once time when a player moves into this panel.
+   *
+   * @param player The player character to heal in this panel.
+   */
+
   def healCharacter(player: PlayerCharacter): Unit = {
     if (player.maxHp == player.currHp) {
       player.currHp = player.maxHp
@@ -63,6 +70,14 @@ class HomePanel extends Panel {
       player.currHp += 1
     }
   }
+
+  /** Do a NormaCheck to a character from the list of characters currently on this panel.
+   *
+   * A normaCheck checks if the character is able to advance his Norma.
+   * This might be invoked once time when a player moves into this panel.
+   *
+   * @param player The player character to heal in this panel.
+   */
 
   def normaCheck(player: PlayerCharacter): Unit = {
 
