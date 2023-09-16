@@ -47,5 +47,6 @@ class DropPanel extends Panel {
   def dropStars(player: PlayerCharacter, roll :Int): Unit = {
     val toDrop: Int = roll * player.currNorma
     player.currStars -= toDrop
+    // player.decreaseStars(toDrop)
   }
 }

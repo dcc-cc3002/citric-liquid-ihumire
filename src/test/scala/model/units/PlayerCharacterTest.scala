@@ -61,6 +61,26 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.currRoad, currRoad)
   }
 
+  test("A character should be able to increase his level of norma") {
+    val expectedNorma: Int = character.currNorma + 1
+    character.advanceNorma()
+    assertEquals(character.currNorma, expectedNorma)
+  }
+
+  test("A character should be able to increase his value of stars") {
+    val valueToGive: Int = 10
+    val expectedStars: Int = character.currStars + valueToGive
+    character.increaseStars(valueToGive)
+    assertEquals(character.currStars, expectedStars)
+  }
+
+  test("A character should be able to decrease his value of stars") {
+    val valueToDrop: Int = 10
+    val expectedStars: Int = character.currStars - valueToDrop
+    character.decreaseStars(valueToDrop)
+    assertEquals(character.currStars, expectedStars)
+  }
+
   // Two ways to test randomness (you can use any of them):
 
   // 1. Test invariant properties, e.g. the result is always between 1 and 6.

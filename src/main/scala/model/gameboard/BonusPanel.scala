@@ -47,5 +47,6 @@ class BonusPanel extends Panel {
   def giveStars(player: PlayerCharacter, roll :Int): Unit = {
     val toGive: Int = math.min(roll * player.currNorma, roll * 3)
     player.currStars += toGive
+    // player.increaseStars(toGive)
   }
 }

@@ -35,7 +35,7 @@ import scala.util.Random
   * @author [[https://github.com/joelriquelme/ Joel Riquelme P.]]
   * @author [[https://github.com/r8vnhill/ Ignacio Slater M.]]
   * @author [[https://github.com/Seivier/ Vicente González B.]]
-  * @author [[https://github.com/~Your github account~/ ~Your Name~]]
+  * @author [[https://github.com/ihumire/ Ignacio Humire S.]]
   */
 class PlayerCharacter(val name: String,
               val maxHp: Int,
@@ -52,6 +52,20 @@ class PlayerCharacter(val name: String,
   /** Rolls a dice and returns a value between 1 to 6. */
   def rollDice(): Int = {
     randomNumberGenerator.nextInt(6) + 1
+  }
+
+  def advanceNorma(): Unit = {
+    if (currNorma <= 5) {
+      currNorma += 1
+    }
+  }
+
+  def increaseStars(value: Int): Unit = {
+    currStars += value
+  }
+
+  def decreaseStars(value: Int): Unit = {
+    currStars -= value
   }
 
   // define norma clear in the future for question about the road to go.

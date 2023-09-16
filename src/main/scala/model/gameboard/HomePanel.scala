@@ -5,6 +5,17 @@ import model.units.PlayerCharacter
 
 import scala.collection.mutable.ArrayBuffer
 
+/** The `HomePanel` class represents a panel in the game.
+ *
+ * This class provides a list of characters who are into this panel and the panels next to them.
+ * Also, this class incorporates methods to modify that list of characters, adding or removing characters depend of the
+ * moment in the game.
+ * At this case, this class summon other specific methods like heal a specific player into the list of characters and
+ * do a normaCheck.
+ *
+ * @author [[https://github.com/ihumire/ Ignacio Humire S.]]
+ */
+
 class HomePanel extends Panel {
   /** Array of the characters currently positioned on this panel.
    *
@@ -57,43 +68,43 @@ class HomePanel extends Panel {
 
     if (player.currNorma == 1) {
       if ((player.currStars >= 10) || (player.currVictories >= 1)){
-        player.currNorma += 1
+        player.advanceNorma()
       }
     }
 
     else if(player.currNorma == 2) {
       if ((player.currRoad == 1) && (player.currStars >= 30)) {
-        player.currNorma += 1
+        player.advanceNorma()
       }
       else if ((player.currRoad == 2) && (player.currVictories >= 3)){
-        player.currNorma += 1
+        player.advanceNorma()
       }
     }
 
     else if (player.currNorma == 3) {
       if ((player.currRoad == 1) && (player.currStars >= 70)) {
-        player.currNorma += 1
+        player.advanceNorma()
       }
       else if ((player.currRoad == 2) && (player.currVictories >= 6)) {
-        player.currNorma += 1
+        player.advanceNorma()
       }
     }
 
     else if (player.currNorma == 4) {
       if ((player.currRoad == 1) && (player.currStars >= 120)) {
-        player.currNorma += 1
+        player.advanceNorma()
       }
       else if ((player.currRoad == 2) &&  (player.currVictories >= 10)) {
-        player.currNorma += 1
+        player.advanceNorma()
       }
     }
 
     else if (player.currNorma == 5) {
       if ((player.currRoad == 1) && (player.currStars >= 200)) {
-        player.currNorma += 1
+        player.advanceNorma()
       }
       else if ((player.currRoad == 2) && (player.currVictories >= 14)) {
-        player.currNorma += 1
+        player.advanceNorma()
       }
     }
   }
