@@ -19,7 +19,7 @@ class PlayerCharacterTest extends munit.FunSuite {
   var currStars = 0
   var currVictories = 0
   var currRoad = 0
-  private val randomNumberGenerator = new Random(11)
+  private var randomNumberGenerator: Random = _
   /* Add any other constants you need here... */
 
   /*
@@ -33,6 +33,7 @@ class PlayerCharacterTest extends munit.FunSuite {
 
   // This method is executed before each `test(...)` method.
   override def beforeEach(context: BeforeEach): Unit = {
+    randomNumberGenerator = new Random(11)
     character = new PlayerCharacter(
       name,
       maxHp,
