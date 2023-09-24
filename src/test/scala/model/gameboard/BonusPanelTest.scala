@@ -2,15 +2,12 @@ package cl.uchile.dcc.citric
 package model.gameboard
 
 import model.units.PlayerCharacter
-
 import munit.FunSuite
-
 import scala.collection.mutable.ArrayBuffer
 
 class BonusPanelTest extends FunSuite {
   var player1: PlayerCharacter = _
   var player2: PlayerCharacter = _
-  var roll: Int = _
   var bonus: BonusPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {

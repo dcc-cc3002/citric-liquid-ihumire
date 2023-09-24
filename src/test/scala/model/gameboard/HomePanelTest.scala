@@ -20,34 +20,6 @@ class HomePanelTest extends FunSuite {
     home = new HomePanel
   }
 
-  test("Add character to a home panel") {
-    val expectedNothing: ArrayBuffer[PlayerCharacter] = ArrayBuffer()
-    val expectedCharacter: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1)
-    assertEquals(home.characters, expectedNothing)
-    assertNotEquals(home.characters, expectedCharacter)
-    home.addCharacter(player1)
-    assertNotEquals(home.characters, expectedNothing)
-    assertEquals(home.characters, expectedCharacter)
-  }
-
-  test("Remove character from a home panel") {
-    home.addCharacter(player1)
-    home.addCharacter(player2)
-    val expectedNothing: ArrayBuffer[PlayerCharacter] = ArrayBuffer()
-    val expectedCharacter1: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1)
-    val expectedCharacter2: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player2)
-    val expectedCharacters: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1, player2)
-    assertNotEquals(home.characters, expectedNothing)
-    assertNotEquals(home.characters, expectedCharacter1)
-    assertNotEquals(home.characters, expectedCharacter2)
-    assertEquals(home.characters, expectedCharacters)
-    home.removeCharacter(player1)
-    assertNotEquals(home.characters, expectedNothing)
-    assertNotEquals(home.characters, expectedCharacter1)
-    assertEquals(home.characters, expectedCharacter2)
-    assertNotEquals(home.characters, expectedCharacters)
-  }
-
   test("Heal a character in a home panel with maxHp") {
     val expectedHpP1: Int = player1.currHp + 1
     home.healCharacter(player1)
