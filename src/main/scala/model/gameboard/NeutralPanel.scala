@@ -15,5 +15,4 @@ import scala.collection.mutable.ArrayBuffer
 
 class NeutralPanel extends AbstractPanel {
 
-
 }
