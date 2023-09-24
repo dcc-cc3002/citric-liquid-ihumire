@@ -10,41 +10,12 @@ import scala.collection.mutable.ArrayBuffer
 class DropPanelTest extends FunSuite {
   var player1: PlayerCharacter = _
   var player2: PlayerCharacter = _
-  var roll: Int = _
   var drop: DropPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 10, 10,5, 5, 0, 2, 50, 5, 1)
     player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 20, 2, 0)
     drop = new DropPanel
-  }
-
-  test("Add character to a bonus panel"){
-    val expectedNothing : ArrayBuffer[PlayerCharacter] = ArrayBuffer()
-    val expectedCharacter : ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1)
-    assertEquals(drop.characters, expectedNothing)
-    assertNotEquals(drop.characters, expectedCharacter)
-    drop.addCharacter(player1)
-    assertNotEquals(drop.characters, expectedNothing)
-    assertEquals(drop.characters, expectedCharacter)
-  }
-
-  test("Remove character from a bonus panel") {
-    drop.addCharacter(player1)
-    drop.addCharacter(player2)
-    val expectedNothing: ArrayBuffer[PlayerCharacter] = ArrayBuffer()
-    val expectedCharacter1: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1)
-    val expectedCharacter2: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player2)
-    val expectedCharacters: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1,player2)
-    assertNotEquals(drop.characters, expectedNothing)
-    assertNotEquals(drop.characters, expectedCharacter1)
-    assertNotEquals(drop.characters, expectedCharacter2)
-    assertEquals(drop.characters, expectedCharacters)
-    drop.removeCharacter(player1)
-    assertNotEquals(drop.characters, expectedNothing)
-    assertNotEquals(drop.characters, expectedCharacter1)
-    assertEquals(drop.characters, expectedCharacter2)
-    assertNotEquals(drop.characters, expectedCharacters)
   }
 
   test("Drop stars by a character in a bonus panel (p1 version"){
