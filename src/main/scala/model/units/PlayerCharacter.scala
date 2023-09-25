@@ -68,8 +68,9 @@ class PlayerCharacter(val name: String,
    * The character increase his level of Norma.
    */
   def advanceNorma(): Unit = {
-    if (currNorma <= 5) {
-      currNorma += 1
+    currNorma+=1
+    if (currNorma > 6) {
+      currNorma = 6
     }
   }
 
@@ -111,4 +112,47 @@ class PlayerCharacter(val name: String,
     currVictories+=1
   }
 
+  def normaClear(): Unit = {
+
+    if (currNorma == 1) {
+      if ((currStars >= 10) || (currVictories >= 1)) {
+        advanceNorma()
+      }
+    }
+    else if (currNorma == 2) {
+      if ((currRoad == 1) && (currStars >= 30)) {
+        advanceNorma()
+      }
+      else if ((currRoad == 2) && (currVictories >= 3)) {
+        advanceNorma()
+      }
+    }
+
+    else if (currNorma == 3) {
+      if ((currRoad == 1) && (currStars >= 70)) {
+        advanceNorma()
+      }
+      else if ((currRoad == 2) && (currVictories >= 6)) {
+        advanceNorma()
+      }
+    }
+
+    else if (currNorma == 4) {
+      if ((currRoad == 1) && (currStars >= 120)) {
+        advanceNorma()
+      }
+      else if ((currRoad == 2) && (currVictories >= 10)) {
+        advanceNorma()
+      }
+    }
+
+    else if (currNorma == 5) {
+      if ((currRoad == 1) && (currStars >= 200)) {
+        advanceNorma()
+      }
+      else if ((currRoad == 2) && (currVictories >= 14)) {
+        advanceNorma()
+      }
+    }
+  }
 }

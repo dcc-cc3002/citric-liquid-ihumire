@@ -26,12 +26,7 @@ class HomePanel extends AbstractPanel {
    */
 
   def healCharacter(player: PlayerCharacter): Unit = {
-    if (player.maxHp == player.currHp) {
-      player.currHp = player.maxHp
-    }
-    else {
-      player.currHp += 1
-    }
+    player.increaseHp(1)
   }
 
   /** Do a NormaCheck to a character from the list of characters currently on this panel.
@@ -43,48 +38,6 @@ class HomePanel extends AbstractPanel {
    */
 
   def normaCheck(player: PlayerCharacter): Unit = {
-
-    if (player.currNorma == 1) {
-      if ((player.currStars >= 10) || (player.currVictories >= 1)){
-        player.advanceNorma()
-      }
-    }
-
-    else if(player.currNorma == 2) {
-      if ((player.currRoad == 1) && (player.currStars >= 30)) {
-        player.advanceNorma()
-      }
-      else if ((player.currRoad == 2) && (player.currVictories >= 3)){
-        player.advanceNorma()
-      }
-    }
-
-    else if (player.currNorma == 3) {
-      if ((player.currRoad == 1) && (player.currStars >= 70)) {
-        player.advanceNorma()
-      }
-      else if ((player.currRoad == 2) && (player.currVictories >= 6)) {
-        player.advanceNorma()
-      }
-    }
-
-    else if (player.currNorma == 4) {
-      if ((player.currRoad == 1) && (player.currStars >= 120)) {
-        player.advanceNorma()
-      }
-      else if ((player.currRoad == 2) &&  (player.currVictories >= 10)) {
-        player.advanceNorma()
-      }
-    }
-
-    else if (player.currNorma == 5) {
-      if ((player.currRoad == 1) && (player.currStars >= 200)) {
-        player.advanceNorma()
-      }
-      else if ((player.currRoad == 2) && (player.currVictories >= 14)) {
-        player.advanceNorma()
-      }
-    }
+    player.normaClear()
   }
-
 }
