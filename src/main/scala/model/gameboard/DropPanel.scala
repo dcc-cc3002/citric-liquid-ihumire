@@ -24,7 +24,7 @@ class DropPanel extends AbstractPanel {
    * @param roll The number who depends the numbers of stars to drop.
    */
 
-  def dropStars(player: PlayerCharacter, roll :Int): Unit = {
+  def dropStars(player: PlayerCharacter, roll: Int): Unit = {
     val toDrop: Int = roll * player.currNorma
     player.decreaseStars(toDrop)
   }

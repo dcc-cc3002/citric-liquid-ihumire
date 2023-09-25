@@ -31,6 +31,8 @@ class PlayerCharacterTest extends munit.FunSuite {
   private var character: PlayerCharacter = _  // <- x = _ is the same as x = null
   /* Add any other variables you need here... */
 
+  private var character1: PlayerCharacter = _
+  private var character2: PlayerCharacter = _
   // This method is executed before each `test(...)` method.
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
@@ -38,6 +40,32 @@ class PlayerCharacterTest extends munit.FunSuite {
       name,
       maxHp,
       currHp,
+      attack,
+      defense,
+      evasion,
+      currNorma,
+      currStars,
+      currVictories,
+      currRoad,
+      randomNumberGenerator
+    )
+    character1 = new PlayerCharacter(
+      name,
+      10,
+      9,
+      attack,
+      defense,
+      evasion,
+      currNorma,
+      11,
+      currVictories,
+      currRoad,
+      randomNumberGenerator
+    )
+    character2 = new PlayerCharacter(
+      name,
+      10,
+      1,
       attack,
       defense,
       evasion,
@@ -68,18 +96,53 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.currNorma, expectedNorma)
   }
 
-  test("A character should be able to increase his value of stars") {
+  test("A character should be able to increase his value of stars, without limits") {
     val valueToGive: Int = 10
     val expectedStars: Int = character.currStars + valueToGive
     character.increaseStars(valueToGive)
     assertEquals(character.currStars, expectedStars)
   }
 
-  test("A character should be able to decrease his value of stars") {
+  test("A character should be able to decrease his value of stars, without overflow the 0") {
     val valueToDrop: Int = 10
+    // This case should overflow
     val expectedStars: Int = character.currStars - valueToDrop
     character.decreaseStars(valueToDrop)
-    assertEquals(character.currStars, expectedStars)
+    assertNotEquals(character.currStars, expectedStars)
+    // This case shouldn´t overflow
+    val expectedStars1: Int = character1.currStars - valueToDrop
+    character1.decreaseStars(valueToDrop)
+    assertEquals(character1.currStars, expectedStars1)
+  }
+
+  test("A character should be able to increase his currHp, without overflow maxHp") {
+    val valueToIncrease: Int = 1
+    // This case should overflow
+    val expectedHp: Int = character.currHp + valueToIncrease
+    character.increaseHp(valueToIncrease)
+    assertNotEquals(character.currHp, expectedHp)
+    // This case shouldn't overflow
+    val expectedHp1: Int = character1.currHp + valueToIncrease
+    character1.increaseHp(valueToIncrease)
+    assertEquals(character1.currHp, expectedHp1)
+  }
+
+  test("A character should be able to decrease his currHp, without overflow the 0") {
+    val valueToDecrease: Int = 2
+    // This case should overflow
+    val expectedHp: Int = character.currHp - valueToDecrease
+    character.decreaseHp(valueToDecrease)
+    assertEquals(character.currHp, expectedHp)
+    // This case shouldn't overflow
+    val expectedHp1: Int = character2.currHp - valueToDecrease
+    character2.decreaseHp(valueToDecrease)
+    assertNotEquals(character2.currHp, expectedHp1)
+  }
+
+  test("A character should be able to increase his victories, without limits") {
+    val expectedVictories: Int = character.currVictories + 1
+    character.increaseVictory()
+    assertEquals(character.currVictories, expectedVictories)
   }
 
   // Two ways to test randomness (you can use any of them):

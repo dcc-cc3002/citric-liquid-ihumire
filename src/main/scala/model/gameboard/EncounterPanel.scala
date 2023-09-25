@@ -16,5 +16,5 @@ import scala.collection.mutable.ArrayBuffer
  */
 
 class EncounterPanel extends AbstractPanel {
-  
+
 }
