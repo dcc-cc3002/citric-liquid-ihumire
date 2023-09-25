@@ -3,7 +3,7 @@ package model.units
 
 import scala.util.Random
 
-class WildUnitTest extends munit.FunSuite{
+class WildUnitCharacterTest extends munit.FunSuite{
   private val name = "WildUnit"
   private val maxHp = 5
   private var currHp = 5

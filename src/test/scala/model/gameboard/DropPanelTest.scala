@@ -18,6 +18,34 @@ class DropPanelTest extends FunSuite {
     drop = new DropPanel
   }
 
+  test("Add character to drop panel") {
+    val expectedNothing: ArrayBuffer[PlayerCharacter] = ArrayBuffer()
+    val expectedCharacter: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1)
+    assertEquals(drop.characters, expectedNothing)
+    assertNotEquals(drop.characters, expectedCharacter)
+    drop.addCharacter(player1)
+    assertNotEquals(drop.characters, expectedNothing)
+    assertEquals(drop.characters, expectedCharacter)
+  }
+
+  test("Remove character from a drop panel") {
+    drop.addCharacter(player1)
+    drop.addCharacter(player2)
+    val expectedNothing: ArrayBuffer[PlayerCharacter] = ArrayBuffer()
+    val expectedCharacter1: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1)
+    val expectedCharacter2: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player2)
+    val expectedCharacters: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1, player2)
+    assertNotEquals(drop.characters, expectedNothing)
+    assertNotEquals(drop.characters, expectedCharacter1)
+    assertNotEquals(drop.characters, expectedCharacter2)
+    assertEquals(drop.characters, expectedCharacters)
+    drop.removeCharacter(player1)
+    assertNotEquals(drop.characters, expectedNothing)
+    assertNotEquals(drop.characters, expectedCharacter1)
+    assertEquals(drop.characters, expectedCharacter2)
+    assertNotEquals(drop.characters, expectedCharacters)
+  }
+
   test("Drop stars by a character in a bonus panel (p1 version"){
     val roll: Int = player1.rollDice()
     val toDrop: Int = math.min(roll * player1.currNorma, roll * 3)
