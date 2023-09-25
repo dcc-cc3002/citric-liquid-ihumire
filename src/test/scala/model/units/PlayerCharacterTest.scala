@@ -11,14 +11,14 @@ class PlayerCharacterTest extends munit.FunSuite {
   */
   private val name = "testPlayer"
   private val maxHp = 10
-  var currHp = 10
+  private var currHp = 10
   private val attack = 1
   private val defense = 1
   private val evasion = 1
-  var currNorma = 1
-  var currStars = 0
-  var currVictories = 0
-  var currRoad = 0
+  private var currNorma = 1
+  private var currStars = 0
+  private var currVictories = 0
+  private var currRoad = 0
   private var randomNumberGenerator: Random = _
   /* Add any other constants you need here... */
 
