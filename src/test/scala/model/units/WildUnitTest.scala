@@ -13,15 +13,15 @@ class WildUnitTest extends munit.FunSuite{
   private var currStars = 0
   private var randomNumberGenerator: Random = _
 
-  private var wildUnit1: WildUnit = _
-  private var wildUnit2: WildUnit = _
-  private var wildUnit3: WildUnit = _
+  private var wildUnit1: WildUnitCharacter = _
+  private var wildUnit2: WildUnitCharacter = _
+  private var wildUnit3: WildUnitCharacter = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
-    wildUnit1 = new WildUnit(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
-    wildUnit2 = new WildUnit(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
-    wildUnit3 = new WildUnit(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
+    wildUnit1 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
+    wildUnit2 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
+    wildUnit3 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
   }
 
   test("A wild unit should have correctly set their attributes"){
@@ -48,11 +48,9 @@ class WildUnitTest extends munit.FunSuite{
   // are always the same for the same seed.
   test("A wild unit should be able to roll a dice with a fixed seed") {
     val other1 =
-      new WildUnit(name, maxHp, currHp, attack, defense, evasion, currStars, new Random(11))
+      new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars, new Random(11))
     for (_ <- 1 to 10) {
       assertEquals(wildUnit1.rollDice(), other1.rollDice())
     }
   }
-
-
 }

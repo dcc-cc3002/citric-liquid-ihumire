@@ -144,7 +144,6 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.currVictories, expectedVictories)
   }
 
-
   test("A character should be able to NormaClear by all the stars road") {
 
     val expected1: Int = testCharStarRoad1.currNorma + 1
