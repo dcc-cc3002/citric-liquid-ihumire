@@ -19,9 +19,9 @@ class WildUnitCharacterTest extends munit.FunSuite{
 
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
-    wildUnit1 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
-    wildUnit2 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
-    wildUnit3 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars, randomNumberGenerator)
+    wildUnit1 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars,randomNumberGenerator)
+    wildUnit2 = new WildUnitCharacter(name, maxHp, 4, attack, defense, evasion, 11)
+    wildUnit3 = new WildUnitCharacter(name, maxHp, 1, attack, defense, evasion, currStars, randomNumberGenerator)
   }
 
   test("A wild unit should have correctly set their attributes"){
@@ -53,4 +53,53 @@ class WildUnitCharacterTest extends munit.FunSuite{
       assertEquals(wildUnit1.rollDice(), other1.rollDice())
     }
   }
+
+  test("A character should automatically have a randomNumberGenerator to work in a dice"){
+    val randomWildUnitTestValue: Int = wildUnit2.randomNumberGenerator.nextInt(6) + 1
+    assert(randomWildUnitTestValue >=1 && randomWildUnitTestValue <= 6)
+  }
+
+  test("A wild unit should be able to increase his value of stars, without limits") {
+    val valueToGive: Int = 10
+    val expectedStars: Int = wildUnit1.currStars + valueToGive
+    wildUnit1.increaseStars(valueToGive)
+    assertEquals(wildUnit1.currStars, expectedStars)
+  }
+
+  test("A wild unit should be able to decrease his value of stars, without overflow the 0") {
+    val valueToDrop: Int = 10
+    // This case should overflow
+    val expectedStars1: Int = wildUnit1.currStars - valueToDrop
+    wildUnit1.decreaseStars(valueToDrop)
+    assertNotEquals(wildUnit1.currStars, expectedStars1)
+    // This case shouldn´t overflow
+    val expectedStars2: Int = wildUnit2.currStars - valueToDrop
+    wildUnit2.decreaseStars(valueToDrop)
+    assertEquals(wildUnit2.currStars, expectedStars2)
+  }
+
+  test("A character should be able to increase his currHp, without overflow maxHp") {
+    val valueToIncrease: Int = 1
+    // This case should overflow
+    val expectedHp1: Int = wildUnit1.currHp + valueToIncrease
+    wildUnit1.increaseHp(valueToIncrease)
+    assertNotEquals(wildUnit1.currHp, expectedHp1)
+    // This case shouldn't overflow
+    val expectedHp2: Int = wildUnit2.currHp + valueToIncrease
+    wildUnit2.increaseHp(valueToIncrease)
+    assertEquals(wildUnit2.currHp, expectedHp2)
+  }
+
+  test("A character should be able to decrease his currHp, without overflow the 0") {
+    val valueToDecrease: Int = 2
+    // This case should overflow
+    val expectedHp1: Int = wildUnit1.currHp - valueToDecrease
+    wildUnit1.decreaseHp(valueToDecrease)
+    assertEquals(wildUnit1.currHp, expectedHp1)
+    // This case shouldn't overflow
+    val expectedHp2: Int = wildUnit3.currHp - valueToDecrease
+    wildUnit3.decreaseHp(valueToDecrease)
+    assertNotEquals(wildUnit3.currHp, expectedHp2)
+  }
+
 }

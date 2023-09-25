@@ -26,7 +26,6 @@ class WildUnitCharacter(val name: String,
   def increaseStars(value: Int): Unit = {
     currStars += value
   }
-
   /**
    * The character decrease his amount of stars by a specific value.
    *
@@ -36,6 +35,28 @@ class WildUnitCharacter(val name: String,
     currStars -= value
     if (currStars < 0) {
       currStars = 0
+    }
+  }
+  /**
+   * The character increase his health points by a specific value.
+   *
+   * @param value The number of health points, bigger than 0, given to the character less than maxHp.
+   */
+  def increaseHp(value: Int): Unit = {
+    currHp += value
+    if (currHp > maxHp) {
+      currHp = maxHp
+    }
+  }
+  /**
+   * The character decrease his health points by a specific value.
+   *
+   * @param value The number of health points, bigger than 0, steal to the character at least 0.
+   */
+  def decreaseHp(value: Int): Unit = {
+    currHp -= value
+    if (currHp < 0) {
+      currHp = 0
     }
   }
 }
