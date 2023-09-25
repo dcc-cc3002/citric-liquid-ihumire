@@ -47,7 +47,7 @@ class PlayerCharacterTest extends munit.FunSuite {
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
     character = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      currNorma, currStars, currVictories, currRoad, randomNumberGenerator)
+      currNorma, currStars, currVictories, currRoad)
     character1 = new PlayerCharacter(
       name, 10, 9, attack, defense, evasion,
       currNorma, 11,currVictories,currRoad,randomNumberGenerator)
@@ -77,6 +77,7 @@ class PlayerCharacterTest extends munit.FunSuite {
   }
 
   test("A character should have correctly set their attributes") {
+    val randomCharacterTestValue: Int = character.randomNumberGenerator.nextInt(6) + 1
     assertEquals(character.name, name)
     assertEquals(character.maxHp, maxHp)
     assertEquals(character.currHp, currHp)
@@ -87,6 +88,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.currStars, currStars)
     assertEquals(character.currVictories, currVictories)
     assertEquals(character.currRoad, currRoad)
+    assert(randomCharacterTestValue >= 1 && randomCharacterTestValue <= 6)
   }
 
   test("A character should be able to increase his level of norma") {
@@ -195,7 +197,7 @@ class PlayerCharacterTest extends munit.FunSuite {
   // 1. Test invariant properties, e.g. the result is always between 1 and 6.
   test("A character should be able to roll a dice") {
     for (_ <- 1 to 10) {
-      assert(character.rollDice >= 1 && character.rollDice <= 6)
+      assert(character1.rollDice >= 1 && character1.rollDice <= 6)
     }
   }
 
@@ -206,7 +208,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     val other =
       new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion, currNorma, currStars, currVictories, currRoad, new Random(11))
     for (_ <- 1 to 10) {
-      assertEquals(character.rollDice(), other.rollDice())
+      assertEquals(character1.rollDice(), other.rollDice())
     }
   }
 

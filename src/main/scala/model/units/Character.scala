@@ -11,7 +11,7 @@ trait Character {
   val defense: Int
   val evasion: Int
   var currStars: Int
-  var randomNumberGenerator: Random
+  val randomNumberGenerator: Random
 
   def rollDice(): Int
   def increaseStars(value: Int): Unit
