@@ -31,7 +31,7 @@ class HomePanel extends AbstractPanel {
 
   /** Do a NormaCheck to a character from the list of characters currently on this panel.
    *
-   * A normaCheck checks if the character is able to advance his Norma.
+   * A normaCheck checks if the character is able to advance his Norma, using NormaClear of the character.
    * This might be invoked once time when a player moves into this panel.
    *
    * @param player The player character to heal in this panel.

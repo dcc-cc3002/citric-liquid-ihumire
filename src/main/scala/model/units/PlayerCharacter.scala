@@ -75,6 +75,7 @@ class PlayerCharacter(val name: String,
 
   /**
    * The character increase his amount of stars by a specific value.
+   *
    * @param value The number of stars given to the character bigger than 0.
    */
   def increaseStars(value: Int): Unit = {
@@ -93,6 +94,11 @@ class PlayerCharacter(val name: String,
     }
   }
 
+  /**
+   * The character increase his health points by a specific value.
+   *
+   * @param value The number of health points, bigger than 0, given to the character less than maxHp.
+   */
   def increaseHp(value: Int): Unit = {
     currHp += value
     if (currHp > maxHp){
@@ -100,6 +106,11 @@ class PlayerCharacter(val name: String,
     }
   }
 
+  /**
+   * The character decrease his health points by a specific value.
+   *
+   * @param value The number of health points, bigger than 0, steal to the character at least 0.
+   */
   def decreaseHp(value: Int): Unit = {
     currHp -= value
     if (currHp < 0) {
@@ -107,10 +118,18 @@ class PlayerCharacter(val name: String,
     }
   }
 
+  /**
+   * The character increase his amount of victories by one.
+   */
   def increaseVictory(): Unit = {
     currVictories+=1
   }
 
+  /**
+   * The character NormaClears his self, updating his level of norma.
+   * The method considers the amount of stars, amount of victories, the level of norma
+   * and the road previously chosen.
+   */
   def normaClear(): Unit = {
 
     if (currNorma == 1) {

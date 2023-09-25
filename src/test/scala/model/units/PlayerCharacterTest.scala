@@ -33,48 +33,47 @@ class PlayerCharacterTest extends munit.FunSuite {
 
   private var character1: PlayerCharacter = _
   private var character2: PlayerCharacter = _
+  private var testCharStarRoad1: PlayerCharacter = _
+  private var testCharStarRoad2: PlayerCharacter = _
+  private var testCharStarRoad3: PlayerCharacter = _
+  private var testCharStarRoad4: PlayerCharacter = _
+  private var testCharStarRoad5: PlayerCharacter = _
+  private var testCharVictoryRoad1: PlayerCharacter = _
+  private var testCharVictoryRoad2: PlayerCharacter = _
+  private var testCharVictoryRoad3: PlayerCharacter = _
+  private var testCharVictoryRoad4: PlayerCharacter = _
+  private var testCharVictoryRoad5: PlayerCharacter = _
   // This method is executed before each `test(...)` method.
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
-    character = new PlayerCharacter(
-      name,
-      maxHp,
-      currHp,
-      attack,
-      defense,
-      evasion,
-      currNorma,
-      currStars,
-      currVictories,
-      currRoad,
-      randomNumberGenerator
-    )
+    character = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      currNorma, currStars, currVictories, currRoad, randomNumberGenerator)
     character1 = new PlayerCharacter(
-      name,
-      10,
-      9,
-      attack,
-      defense,
-      evasion,
-      currNorma,
-      11,
-      currVictories,
-      currRoad,
-      randomNumberGenerator
-    )
+      name, 10, 9, attack, defense, evasion,
+      currNorma, 11,currVictories,currRoad,randomNumberGenerator)
     character2 = new PlayerCharacter(
-      name,
-      10,
-      1,
-      attack,
-      defense,
-      evasion,
-      currNorma,
-      currStars,
-      currVictories,
-      currRoad,
-      randomNumberGenerator
-    )
+      name, 10, 1, attack, defense, evasion,
+      currNorma, currStars, currVictories, currRoad, randomNumberGenerator)
+    testCharStarRoad1 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      1, 10, currVictories, 1, randomNumberGenerator)
+    testCharStarRoad2 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      2, 30, currVictories, 1, randomNumberGenerator)
+    testCharStarRoad3 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      3, 70, currVictories, 1, randomNumberGenerator)
+    testCharStarRoad4 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      4, 120, currVictories, 1, randomNumberGenerator)
+    testCharStarRoad5 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      5, 200, currVictories, 1, randomNumberGenerator)
+    testCharVictoryRoad1 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      1, currStars, 1, 2, randomNumberGenerator)
+    testCharVictoryRoad2 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      2, currStars, 3, 2, randomNumberGenerator)
+    testCharVictoryRoad3 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      3, currStars, 6, 2, randomNumberGenerator)
+    testCharVictoryRoad4 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      4, currStars, 10, 2, randomNumberGenerator)
+    testCharVictoryRoad5 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
+      5, currStars, 14, 2, randomNumberGenerator)
   }
 
   test("A character should have correctly set their attributes") {
@@ -148,72 +147,49 @@ class PlayerCharacterTest extends munit.FunSuite {
 
   test("A character should be able to NormaClear by all the stars road") {
 
-    var testCharacter1 = new PlayerCharacter(name,maxHp,currHp,attack,defense,evasion,
-      1,10,currVictories,1,randomNumberGenerator)
-    val expected1: Int = testCharacter1.currNorma + 1
-    testCharacter1.normaClear()
-    assertEquals(testCharacter1.currNorma,expected1)
+    val expected1: Int = testCharStarRoad1.currNorma + 1
+    testCharStarRoad1.normaClear()
+    assertEquals(testCharStarRoad1.currNorma,expected1)
 
-    var testCharacter2 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      2, 30, currVictories, 1, randomNumberGenerator)
-    val expected2: Int = testCharacter2.currNorma + 1
-    testCharacter2.normaClear()
-    assertEquals(testCharacter2.currNorma, expected2)
+    val expected2: Int = testCharStarRoad2.currNorma + 1
+    testCharStarRoad2.normaClear()
+    assertEquals(testCharStarRoad2.currNorma, expected2)
 
-    var testCharacter3 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      3, 70, currVictories, 1, randomNumberGenerator)
-    val expected3: Int = testCharacter3.currNorma + 1
-    testCharacter3.normaClear()
-    assertEquals(testCharacter3.currNorma, expected3)
+    val expected3: Int = testCharStarRoad3.currNorma + 1
+    testCharStarRoad3.normaClear()
+    assertEquals(testCharStarRoad3.currNorma, expected3)
 
-    var testCharacter4 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      4, 120, currVictories, 1, randomNumberGenerator)
-    val expected4: Int = testCharacter4.currNorma + 1
-    testCharacter4.normaClear()
-    assertEquals(testCharacter4.currNorma, expected4)
+    val expected4: Int = testCharStarRoad4.currNorma + 1
+    testCharStarRoad4.normaClear()
+    assertEquals(testCharStarRoad4.currNorma, expected4)
 
-    var testCharacter5 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      5, 200, currVictories, 1, randomNumberGenerator)
-    val expected5: Int = testCharacter5.currNorma + 1
-    testCharacter5.normaClear()
-    assertEquals(testCharacter5.currNorma, expected5)
+    val expected5: Int = testCharStarRoad5.currNorma + 1
+    testCharStarRoad5.normaClear()
+    assertEquals(testCharStarRoad5.currNorma, expected5)
   }
 
   test ("A character should be able to NormaClear by all the victories road") {
 
-    var testCharacter1 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      1, currStars, 1, 2, randomNumberGenerator)
-    val expected1: Int = testCharacter1.currNorma + 1
-    testCharacter1.normaClear()
-    assertEquals(testCharacter1.currNorma, expected1)
+    val expected1: Int = testCharVictoryRoad1.currNorma + 1
+    testCharVictoryRoad1.normaClear()
+    assertEquals(testCharVictoryRoad1.currNorma, expected1)
 
-    var testCharacter2 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      2, currStars, 3, 2, randomNumberGenerator)
-    val expected2: Int = testCharacter2.currNorma + 1
-    testCharacter2.normaClear()
-    assertEquals(testCharacter2.currNorma, expected2)
+    val expected2: Int = testCharVictoryRoad2.currNorma + 1
+    testCharVictoryRoad2.normaClear()
+    assertEquals(testCharVictoryRoad2.currNorma, expected2)
 
-    var testCharacter3 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      3, currStars, 6, 2, randomNumberGenerator)
-    val expected3: Int = testCharacter3.currNorma + 1
-    testCharacter3.normaClear()
-    assertEquals(testCharacter3.currNorma, expected3)
+    val expected3: Int = testCharVictoryRoad3.currNorma + 1
+    testCharVictoryRoad3.normaClear()
+    assertEquals(testCharVictoryRoad3.currNorma, expected3)
 
-    var testCharacter4 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      4, currStars, 10, 2, randomNumberGenerator)
-    val expected4: Int = testCharacter4.currNorma + 1
-    testCharacter4.normaClear()
-    assertEquals(testCharacter4.currNorma, expected4)
+    val expected4: Int = testCharVictoryRoad4.currNorma + 1
+    testCharVictoryRoad4.normaClear()
+    assertEquals(testCharVictoryRoad4.currNorma, expected4)
 
-    var testCharacter5 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      5, currStars, 14, 2, randomNumberGenerator)
-    val expected5: Int = testCharacter5.currNorma + 1
-    testCharacter5.normaClear()
-    assertEquals(testCharacter5.currNorma, expected5)
+    val expected5: Int = testCharVictoryRoad5.currNorma + 1
+    testCharVictoryRoad5.normaClear()
+    assertEquals(testCharVictoryRoad5.currNorma, expected5)
   }
-
-
-
 
   // Two ways to test randomness (you can use any of them):
 
