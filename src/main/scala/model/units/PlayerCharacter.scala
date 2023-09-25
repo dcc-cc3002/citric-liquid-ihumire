@@ -68,9 +68,8 @@ class PlayerCharacter(val name: String,
    * The character increase his level of Norma.
    */
   def advanceNorma(): Unit = {
-    currNorma+=1
-    if (currNorma > 6) {
-      currNorma = 6
+    if (currNorma <= 5) {
+      currNorma += 1
     }
   }
 
