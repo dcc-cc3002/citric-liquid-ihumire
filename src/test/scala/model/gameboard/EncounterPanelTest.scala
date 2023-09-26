@@ -10,15 +10,11 @@ import scala.collection.mutable.ArrayBuffer
 class EncounterPanelTest extends FunSuite {
   private var player1: PlayerCharacter = _
   private var player2: PlayerCharacter = _
-  private var wildUnit1: WildUnitCharacter = _
-  private var wildUnit2: WildUnitCharacter = _
   private var encounter: EncounterPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 10, 10, 5, 5, 0, 2, 50, 5, 1)
     player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 20, 2, 0)
-    wildUnit1 = new WildUnitCharacter("Chicken",3,3, -1, -1, 1,0)
-    wildUnit2 = new WildUnitCharacter("Chicken",3,0, -1, -1, 1,0)
     encounter = new EncounterPanel
   }
 
@@ -44,28 +40,26 @@ class EncounterPanelTest extends FunSuite {
     assertNotEquals(encounter.characters, expectedCharacters)
   }
 
-  test("Add wild unit to encounter panel") {
-    val expectedCharacter: ArrayBuffer[WildUnitCharacter] = ArrayBuffer(wildUnit1)
-    assertNotEquals(encounter.wildUnits, expectedCharacter)
-    encounter.addWildUnit(wildUnit1)
-    assertEquals(encounter.wildUnits, expectedCharacter)
+  test("Add a random wild unit to encounter panel only if is empty") {
+    val expectedChicken: ArrayBuffer[WildUnitCharacter] = ArrayBuffer(encounter.enemyChicken)
+    val expectedRoboBall: ArrayBuffer[WildUnitCharacter] = ArrayBuffer(encounter.enemyRoboBall)
+    val expectedSeagull: ArrayBuffer[WildUnitCharacter] = ArrayBuffer(encounter.enemySeagull)
+    encounter.addRandomWildUnit()
+    assert(encounter.wildUnitInPanel == expectedChicken || encounter.wildUnitInPanel == expectedRoboBall
+      || encounter.wildUnitInPanel == expectedSeagull)
+    encounter.addRandomWildUnit()
+    assert(encounter.wildUnitInPanel == expectedChicken || encounter.wildUnitInPanel == expectedRoboBall
+      || encounter.wildUnitInPanel == expectedSeagull)
+
   }
 
-  test("Remove a wild unit from an encounter panel") {
-    encounter.addWildUnit(wildUnit1)
+  test("Remove a wild unit from an encounter panel only if is death") {
+    encounter.addRandomWildUnit()
     val expectedNothing: ArrayBuffer[WildUnitCharacter] = ArrayBuffer()
-    val expectedWildUnit: ArrayBuffer[WildUnitCharacter] = ArrayBuffer(wildUnit1)
-    assertNotEquals(encounter.wildUnits, expectedNothing)
-    assertEquals(encounter.wildUnits, expectedWildUnit)
-    encounter.removeWildUnit(wildUnit1)
-    assertEquals(encounter.wildUnits, expectedNothing)
-    assertNotEquals(encounter.wildUnits, expectedWildUnit)
-  }
-
-  test("Remove a wild unit if is death"){
-    encounter.addWildUnit(wildUnit2)
-    val expected: ArrayBuffer[WildUnitCharacter] = ArrayBuffer()
-    encounter.checkStatus(wildUnit2)
-    assertEquals(encounter.wildUnits, expected)
+    encounter.removeWildUnit()
+    assertNotEquals(encounter.wildUnitInPanel, expectedNothing)
+    encounter.wildUnitInPanel(0).decreaseHp(3)
+    encounter.removeWildUnit()
+    assertEquals(encounter.wildUnitInPanel, expectedNothing)
   }
 }
