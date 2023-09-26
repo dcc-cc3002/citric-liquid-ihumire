@@ -16,12 +16,15 @@ class WildUnitCharacterTest extends munit.FunSuite{
   private var wildUnit1: WildUnitCharacter = _
   private var wildUnit2: WildUnitCharacter = _
   private var wildUnit3: WildUnitCharacter = _
+  private var wildUnit4: WildUnitCharacter = _
+
 
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
     wildUnit1 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars,randomNumberGenerator)
     wildUnit2 = new WildUnitCharacter(name, maxHp, 4, attack, defense, evasion, 11)
     wildUnit3 = new WildUnitCharacter(name, maxHp, 1, attack, defense, evasion, currStars, randomNumberGenerator)
+    wildUnit4 = new WildUnitCharacter(name, maxHp, 0, attack, defense, evasion, currStars, randomNumberGenerator)
   }
 
   test("A wild unit should have correctly set their attributes"){
@@ -100,6 +103,14 @@ class WildUnitCharacterTest extends munit.FunSuite{
     val expectedHp2: Int = wildUnit3.currHp - valueToDecrease
     wildUnit3.decreaseHp(valueToDecrease)
     assertNotEquals(wildUnit3.currHp, expectedHp2)
+  }
+
+  test("A wild unit should enter in death state"){
+    val expected: Boolean = true
+    wildUnit1.shouldBeDeath()
+    assertNotEquals(wildUnit1.death, expected)
+    wildUnit4.shouldBeDeath()
+    assertEquals(wildUnit4.death, expected)
   }
 
 }

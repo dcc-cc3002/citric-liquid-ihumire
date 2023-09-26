@@ -56,6 +56,7 @@ class PlayerCharacter(val name: String,
                       var currVictories: Int,
                       var currRoad: Int,
                       val randomNumberGenerator: Random = new Random()) extends AbstractCharacter {
+  var knockedOut: Boolean = false
   /**
    * The character increase his level of Norma.
    */
@@ -117,6 +118,12 @@ class PlayerCharacter(val name: String,
       else if ((currRoad == 2) && (currVictories >= 14)) {
         advanceNorma()
       }
+    }
+  }
+
+  def shouldKnockedOut(): Unit = {
+    if (currHp == 0) {
+      knockedOut = true
     }
   }
 }

@@ -33,6 +33,7 @@ class PlayerCharacterTest extends munit.FunSuite {
 
   private var character1: PlayerCharacter = _
   private var character2: PlayerCharacter = _
+  private var character3: PlayerCharacter = _
   private var testCharStarRoad1: PlayerCharacter = _
   private var testCharStarRoad2: PlayerCharacter = _
   private var testCharStarRoad3: PlayerCharacter = _
@@ -53,6 +54,9 @@ class PlayerCharacterTest extends munit.FunSuite {
       currNorma, 11,currVictories,currRoad,randomNumberGenerator)
     character2 = new PlayerCharacter(
       name, 10, 1, attack, defense, evasion,
+      currNorma, currStars, currVictories, currRoad, randomNumberGenerator)
+    character3 = new PlayerCharacter(
+      name, maxHp, 0, attack, defense, evasion,
       currNorma, currStars, currVictories, currRoad, randomNumberGenerator)
     testCharStarRoad1 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
       1, 10, currVictories, 1, randomNumberGenerator)
@@ -212,4 +216,11 @@ class PlayerCharacterTest extends munit.FunSuite {
     }
   }
 
+  test("A character should be able to knockedOut"){
+    val expected: Boolean = true
+    character.shouldKnockedOut()
+    assertNotEquals(character.knockedOut, expected)
+    character3.shouldKnockedOut()
+    assertEquals(character3.knockedOut, expected)
+  }
 }

@@ -27,4 +27,11 @@ class EncounterPanel extends AbstractPanel {
     val index: Int = wildUnits.indexOf(wildUnit)
     wildUnits.remove(index)
   }
+
+  def checkStatus(wildUnit: WildUnitCharacter): Unit = {
+    wildUnit.shouldBeDeath()
+    if (wildUnit.death) {
+      removeWildUnit(wildUnit)
+    }
+  }
 }

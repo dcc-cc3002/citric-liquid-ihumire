@@ -11,12 +11,14 @@ class EncounterPanelTest extends FunSuite {
   private var player1: PlayerCharacter = _
   private var player2: PlayerCharacter = _
   private var wildUnit1: WildUnitCharacter = _
+  private var wildUnit2: WildUnitCharacter = _
   private var encounter: EncounterPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 10, 10, 5, 5, 0, 2, 50, 5, 1)
     player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 20, 2, 0)
     wildUnit1 = new WildUnitCharacter("Chicken",3,3, -1, -1, 1,0)
+    wildUnit2 = new WildUnitCharacter("Chicken",3,0, -1, -1, 1,0)
     encounter = new EncounterPanel
   }
 
@@ -58,5 +60,12 @@ class EncounterPanelTest extends FunSuite {
     encounter.removeWildUnit(wildUnit1)
     assertEquals(encounter.wildUnits, expectedNothing)
     assertNotEquals(encounter.wildUnits, expectedWildUnit)
+  }
+
+  test("Remove a wild unit if is death"){
+    encounter.addWildUnit(wildUnit2)
+    val expected: ArrayBuffer[WildUnitCharacter] = ArrayBuffer()
+    encounter.checkStatus(wildUnit2)
+    assertEquals(encounter.wildUnits, expected)
   }
 }
