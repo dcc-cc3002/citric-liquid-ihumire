@@ -46,17 +46,16 @@ import scala.util.Random
   * @author [[https://github.com/ihumire/ Ignacio Humire S.]]
   */
 class PlayerCharacter(val name: String,
-              val maxHp: Int,
-              var currHp: Int,
-              val attack: Int,
-              val defense: Int,
-              val evasion: Int,
-              var currNorma: Int,
-              var currStars: Int,
-              var currVictories: Int,
-              var currRoad: Int,
-              val randomNumberGenerator: Random = new Random()) extends AbstractCharacter {
-
+                      val maxHp: Int,
+                      var currHp: Int,
+                      val attack: Int,
+                      val defense: Int,
+                      val evasion: Int,
+                      var currNorma: Int,
+                      var currStars: Int,
+                      var currVictories: Int,
+                      var currRoad: Int,
+                      val randomNumberGenerator: Random = new Random()) extends AbstractCharacter {
   /**
    * The character increase his level of Norma.
    */

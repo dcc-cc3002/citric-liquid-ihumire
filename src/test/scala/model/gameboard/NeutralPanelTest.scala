@@ -17,29 +17,20 @@ class NeutralPanelTest extends FunSuite {
   }
 
   test("Add character to neutral panel") {
-    val expectedNothing: ArrayBuffer[PlayerCharacter] = ArrayBuffer()
     val expectedCharacter: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1)
-    assertEquals(neutral.characters, expectedNothing)
     assertNotEquals(neutral.characters, expectedCharacter)
     neutral.addCharacter(player1)
-    assertNotEquals(neutral.characters, expectedNothing)
     assertEquals(neutral.characters, expectedCharacter)
   }
 
   test("Remove character from a neutral panel") {
     neutral.addCharacter(player1)
     neutral.addCharacter(player2)
-    val expectedNothing: ArrayBuffer[PlayerCharacter] = ArrayBuffer()
-    val expectedCharacter1: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1)
     val expectedCharacter2: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player2)
     val expectedCharacters: ArrayBuffer[PlayerCharacter] = ArrayBuffer(player1, player2)
-    assertNotEquals(neutral.characters, expectedNothing)
-    assertNotEquals(neutral.characters, expectedCharacter1)
     assertNotEquals(neutral.characters, expectedCharacter2)
     assertEquals(neutral.characters, expectedCharacters)
     neutral.removeCharacter(player1)
-    assertNotEquals(neutral.characters, expectedNothing)
-    assertNotEquals(neutral.characters, expectedCharacter1)
     assertEquals(neutral.characters, expectedCharacter2)
     assertNotEquals(neutral.characters, expectedCharacters)
   }

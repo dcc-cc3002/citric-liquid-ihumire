@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.gameboard
 
-import model.units.PlayerCharacter
+import model.units.{PlayerCharacter, WildUnitCharacter}
 
 import scala.collection.mutable.ArrayBuffer
 
@@ -17,4 +17,14 @@ import scala.collection.mutable.ArrayBuffer
 
 class EncounterPanel extends AbstractPanel {
 
+  val wildUnits: ArrayBuffer[WildUnitCharacter] = new ArrayBuffer[WildUnitCharacter]()
+
+  def addWildUnit(wildUnit: WildUnitCharacter): Unit = {
+    wildUnits.addOne(wildUnit)
+  }
+
+  def removeWildUnit(wildUnit: WildUnitCharacter): Unit = {
+    val index: Int = wildUnits.indexOf(wildUnit)
+    wildUnits.remove(index)
+  }
 }
