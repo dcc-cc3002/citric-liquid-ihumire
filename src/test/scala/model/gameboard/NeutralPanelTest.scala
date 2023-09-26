@@ -12,7 +12,6 @@ class NeutralPanelTest extends FunSuite {
   private var home: HomePanel = _
   private var bonus: BonusPanel = _
   private var drop: DropPanel = _
-  private var encounter: EncounterPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 10, 10, 5, 5, 0, 2, 50, 5, 1)
@@ -21,7 +20,6 @@ class NeutralPanelTest extends FunSuite {
     home = new HomePanel
     bonus = new BonusPanel
     drop = new DropPanel
-    encounter = new EncounterPanel
   }
 
   test("Add character to neutral panel") {

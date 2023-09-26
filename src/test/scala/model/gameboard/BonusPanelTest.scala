@@ -8,12 +8,18 @@ import scala.collection.mutable.ArrayBuffer
 class BonusPanelTest extends FunSuite {
   private var player1: PlayerCharacter = _
   private var player2: PlayerCharacter = _
+  private var neutral: NeutralPanel = _
+  private var home: HomePanel = _
   private var bonus: BonusPanel = _
+  private var drop: DropPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 10, 10,5, 5, 0, 2, 50, 5, 1)
     player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 20, 2, 0)
+    neutral = new NeutralPanel
+    home = new HomePanel
     bonus = new BonusPanel
+    drop = new DropPanel
   }
 
   test("Add character to bonus panel") {
@@ -49,5 +55,40 @@ class BonusPanelTest extends FunSuite {
     val expectedStars: Int = player2.currStars + toGive
     bonus.giveStars(player2, roll)
     assertEquals(player2.currStars, expectedStars)
+  }
+
+  test("Add a panel to nextPanels in bonus panel, having at 3 max") {
+    val expectedOnePanel: ArrayBuffer[Panel] = ArrayBuffer(neutral)
+    val expectedTwoPanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home)
+    val expectedThreePanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home, bonus)
+    bonus.addPanel(neutral)
+    assertEquals(bonus.nextPanels, expectedOnePanel)
+    bonus.addPanel(home)
+    assertEquals(bonus.nextPanels, expectedTwoPanels)
+    bonus.addPanel(bonus)
+    assertEquals(bonus.nextPanels, expectedThreePanels)
+    /* Extra addition do nothing */
+    bonus.addPanel(drop)
+    assertEquals(bonus.nextPanels, expectedThreePanels)
+  }
+
+  test("Remove a panel to nextPanels in bonus panel") {
+    bonus.addPanel(neutral)
+    bonus.addPanel(home)
+    bonus.addPanel(bonus)
+    val expectedNoPanel: ArrayBuffer[Panel] = ArrayBuffer()
+    val expectedOnePanel: ArrayBuffer[Panel] = ArrayBuffer(neutral)
+    val expectedTwoPanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home)
+    val expectedThreePanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home, bonus)
+    assertEquals(bonus.nextPanels, expectedThreePanels)
+    bonus.removePanel(bonus)
+    assertEquals(bonus.nextPanels, expectedTwoPanels)
+    bonus.removePanel(home)
+    assertEquals(bonus.nextPanels, expectedOnePanel)
+    bonus.removePanel(neutral)
+    assertEquals(bonus.nextPanels, expectedNoPanel)
+    /* Extra remove do nothing */
+    bonus.removePanel(neutral)
+    assertEquals(bonus.nextPanels, expectedNoPanel)
   }
 }

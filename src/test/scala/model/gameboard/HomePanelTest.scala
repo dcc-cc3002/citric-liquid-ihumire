@@ -12,13 +12,19 @@ class HomePanelTest extends FunSuite {
   private var player1: PlayerCharacter = _
   private var player2: PlayerCharacter = _
   private var player3: PlayerCharacter = _
+  private var neutral: NeutralPanel = _
   private var home: HomePanel = _
+  private var bonus: BonusPanel = _
+  private var drop: DropPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 10, 10, 5, 5, 0, 2, 50, 5, 1)
     player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 9, 0, 1)
     player3 = new PlayerCharacter("Lunita", 9, 3, 4, 3, 2, 3, 20, 5, 2)
+    neutral = new NeutralPanel
     home = new HomePanel
+    bonus = new BonusPanel
+    drop = new DropPanel
   }
 
   test("Add character to home panel") {
@@ -71,4 +77,38 @@ class HomePanelTest extends FunSuite {
     assertNotEquals(player3.currNorma, expectedNormaP3)
   }
 
+  test("Add a panel to nextPanels in home panel, having at 3 max") {
+    val expectedOnePanel: ArrayBuffer[Panel] = ArrayBuffer(neutral)
+    val expectedTwoPanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home)
+    val expectedThreePanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home, bonus)
+    home.addPanel(neutral)
+    assertEquals(home.nextPanels, expectedOnePanel)
+    home.addPanel(home)
+    assertEquals(home.nextPanels, expectedTwoPanels)
+    home.addPanel(bonus)
+    assertEquals(home.nextPanels, expectedThreePanels)
+    /* Extra addition do nothing */
+    home.addPanel(drop)
+    assertEquals(home.nextPanels, expectedThreePanels)
+  }
+
+  test("Remove a panel to nextPanels in home panel") {
+    home.addPanel(neutral)
+    home.addPanel(home)
+    home.addPanel(bonus)
+    val expectedNoPanel: ArrayBuffer[Panel] = ArrayBuffer()
+    val expectedOnePanel: ArrayBuffer[Panel] = ArrayBuffer(neutral)
+    val expectedTwoPanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home)
+    val expectedThreePanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home, bonus)
+    assertEquals(home.nextPanels, expectedThreePanels)
+    home.removePanel(bonus)
+    assertEquals(home.nextPanels, expectedTwoPanels)
+    home.removePanel(home)
+    assertEquals(home.nextPanels, expectedOnePanel)
+    home.removePanel(neutral)
+    assertEquals(home.nextPanels, expectedNoPanel)
+    /* Extra remove do nothing */
+    home.removePanel(neutral)
+    assertEquals(home.nextPanels, expectedNoPanel)
+  }
 }
