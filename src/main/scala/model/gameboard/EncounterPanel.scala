@@ -21,8 +21,8 @@ class EncounterPanel extends AbstractPanel {
   var enemyChicken = new WildUnitCharacter("Chicken", 3, 3, -1, -1, 1, 0)
   var enemyRoboBall = new WildUnitCharacter("RoboBall", 3, 3, -1, 1, -1, 0)
   var enemySeagull = new WildUnitCharacter("Seagull", 3, 3, 1, -1, -1, 0)
-
-  val enemies: ArrayBuffer[WildUnitCharacter] = ArrayBuffer[WildUnitCharacter](enemyChicken, enemyRoboBall, enemySeagull)
+  /* List with all enemies that can be in the panel. */
+  private val enemies: ArrayBuffer[WildUnitCharacter] = ArrayBuffer[WildUnitCharacter](enemyChicken, enemyRoboBall, enemySeagull)
 
   /** Array of the wild unit currently positioned on this panel.
    *
@@ -31,10 +31,10 @@ class EncounterPanel extends AbstractPanel {
    */
   val wildUnitInPanel: ArrayBuffer[WildUnitCharacter] = new ArrayBuffer[WildUnitCharacter]()
 
-  /** Adds a random wild unit to the list of wildUnits currently on this panel.
+  /** Adds a random wild unit to the list of wildUnits only if is empty.
    *
    * This might be invoked once time when a player moves to this panel to have a fight with the
-   * wild unit into them. A random wild unit will spawn in the panel if wildsUnits is empty.
+   * wild unit into them.
    *
    */
   def addRandomWildUnit(): Unit = {
@@ -47,7 +47,7 @@ class EncounterPanel extends AbstractPanel {
   }
   /** Remove the wild unit if him currHp is 0.
    *
-   * This might be invoked every time3 before a duel with the player.
+   * This might be invoked every time before a duel with the player.
    *
    */
   def removeWildUnit(): Unit = {
