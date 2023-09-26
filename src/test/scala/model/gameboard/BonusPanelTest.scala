@@ -6,9 +6,9 @@ import munit.FunSuite
 import scala.collection.mutable.ArrayBuffer
 
 class BonusPanelTest extends FunSuite {
-  var player1: PlayerCharacter = _
-  var player2: PlayerCharacter = _
-  var bonus: BonusPanel = _
+  private var player1: PlayerCharacter = _
+  private var player2: PlayerCharacter = _
+  private var bonus: BonusPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 10, 10,5, 5, 0, 2, 50, 5, 1)

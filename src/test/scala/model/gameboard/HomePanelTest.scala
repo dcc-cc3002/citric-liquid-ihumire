@@ -9,10 +9,10 @@ import scala.collection.mutable.ArrayBuffer
 
 
 class HomePanelTest extends FunSuite {
-  var player1: PlayerCharacter = _
-  var player2: PlayerCharacter = _
-  var player3: PlayerCharacter = _
-  var home: HomePanel = _
+  private var player1: PlayerCharacter = _
+  private var player2: PlayerCharacter = _
+  private var player3: PlayerCharacter = _
+  private var home: HomePanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 10, 10, 5, 5, 0, 2, 50, 5, 1)
