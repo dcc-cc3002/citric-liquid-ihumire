@@ -48,4 +48,32 @@ abstract class AbstractPanel extends Panel {
     characters.remove(index)
   }
 
+  /** Adds a panel to the list of nextPanels next to this panel.
+   *
+   * This might be invoked when a player needs to move to another panel on his turn.
+   * Only work having 3 nextPanels at max.
+   *
+   * @param panel The panel to add to this panel's nextPanels.
+   */
+  def addPanel(panel: Panel): Unit = {
+    if (nextPanels.length < 3){
+      nextPanels.addOne(panel)
+    }
+  }
+
+  /** Removes a panel to the list of nextPanels next to this panel.
+   *
+   * This might be invoked when a player advances to nextPanel and have another nextPanels.
+   * Only work existing panels in nextPanels.
+   *
+   * @param panel The panel to remove to this panel's nextPanels.
+   */
+
+  def removePanel(panel: Panel): Unit = {
+    if (nextPanels.nonEmpty){
+      val index: Int = nextPanels.indexOf(panel)
+      nextPanels.remove(index)
+    }
+  }
+
 }
