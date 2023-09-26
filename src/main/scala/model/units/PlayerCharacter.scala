@@ -12,15 +12,13 @@ import scala.util.Random
   *
   * For instance, players can:
  *
-  * - Increase or decrease their star count.
- *
-  * - Roll a dice, a common action in many board games.
- *
   * - Advance their norma level.
  *
-  * - Increase or decrease their health points.
- *
   * - Increase their victories count.
+ *
+  * - Clear his norma if have the possibility to glow up.
+ *
+  * - Recognize the KO if his current health points are 0.
   *
   * Furthermore, the `Player` class has a utility for generating random numbers,
   * which is primarily used for simulating dice rolls. By default, this utility is
@@ -56,6 +54,9 @@ class PlayerCharacter(val name: String,
                       var currVictories: Int,
                       var currRoad: Int,
                       val randomNumberGenerator: Random = new Random()) extends AbstractCharacter {
+  /**
+   * The character can be KO.
+   */
   var knockedOut: Boolean = false
   /**
    * The character increase his level of Norma.
@@ -120,7 +121,9 @@ class PlayerCharacter(val name: String,
       }
     }
   }
-
+  /**
+   * The character can determinate if him should be KO.
+   */
   def shouldKnockedOut(): Unit = {
     if (currHp == 0) {
       knockedOut = true

@@ -6,10 +6,7 @@ import scala.collection.mutable.ArrayBuffer
 
 /** The `BonusPanel` class represents a panel in the game.
  *
- * This class provides a list of characters who are into this panel and the panels next to them.
- * Also, this class incorporates methods to modify that list of characters, adding or removing characters depend of the
- * moment in the game.
- * At this case, this class summon other specific method giving a specific value of stars to a character in the panel.
+ * This class summon a specific method giving a specific value of stars to a character in the panel.
  *
  * @author [[https://github.com/ihumire/ Ignacio Humire S.]]
  */

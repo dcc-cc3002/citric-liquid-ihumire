@@ -3,7 +3,12 @@ package model.gameboard
 
 import cl.uchile.dcc.citric.model.units.PlayerCharacter
 import scala.collection.mutable.ArrayBuffer
-
+/** Represents a basic structure for every single cell on a board.
+ * This abstract class provides a list of characters who are into this panel and the panels next to them.
+ * Also, this abstract class incorporates methods to modify that list of characters, adding or removing characters depend of the
+ * moment in the game.
+ * @author [[https://github.com/ihumire Ignacio Humire S.]]
+ */
 abstract class AbstractPanel extends Panel {
   /** Array of the characters currently positioned on this panel.
    *
