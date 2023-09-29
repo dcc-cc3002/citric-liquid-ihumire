@@ -32,8 +32,8 @@ class HomePanel extends AbstractPanel {
    *
    * @param player The player character to normaCheck.
    */
-
+/*
   def normaCheck(player: PlayerCharacter): Unit = {
     player.normaClear()
-  }
+  }*/
 }

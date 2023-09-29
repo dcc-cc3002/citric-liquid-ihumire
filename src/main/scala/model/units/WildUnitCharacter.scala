@@ -5,12 +5,12 @@ import scala.util.Random
 
 class WildUnitCharacter(val name: String,
                         val maxHp: Int,
-                        var currHp: Int,
                         val attack: Int,
                         val defense: Int,
                         val evasion: Int,
-                        var currStars: Int,
                         val randomNumberGenerator: Random = new Random()) extends AbstractCharacter {
+  var currHp: Int = maxHp
+  var currStars: Int = 0
   var death: Boolean = false
 
   def shouldBeDeath(): Unit = {

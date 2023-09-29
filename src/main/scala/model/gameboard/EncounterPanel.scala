@@ -18,9 +18,9 @@ import scala.util.Random
 
 class EncounterPanel extends AbstractPanel {
   /* Every type of wild unit without life*/
-  var enemyChicken = new WildUnitCharacter("Chicken", 3, 3, -1, -1, 1, 0)
-  var enemyRoboBall = new WildUnitCharacter("RoboBall", 3, 3, -1, 1, -1, 0)
-  var enemySeagull = new WildUnitCharacter("Seagull", 3, 3, 1, -1, -1, 0)
+  var enemyChicken = new WildUnitCharacter("Chicken", 3, -1, -1, 1)
+  var enemyRoboBall = new WildUnitCharacter("RoboBall", 3, -1, 1, -1)
+  var enemySeagull = new WildUnitCharacter("Seagull", 3, 1, -1, -1)
   /* List with all enemies that can be in the panel. */
   private val enemies: ArrayBuffer[WildUnitCharacter] = ArrayBuffer[WildUnitCharacter](enemyChicken, enemyRoboBall, enemySeagull)
 

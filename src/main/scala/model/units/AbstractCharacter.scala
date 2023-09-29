@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import scala.util.Random
+
 /** Represents the constants and methods of any type of character.
  *
  * This abstract class provides the most elemental methods that any type of character
@@ -12,6 +14,13 @@ package model.units
  * @author [[https://github.com/ihumire Ignacio Humire S.]]
  */
 abstract class AbstractCharacter extends Character {
+  val name: String
+  val maxHp: Int
+  val attack: Int
+  val defense: Int
+  val evasion: Int
+  val randomNumberGenerator: Random
+
   /**
    * Rolls a dice and returns a value between 1 to 6.
    */

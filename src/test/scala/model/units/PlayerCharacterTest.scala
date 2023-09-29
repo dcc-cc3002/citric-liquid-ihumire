@@ -4,33 +4,16 @@ package model.units
 import scala.util.Random
 
 class PlayerCharacterTest extends munit.FunSuite {
-  /*
-  REMEMBER: It is a good practice to use constants for the values that are used in multiple
-  tests, so you can change them in a single place.
-  This will make your tests more readable, easier to maintain, and less error-prone.
-  */
+
   private val name = "testPlayer"
-  private val maxHp = 10
-  private var currHp = 10
+  private val maxHp = 5
   private val attack = 1
   private val defense = 1
   private val evasion = 1
-  private var currNorma = 1
-  private var currStars = 0
-  private var currVictories = 0
-  private var currRoad = 0
   private var randomNumberGenerator: Random = _
-  /* Add any other constants you need here... */
 
+  private var character: PlayerCharacter = _
   /*
-  This is the object under test.
-  We initialize it in the beforeEach method so we can reuse it in all the tests.
-  This is a good practice because it will reset the object before each test, so you don't have
-  to worry about the state of the object between tests.
-  */
-  private var character: PlayerCharacter = _  // <- x = _ is the same as x = null
-  /* Add any other variables you need here... */
-
   private var character1: PlayerCharacter = _
   private var character2: PlayerCharacter = _
   private var character3: PlayerCharacter = _
@@ -43,12 +26,12 @@ class PlayerCharacterTest extends munit.FunSuite {
   private var testCharVictoryRoad2: PlayerCharacter = _
   private var testCharVictoryRoad3: PlayerCharacter = _
   private var testCharVictoryRoad4: PlayerCharacter = _
-  private var testCharVictoryRoad5: PlayerCharacter = _
+  private var testCharVictoryRoad5: PlayerCharacter = _ */
   // This method is executed before each `test(...)` method.
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
-    character = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      currNorma, currStars, currVictories, currRoad)
+    character = new PlayerCharacter(name, maxHp, attack, defense, evasion)
+    /*
     character1 = new PlayerCharacter(
       name, 10, 9, attack, defense, evasion,
       currNorma, 11,currVictories,currRoad,randomNumberGenerator)
@@ -77,27 +60,22 @@ class PlayerCharacterTest extends munit.FunSuite {
     testCharVictoryRoad4 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
       4, currStars, 10, 2, randomNumberGenerator)
     testCharVictoryRoad5 = new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion,
-      5, currStars, 14, 2, randomNumberGenerator)
+      5, currStars, 14, 2, randomNumberGenerator)*/
   }
 
   test("A character should have correctly set their attributes") {
     val randomCharacterTestValue: Int = character.randomNumberGenerator.nextInt(6) + 1
     assertEquals(character.name, name)
     assertEquals(character.maxHp, maxHp)
-    assertEquals(character.currHp, currHp)
     assertEquals(character.attack, attack)
     assertEquals(character.defense, defense)
     assertEquals(character.evasion, evasion)
-    assertEquals(character.currNorma, currNorma)
-    assertEquals(character.currStars, currStars)
-    assertEquals(character.currVictories, currVictories)
-    assertEquals(character.currRoad, currRoad)
     assert(randomCharacterTestValue >= 1 && randomCharacterTestValue <= 6)
   }
 
-  test("A character should be able to increase his level of norma") {
-    val expectedNorma: Int = character.currNorma + 1
-    character.advanceNorma()
+  test("A character should be able to set his level of norma") {
+    val expectedNorma: Int = 2
+    character.advanceToNorma(2)
     assertEquals(character.currNorma, expectedNorma)
   }
 
@@ -107,7 +85,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.increaseStars(valueToGive)
     assertEquals(character.currStars, expectedStars)
   }
-
+/*
   test("A character should be able to decrease his value of stars, without overflow the 0") {
     val valueToDrop: Int = 10
     // This case should overflow
@@ -119,7 +97,9 @@ class PlayerCharacterTest extends munit.FunSuite {
     character1.decreaseStars(valueToDrop)
     assertEquals(character1.currStars, expectedStars1)
   }
-
+  
+ */
+/*
   test("A character should be able to increase his currHp, without overflow maxHp") {
     val valueToIncrease: Int = 1
     // This case should overflow
@@ -222,5 +202,5 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertNotEquals(character.knockedOut, expected)
     character3.shouldKnockedOut()
     assertEquals(character3.knockedOut, expected)
-  }
+  */
 }

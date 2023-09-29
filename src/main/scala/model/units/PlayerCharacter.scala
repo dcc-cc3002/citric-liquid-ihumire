@@ -45,15 +45,18 @@ import scala.util.Random
   */
 class PlayerCharacter(val name: String,
                       val maxHp: Int,
-                      var currHp: Int,
                       val attack: Int,
                       val defense: Int,
                       val evasion: Int,
-                      var currNorma: Int,
-                      var currStars: Int,
-                      var currVictories: Int,
-                      var currRoad: Int,
                       val randomNumberGenerator: Random = new Random()) extends AbstractCharacter {
+
+
+  var currHp: Int = maxHp
+  var currNorma: Int = 1
+  var currStars: Int = 0
+  var currVictories: Int = 0
+  var currRoad: Int = 0
+
   /**
    * The character can be KO.
    */
@@ -61,9 +64,9 @@ class PlayerCharacter(val name: String,
   /**
    * The character increase his level of Norma.
    */
-  def advanceNorma(): Unit = {
-    if (currNorma <= 5) {
-      currNorma += 1
+  def advanceToNorma(value: Int): Unit = {
+    if (value>=1 && value<=6) {
+      currNorma = value
     }
   }
   /**
@@ -72,7 +75,7 @@ class PlayerCharacter(val name: String,
   def increaseVictory(): Unit = {
     currVictories+=1
   }
-
+/*
   /**
    * The character NormaClears his self, updating his level of norma.
    * The method considers the amount of stars, amount of victories, the level of norma
@@ -120,7 +123,7 @@ class PlayerCharacter(val name: String,
         advanceNorma()
       }
     }
-  }
+  }*/
   /**
    * The character can determinate if him should be KO.
    */

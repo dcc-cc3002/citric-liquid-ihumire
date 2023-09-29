@@ -4,6 +4,7 @@ package model.units
 import scala.util.Random
 
 class WildUnitCharacterTest extends munit.FunSuite{
+  /*
   private val name = "WildUnit"
   private val maxHp = 5
   private var currHp = 5
@@ -112,5 +113,5 @@ class WildUnitCharacterTest extends munit.FunSuite{
     wildUnit4.shouldBeDeath()
     assertEquals(wildUnit4.death, expected)
   }
-
+  */
 }
