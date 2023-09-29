@@ -5,7 +5,7 @@ import model.units.PlayerCharacter
 import munit.FunSuite
 import scala.collection.mutable.ArrayBuffer
 
-class BonusPanelTest extends FunSuite {/*
+class BonusPanelTest extends FunSuite {
   private var player1: PlayerCharacter = _
   private var player2: PlayerCharacter = _
   private var neutral: NeutralPanel = _
@@ -14,8 +14,8 @@ class BonusPanelTest extends FunSuite {/*
   private var drop: DropPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    player1 = new PlayerCharacter("Molly", 10, 10,5, 5, 0, 2, 50, 5, 1)
-    player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 20, 2, 0)
+    player1 = new PlayerCharacter("Molly", 5, 1, 1, 0)
+    player2 = new PlayerCharacter("Kira", 5, 1, -1, 1)
     neutral = new NeutralPanel
     home = new HomePanel
     bonus = new BonusPanel
@@ -39,22 +39,6 @@ class BonusPanelTest extends FunSuite {/*
     bonus.removeCharacter(player1)
     assertEquals(bonus.characters, expectedCharacter2)
     assertNotEquals(bonus.characters, expectedCharacters)
-  }
-
-  test("Give stars to a character in a bonus panel (p1 version") {
-    val roll: Int = player1.rollDice()
-    val toGive: Int = math.min(roll * player1.currNorma, roll * 3)
-    val expectedStars: Int = player1.currStars + toGive
-    bonus.giveStars(player1, roll)
-    assertEquals(player1.currStars, expectedStars)
-  }
-
-  test("Give stars to a character in a bonus panel (p2 version)") {
-    val roll: Int = player2.rollDice()
-    val toGive: Int = math.min(roll * player2.currNorma, roll * 3)
-    val expectedStars: Int = player2.currStars + toGive
-    bonus.giveStars(player2, roll)
-    assertEquals(player2.currStars, expectedStars)
   }
 
   test("Add a panel to nextPanels in bonus panel, having at 3 max") {
@@ -90,5 +74,21 @@ class BonusPanelTest extends FunSuite {/*
     /* Extra remove do nothing */
     bonus.removePanel(neutral)
     assertEquals(bonus.nextPanels, expectedNoPanel)
-  }*/
+  }
+
+  test("Give stars to a character in a bonus panel (p1 version") {
+    val roll: Int = player1.rollDice()
+    val toGive: Int = math.min(roll * player1.currNorma, roll * 3)
+    val expectedStars: Int = player1.currStars + toGive
+    bonus.giveStars(player1, roll)
+    assertEquals(player1.currStars, expectedStars)
+  }
+
+  test("Give stars to a character in a bonus panel (p2 version)") {
+    val roll: Int = player2.rollDice()
+    val toGive: Int = math.min(roll * player2.currNorma, roll * 3)
+    val expectedStars: Int = player2.currStars + toGive
+    bonus.giveStars(player2, roll)
+    assertEquals(player2.currStars, expectedStars)
+  }
 }
