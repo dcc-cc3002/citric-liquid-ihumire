@@ -9,9 +9,11 @@ class WildUnitCharacter(name: String,
                         defense: Int,
                         evasion: Int,
                         randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) {
-  var currHp: Int = maxHp
-  var currStars: Int = 0
-  var death: Boolean = false
+  private var _death: Boolean = false
+  def death: Boolean = _death
+  def death_=(newDeath: Boolean): Unit = {
+    _death = newDeath
+  }
 
   def killWildUnit(): Unit = {
     if (currHp == 0) {

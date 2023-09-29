@@ -20,6 +20,18 @@ abstract class AbstractCharacter(val name: String,
                                  val evasion: Int,
                                  val randomNumberGenerator: Random) extends Character {
 
+  private var _currHp: Int = maxHp
+  def currHp: Int = _currHp
+  def currHp_=(newCurrHp: Int): Unit = {
+    _currHp = newCurrHp
+  }
+  private var _currStars: Int = 0
+  def currStars: Int = _currStars
+
+  def currStars_=(newCurrStars: Int): Unit = {
+    _currStars = newCurrStars
+  }
+
   /**
    * Rolls a dice and returns a value between 1 to 6.
    */

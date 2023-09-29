@@ -50,16 +50,31 @@ class PlayerCharacter(name: String,
                       evasion: Int,
                       randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator){
 
-  var currHp: Int = maxHp
-  var currNorma: Int = 1
-  var currStars: Int = 0
-  var currVictories: Int = 0
-  var currRoad: Int = 1
+  private var _currNorma: Int = 1
+  def currNorma: Int = _currNorma
+  def currNorma_=(newNorma: Int): Unit = {
+    _currNorma = newNorma
+  }
+
+  private var _currVictories: Int = 0
+  def currVictories: Int = _currVictories
+  def currVictories_=(newCurrVictories: Int): Unit = {
+    _currVictories = newCurrVictories
+  }
+  private var _currRoad: Int = 1
+  def currRoad: Int = _currRoad
+  def currRoad_=(newCurrRoad: Int): Unit = {
+    _currRoad = newCurrRoad
+  }
 
   /**
    * The character can be KO.
    */
-  var knockedOut: Boolean = false
+  private var _knockedOut: Boolean = false
+  def knockedOut: Boolean = _knockedOut
+  def knockedOut_=(newKnockedOut: Boolean): Unit = {
+    _knockedOut = newKnockedOut
+  }
 
   def changeRoad(value: Int): Unit = {
     if (value == 1 || value == 2) {
