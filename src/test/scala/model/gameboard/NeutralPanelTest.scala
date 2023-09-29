@@ -5,7 +5,7 @@ import model.units.PlayerCharacter
 import scala.collection.mutable.ArrayBuffer
 import munit.FunSuite
 
-class NeutralPanelTest extends FunSuite {/*
+class NeutralPanelTest extends FunSuite {
   private var player1: PlayerCharacter = _
   private var player2: PlayerCharacter = _
   private var neutral: NeutralPanel = _
@@ -14,8 +14,8 @@ class NeutralPanelTest extends FunSuite {/*
   private var drop: DropPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    player1 = new PlayerCharacter("Molly", 10, 10, 5, 5, 0, 2, 50, 5, 1)
-    player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 20, 2, 0)
+    player1 = new PlayerCharacter("Molly", 5, 1, 1, 0)
+    player2 = new PlayerCharacter("Kira", 5, 1, -1, 1)
     neutral = new NeutralPanel
     home = new HomePanel
     bonus = new BonusPanel
@@ -74,6 +74,6 @@ class NeutralPanelTest extends FunSuite {/*
     /* Extra remove do nothing */
     neutral.removePanel(neutral)
     assertEquals(neutral.nextPanels, expectedNoPanel)
-  }*/
+  }
 
 }

@@ -8,19 +8,17 @@ import munit.FunSuite
 import scala.collection.mutable.ArrayBuffer
 
 
-class HomePanelTest extends FunSuite {/*
+class HomePanelTest extends FunSuite {
   private var player1: PlayerCharacter = _
   private var player2: PlayerCharacter = _
-  private var player3: PlayerCharacter = _
   private var neutral: NeutralPanel = _
   private var home: HomePanel = _
   private var bonus: BonusPanel = _
   private var drop: DropPanel = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    player1 = new PlayerCharacter("Molly", 10, 10, 5, 5, 0, 2, 50, 5, 1)
-    player2 = new PlayerCharacter("Kira", 7, 6, 9, 1, 6, 1, 9, 0, 1)
-    player3 = new PlayerCharacter("Lunita", 9, 3, 4, 3, 2, 3, 20, 5, 2)
+    player1 = new PlayerCharacter("Molly", 5, 1, 1, 0)
+    player2 = new PlayerCharacter("Kira", 5, 1, -1, 1)
     neutral = new NeutralPanel
     home = new HomePanel
     bonus = new BonusPanel
@@ -47,34 +45,29 @@ class HomePanelTest extends FunSuite {/*
   }
 
   test("Heal a character in a home panel with maxHp") {
-    val expectedHpP1: Int = player1.currHp + 1
+    val expectedHp: Int = player1.currHp + 1
     home.healCharacter(player1)
-    assertNotEquals(player1.currHp, expectedHpP1)
+    assertNotEquals(player1.currHp, expectedHp)
   }
 
   test("Heal a character in a home panel with not maxHp") {
-    val expectedHpP2: Int = player2.currHp + 1
-    home.healCharacter(player2)
-    assertEquals(player2.currHp, expectedHpP2)
+    player1.decreaseHp(2)
+    val expectedHp: Int = player1.currHp + 1
+    home.healCharacter(player1)
+    assertEquals(player1.currHp, expectedHp)
   }
 
   test("Do norma check to a character in a home panel, ending with a increase of norma") {
-    // other test proving stars road
-    val expectedNormaP1: Int = player1.currNorma + 1
+    player1.increaseStars(10)
+    val expectedNorma: Int = player1.currNorma + 1
     home.normaCheck(player1)
-    assertEquals(player1.currNorma, expectedNormaP1)
+    assertEquals(player1.currNorma, expectedNorma)
   }
 
   test("Do norma check to a character in a home panel, ending with a stay of norma"){
-    // one test proving the norma 1
-    val expectedNormaP2: Int = player2.currNorma + 1
-    home.normaCheck(player2)
-    assertNotEquals(player2.currNorma, expectedNormaP2)
-
-    // other test proving victories road
-    val expectedNormaP3: Int = player3.currNorma + 1
-    home.normaCheck(player3)
-    assertNotEquals(player3.currNorma, expectedNormaP3)
+    val expectedNormaP1: Int = player1.currNorma + 1
+    home.normaCheck(player1)
+    assertNotEquals(player1.currNorma, expectedNormaP1)
   }
 
   test("Add a panel to nextPanels in home panel, having at 3 max") {
@@ -110,5 +103,5 @@ class HomePanelTest extends FunSuite {/*
     /* Extra remove do nothing */
     home.removePanel(neutral)
     assertEquals(home.nextPanels, expectedNoPanel)
-  }*/
+  }
 }
