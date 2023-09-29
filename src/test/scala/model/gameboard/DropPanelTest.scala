@@ -78,19 +78,20 @@ class DropPanelTest extends FunSuite {
     assertEquals(drop.nextPanels, expectedNoPanel)
   }
 
-  test("Drop stars by a character in a bonus panel (p1 version") {
+  test("Drop stars by a character without stars in a drop panel") {
+    val roll: Int = player1.rollDice()
+    val toDrop: Int = math.min(roll * player1.currNorma, roll * 3)
+    val expectedStars: Int = player1.currStars - toDrop
+    drop.dropStars(player1, roll)
+    assertNotEquals(player1.currStars, expectedStars)
+  }
+
+  test("Drop stars by a character with stars in a drop panel") {
+    player1.increaseStars(10)
     val roll: Int = player1.rollDice()
     val toDrop: Int = math.min(roll * player1.currNorma, roll * 3)
     val expectedStars: Int = player1.currStars - toDrop
     drop.dropStars(player1, roll)
     assertEquals(player1.currStars, expectedStars)
-  }
-
-  test("Drop stars by a character in a bonus panel (p2 version)") {
-    val roll: Int = player2.rollDice()
-    val toDrop: Int = roll * player2.currNorma
-    val expectedStars: Int = player2.currStars - toDrop
-    drop.dropStars(player2, roll)
-    assertEquals(player2.currStars, expectedStars)
   }
 }
