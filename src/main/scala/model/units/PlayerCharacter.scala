@@ -43,24 +43,30 @@ import scala.util.Random
   * @author [[https://github.com/Seivier/ Vicente González B.]]
   * @author [[https://github.com/ihumire/ Ignacio Humire S.]]
   */
-class PlayerCharacter(val name: String,
-                      val maxHp: Int,
-                      val attack: Int,
-                      val defense: Int,
-                      val evasion: Int,
-                      val randomNumberGenerator: Random = new Random()) extends AbstractCharacter {
-
+class PlayerCharacter(name: String,
+                      maxHp: Int,
+                      attack: Int,
+                      defense: Int,
+                      evasion: Int,
+                      randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator){
 
   var currHp: Int = maxHp
   var currNorma: Int = 1
   var currStars: Int = 0
   var currVictories: Int = 0
-  var currRoad: Int = 0
+  var currRoad: Int = 1
 
   /**
    * The character can be KO.
    */
   var knockedOut: Boolean = false
+
+  def changeRoad(value: Int): Unit = {
+    if (value == 1 || value == 2) {
+      currRoad = value
+    }
+  }
+
   /**
    * The character increase his level of Norma.
    */
@@ -72,10 +78,10 @@ class PlayerCharacter(val name: String,
   /**
    * The character increase his amount of victories by one.
    */
-  def increaseVictory(): Unit = {
-    currVictories+=1
+  def increaseVictories(value: Int): Unit = {
+    currVictories+=value
   }
-/*
+
   /**
    * The character NormaClears his self, updating his level of norma.
    * The method considers the amount of stars, amount of victories, the level of norma
@@ -85,49 +91,49 @@ class PlayerCharacter(val name: String,
 
     if (currNorma == 1) {
       if ((currStars >= 10) || (currVictories >= 1)) {
-        advanceNorma()
+        advanceToNorma(2)
       }
     }
     else if (currNorma == 2) {
       if ((currRoad == 1) && (currStars >= 30)) {
-        advanceNorma()
+        advanceToNorma(3)
       }
       else if ((currRoad == 2) && (currVictories >= 3)) {
-        advanceNorma()
+        advanceToNorma(3)
       }
     }
 
     else if (currNorma == 3) {
       if ((currRoad == 1) && (currStars >= 70)) {
-        advanceNorma()
+        advanceToNorma(4)
       }
       else if ((currRoad == 2) && (currVictories >= 6)) {
-        advanceNorma()
+        advanceToNorma(4)
       }
     }
 
     else if (currNorma == 4) {
       if ((currRoad == 1) && (currStars >= 120)) {
-        advanceNorma()
+        advanceToNorma(5)
       }
       else if ((currRoad == 2) && (currVictories >= 10)) {
-        advanceNorma()
+        advanceToNorma(5)
       }
     }
 
     else if (currNorma == 5) {
       if ((currRoad == 1) && (currStars >= 200)) {
-        advanceNorma()
+        advanceToNorma(6)
       }
       else if ((currRoad == 2) && (currVictories >= 14)) {
-        advanceNorma()
+        advanceToNorma(6)
       }
     }
-  }*/
+  }
   /**
    * The character can determinate if him should be KO.
    */
-  def shouldKnockedOut(): Unit = {
+  def knockPlayer(): Unit = {
     if (currHp == 0) {
       knockedOut = true
     }

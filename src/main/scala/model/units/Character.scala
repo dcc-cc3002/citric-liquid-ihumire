@@ -45,15 +45,15 @@ trait Character {
    */
   def decreaseStars(value: Int): Unit
   /**
-   * A character increase his health points by a specific value.
-   *
-   * @param value The number of health points, bigger than 0, given to the character less than maxHp.
-   */
-  def increaseHp(value: Int): Unit
-  /**
    * A character decrease his health points by a specific value.
    *
    * @param value The number of health points, bigger than 0, steal to the character at least 0.
    */
   def decreaseHp(value: Int): Unit
+  /**
+   * A character increase his health points by a specific value.
+   *
+   * @param value The number of health points, bigger than 0, given to the character less than maxHp.
+   */
+  def increaseHp(value: Int): Unit
 }

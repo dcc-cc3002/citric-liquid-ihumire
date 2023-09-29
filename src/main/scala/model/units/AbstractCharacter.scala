@@ -13,13 +13,12 @@ import scala.util.Random
  *
  * @author [[https://github.com/ihumire Ignacio Humire S.]]
  */
-abstract class AbstractCharacter extends Character {
-  val name: String
-  val maxHp: Int
-  val attack: Int
-  val defense: Int
-  val evasion: Int
-  val randomNumberGenerator: Random
+abstract class AbstractCharacter(val name: String,
+                                 val maxHp: Int,
+                                 val attack: Int,
+                                 val defense: Int,
+                                 val evasion: Int,
+                                 val randomNumberGenerator: Random) extends Character {
 
   /**
    * Rolls a dice and returns a value between 1 to 6.
@@ -47,17 +46,6 @@ abstract class AbstractCharacter extends Character {
     }
   }
   /**
-   * A character increase his health points by a specific value.
-   *
-   * @param value The number of health points, bigger than 0, given to the character less than maxHp.
-   */
-  def increaseHp(value: Int): Unit = {
-    currHp += value
-    if (currHp > maxHp) {
-      currHp = maxHp
-    }
-  }
-  /**
    * A character decrease his health points by a specific value.
    *
    * @param value The number of health points, bigger than 0, steal to the character at least 0.
@@ -68,4 +56,16 @@ abstract class AbstractCharacter extends Character {
       currHp = 0
     }
   }
+  /**
+   * A character increase his health points by a specific value.
+   *
+   * @param value The number of health points, bigger than 0, given to the character less than maxHp.
+   */
+  def increaseHp(value: Int): Unit = {
+    currHp += value
+    if (currHp > maxHp) {
+      currHp = maxHp
+    }
+  }
+
 }
