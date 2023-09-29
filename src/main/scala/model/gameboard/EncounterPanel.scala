@@ -51,7 +51,7 @@ class EncounterPanel extends AbstractPanel {
    *
    */
   def removeWildUnit(): Unit = {
-    wildUnitInPanel(0).shouldBeDeath()
+    wildUnitInPanel(0).killWildUnit()
     if (wildUnitInPanel(0).death){
       wildUnitInPanel.remove(0)
     }

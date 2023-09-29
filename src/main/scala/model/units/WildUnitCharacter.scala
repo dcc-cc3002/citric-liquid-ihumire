@@ -13,7 +13,7 @@ class WildUnitCharacter(name: String,
   var currStars: Int = 0
   var death: Boolean = false
 
-  def shouldBeDeath(): Unit = {
+  def killWildUnit(): Unit = {
     if (currHp == 0) {
       death = true
     }

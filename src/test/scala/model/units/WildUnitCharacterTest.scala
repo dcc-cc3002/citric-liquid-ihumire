@@ -4,38 +4,30 @@ package model.units
 import scala.util.Random
 
 class WildUnitCharacterTest extends munit.FunSuite{
-  /*
+
   private val name = "WildUnit"
-  private val maxHp = 5
-  private var currHp = 5
+  private val maxHp = 3
   private val attack = 0
   private val defense = 0
   private val evasion = 0
-  private var currStars = 0
   private var randomNumberGenerator: Random = _
 
+  private var wildUnit: WildUnitCharacter = _
   private var wildUnit1: WildUnitCharacter = _
-  private var wildUnit2: WildUnitCharacter = _
-  private var wildUnit3: WildUnitCharacter = _
-  private var wildUnit4: WildUnitCharacter = _
 
 
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
-    wildUnit1 = new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars,randomNumberGenerator)
-    wildUnit2 = new WildUnitCharacter(name, maxHp, 4, attack, defense, evasion, 11)
-    wildUnit3 = new WildUnitCharacter(name, maxHp, 1, attack, defense, evasion, currStars, randomNumberGenerator)
-    wildUnit4 = new WildUnitCharacter(name, maxHp, 0, attack, defense, evasion, currStars, randomNumberGenerator)
+    wildUnit = new WildUnitCharacter(name, maxHp, attack, defense, evasion)
+    wildUnit1 = new WildUnitCharacter(name, maxHp, attack, defense, evasion, randomNumberGenerator)
   }
 
   test("A wild unit should have correctly set their attributes"){
     assertEquals(wildUnit1.name, name)
     assertEquals(wildUnit1.maxHp, maxHp)
-    assertEquals(wildUnit1.currHp, currHp)
     assertEquals(wildUnit1.attack, attack)
     assertEquals(wildUnit1.defense, defense)
     assertEquals(wildUnit1.evasion, evasion)
-    assertEquals(wildUnit1.currStars, currStars)
   }
 
   // Two ways to test randomness (you can use any of them):
@@ -52,66 +44,78 @@ class WildUnitCharacterTest extends munit.FunSuite{
   // are always the same for the same seed.
   test("A wild unit should be able to roll a dice with a fixed seed") {
     val other1 =
-      new WildUnitCharacter(name, maxHp, currHp, attack, defense, evasion, currStars, new Random(11))
+      new WildUnitCharacter(name, maxHp, attack, defense, evasion, new Random(11))
     for (_ <- 1 to 10) {
       assertEquals(wildUnit1.rollDice(), other1.rollDice())
     }
   }
 
-  test("A character should automatically have a randomNumberGenerator to work in a dice"){
-    val randomWildUnitTestValue: Int = wildUnit2.randomNumberGenerator.nextInt(6) + 1
+  test("A wild unit automatically have a randomNumberGenerator to work in a dice"){
+    val randomWildUnitTestValue: Int = wildUnit1.randomNumberGenerator.nextInt(6) + 1
     assert(randomWildUnitTestValue >=1 && randomWildUnitTestValue <= 6)
   }
 
   test("A wild unit should be able to increase his value of stars, without limits") {
     val valueToGive: Int = 10
-    val expectedStars: Int = wildUnit1.currStars + valueToGive
-    wildUnit1.increaseStars(valueToGive)
-    assertEquals(wildUnit1.currStars, expectedStars)
+    val expectedStars: Int = wildUnit.currStars + valueToGive
+    wildUnit.increaseStars(valueToGive)
+    assertEquals(wildUnit.currStars, expectedStars)
   }
 
   test("A wild unit should be able to decrease his value of stars, without overflow the 0") {
     val valueToDrop: Int = 10
-    // This case should overflow
-    val expectedStars1: Int = wildUnit1.currStars - valueToDrop
-    wildUnit1.decreaseStars(valueToDrop)
-    assertNotEquals(wildUnit1.currStars, expectedStars1)
-    // This case shouldn´t overflow
-    val expectedStars2: Int = wildUnit2.currStars - valueToDrop
-    wildUnit2.decreaseStars(valueToDrop)
-    assertEquals(wildUnit2.currStars, expectedStars2)
+    val expectedStars: Int = wildUnit.currStars - valueToDrop
+    wildUnit.decreaseStars(valueToDrop)
+    assertNotEquals(wildUnit.currStars, expectedStars)
   }
 
-  test("A character should be able to increase his currHp, without overflow maxHp") {
-    val valueToIncrease: Int = 1
-    // This case should overflow
-    val expectedHp1: Int = wildUnit1.currHp + valueToIncrease
-    wildUnit1.increaseHp(valueToIncrease)
-    assertNotEquals(wildUnit1.currHp, expectedHp1)
-    // This case shouldn't overflow
-    val expectedHp2: Int = wildUnit2.currHp + valueToIncrease
-    wildUnit2.increaseHp(valueToIncrease)
-    assertEquals(wildUnit2.currHp, expectedHp2)
+  test("A wild unit should be able to decrease his value of stars, doing a normal reduce") {
+    wildUnit.increaseStars(12)
+    val valueToDrop: Int = 10
+    val expectedStarsReduce: Int = wildUnit.currStars - valueToDrop
+    wildUnit.decreaseStars(valueToDrop)
+    assertEquals(wildUnit.currStars, expectedStarsReduce)
   }
 
-  test("A character should be able to decrease his currHp, without overflow the 0") {
+  test("A wild unit should be able to decrease his currHp, without overflow 0") {
+    val valueToDecrease: Int = 6
+    val expectedHp: Int = wildUnit.currHp - valueToDecrease
+    wildUnit.decreaseHp(valueToDecrease)
+    assertNotEquals(wildUnit.currHp, expectedHp)
+  }
+
+  test("A wild unit should be able to decrease his currHp, doing a normal reduce") {
     val valueToDecrease: Int = 2
-    // This case should overflow
-    val expectedHp1: Int = wildUnit1.currHp - valueToDecrease
-    wildUnit1.decreaseHp(valueToDecrease)
-    assertEquals(wildUnit1.currHp, expectedHp1)
-    // This case shouldn't overflow
-    val expectedHp2: Int = wildUnit3.currHp - valueToDecrease
-    wildUnit3.decreaseHp(valueToDecrease)
-    assertNotEquals(wildUnit3.currHp, expectedHp2)
+    val expectedHp: Int = wildUnit.currHp - valueToDecrease
+    wildUnit.decreaseHp(valueToDecrease)
+    assertEquals(wildUnit.currHp, expectedHp)
   }
 
-  test("A wild unit should enter in death state"){
-    val expected: Boolean = true
-    wildUnit1.shouldBeDeath()
-    assertNotEquals(wildUnit1.death, expected)
-    wildUnit4.shouldBeDeath()
-    assertEquals(wildUnit4.death, expected)
+  test("A wild unit should be able to increase his currHp, without overflow maxHp") {
+    val valueToIncrease: Int = 1
+    val expectedHp: Int = wildUnit.currHp + valueToIncrease
+    wildUnit.increaseHp(valueToIncrease)
+    assertNotEquals(wildUnit.currHp, expectedHp)
   }
-  */
+
+  test("A wild unit should be able to increase his currHp, doing a normal addition") {
+    wildUnit.decreaseHp(2)
+    val valueToIncrease: Int = 1
+    val expectedHp: Int = wildUnit.currHp + valueToIncrease
+    wildUnit.increaseHp(valueToIncrease)
+    assertEquals(wildUnit.currHp, expectedHp)
+  }
+
+  test("A wild unit should be able to not being killed when his currHp is not 0") {
+    val expected: Boolean = true
+    wildUnit.killWildUnit()
+    assertNotEquals(wildUnit.death, expected)
+  }
+
+  test("A wild unit should be able to death when his currHp is 0") {
+    wildUnit.decreaseHp(3)
+    val expected: Boolean = true
+    wildUnit.killWildUnit()
+    assertEquals(wildUnit.death, expected)
+  }
 }

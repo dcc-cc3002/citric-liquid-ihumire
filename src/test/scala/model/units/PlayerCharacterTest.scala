@@ -21,14 +21,12 @@ class PlayerCharacterTest extends munit.FunSuite {
     character1 = new PlayerCharacter(name, maxHp, attack, defense, evasion,randomNumberGenerator)
   }
 
-  test("A character should have correctly set their attributes") {
-    val randomCharacterTestValue: Int = character.randomNumberGenerator.nextInt(6) + 1
+  test("A character should have correctly set their attributes and have a new randomNumber") {
     assertEquals(character.name, name)
     assertEquals(character.maxHp, maxHp)
     assertEquals(character.attack, attack)
     assertEquals(character.defense, defense)
     assertEquals(character.evasion, evasion)
-    assert(randomCharacterTestValue >= 1 && randomCharacterTestValue <= 6)
   }
 
   // Two ways to test randomness (you can use any of them):
@@ -49,6 +47,11 @@ class PlayerCharacterTest extends munit.FunSuite {
     for (_ <- 1 to 10) {
       assertEquals(character1.rollDice(), other.rollDice())
     }
+  }
+
+  test("A character wild unit automatically have a randomNumberGenerator to work in a dice") {
+    val randomCharacterTestValue: Int = character.randomNumberGenerator.nextInt(6) + 1
+    assert(randomCharacterTestValue >= 1 && randomCharacterTestValue <= 6)
   }
 
   test("A character should be able to increase his value of stars, without limits") {
