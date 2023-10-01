@@ -48,7 +48,7 @@ class PlayerCharacter(name: String,
                       attack: Int,
                       defense: Int,
                       evasion: Int,
-                      randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator){
+                      randomNumberGenerator: Random) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator){
 
   private var _currNorma: Int = 1
   def currNorma: Int = _currNorma
@@ -73,7 +73,7 @@ class PlayerCharacter(name: String,
   private var _knockedOut: Boolean = false
   def knockedOut: Boolean = _knockedOut
   def knockedOut_=(newKnockedOut: Boolean): Unit = {
-    _knockedOut = newKnockedOut
+    _knockedOut = (currHp == 0)
   }
 
   def changeRoad(value: Int): Unit = {

@@ -23,13 +23,13 @@ abstract class AbstractCharacter(val name: String,
   private var _currHp: Int = maxHp
   def currHp: Int = _currHp
   def currHp_=(newCurrHp: Int): Unit = {
-    _currHp = newCurrHp
+    _currHp = math.max(0, newCurrHp)
   }
   private var _currStars: Int = 0
   def currStars: Int = _currStars
 
   def currStars_=(newCurrStars: Int): Unit = {
-    _currStars = newCurrStars
+    _currStars = math.max(0, newCurrStars)
   }
 
   /**
