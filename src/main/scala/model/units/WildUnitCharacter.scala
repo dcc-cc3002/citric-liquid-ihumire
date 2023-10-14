@@ -8,7 +8,7 @@ class WildUnitCharacter(name: String,
                         attack: Int,
                         defense: Int,
                         evasion: Int,
-                        randomNumberGenerator: Random) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) {
+                        randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) {
   private var _death: Boolean = false
   def death: Boolean = _death
   def death_=(newDeath: Boolean): Unit = {

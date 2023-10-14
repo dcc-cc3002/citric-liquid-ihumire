@@ -15,7 +15,8 @@ abstract class AbstractPanel extends Panel {
    * In the game, multiple characters might be on the same panel at once, e.g., if multiple players
    * land on the same space.
    */
-  val characters: ArrayBuffer[PlayerCharacter] = new ArrayBuffer[PlayerCharacter]()
+  protected val _characters: ArrayBuffer[PlayerCharacter] = new ArrayBuffer[PlayerCharacter]()
+  def characters: ArrayBuffer[PlayerCharacter] = _characters.clone()
 
   /** An array of panels that are directly connected to this one.
    *
@@ -24,7 +25,8 @@ abstract class AbstractPanel extends Panel {
    *
    * @return a List of Panel instances that are adjacent or connected to this panel.
    */
-  var nextPanels: ArrayBuffer[Panel] = new ArrayBuffer[Panel]()
+  protected val _nextPanels: ArrayBuffer[Panel] = new ArrayBuffer[Panel]()
+  def nextPanels: ArrayBuffer[Panel] = _nextPanels.clone()
 
   /** Adds a character to the list of characters currently on this panel.
    *
@@ -33,7 +35,7 @@ abstract class AbstractPanel extends Panel {
    * @param player The player character to add to this panel.
    */
   def addCharacter(player: PlayerCharacter): Unit = {
-    characters.addOne(player)
+    _characters.addOne(player)
   }
 
   /** Removes a character from the list of characters currently on this panel.
@@ -45,7 +47,7 @@ abstract class AbstractPanel extends Panel {
 
   def removeCharacter(player: PlayerCharacter): Unit = {
     val index: Int = characters.indexOf(player)
-    characters.remove(index)
+    _characters.remove(index)
   }
 
   /** Adds a panel to the list of nextPanels next to this panel.
@@ -57,7 +59,7 @@ abstract class AbstractPanel extends Panel {
    */
   def addPanel(panel: Panel): Unit = {
     if (nextPanels.length < 3){
-      nextPanels.addOne(panel)
+      _nextPanels.addOne(panel)
     }
   }
 
@@ -70,10 +72,9 @@ abstract class AbstractPanel extends Panel {
    */
 
   def removePanel(panel: Panel): Unit = {
-    if (nextPanels.nonEmpty){
-      val index: Int = nextPanels.indexOf(panel)
-      nextPanels.remove(index)
+    if (_nextPanels.nonEmpty){
+      val index: Int = _nextPanels.indexOf(panel)
+      _nextPanels.remove(index)
     }
   }
-
 }

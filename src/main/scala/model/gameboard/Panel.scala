@@ -22,7 +22,7 @@ trait Panel {
     * In the game, multiple characters might be on the same panel at once, e.g., if multiple players
     * land on the same space.
     */
-  val characters: ArrayBuffer[PlayerCharacter]
+  protected val _characters: ArrayBuffer[PlayerCharacter]
 
   /** An array of panels that are directly connected to this one.
    *
@@ -31,7 +31,7 @@ trait Panel {
    *
    * @return a List of Panel instances that are adjacent or connected to this panel.
    */
-  var nextPanels: ArrayBuffer[Panel]
+  protected val _nextPanels: ArrayBuffer[Panel]
 
   /** Adds a character to the list of characters currently on this panel.
     *

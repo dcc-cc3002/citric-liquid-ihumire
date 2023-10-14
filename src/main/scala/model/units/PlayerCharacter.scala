@@ -48,7 +48,7 @@ class PlayerCharacter(name: String,
                       attack: Int,
                       defense: Int,
                       evasion: Int,
-                      randomNumberGenerator: Random) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator){
+                      randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator){
 
   private var _currNorma: Int = 1
   def currNorma: Int = _currNorma
