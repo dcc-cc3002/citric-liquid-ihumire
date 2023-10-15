@@ -99,4 +99,13 @@ abstract class AbstractCharacter(val name: String,
     }
   }
 
+  def defendCharacter(atkDamage: Int, value: Int): Int = {
+    val finalDefense: Int = math.max(1, atkDamage - (value + defense))
+    finalDefense
+  }
+
+  def avoidCharacter(atkDamage: Int, value: Int): Int = {
+    val finalAvoid: Int = math.max(0, atkDamage - (value + evasion))
+    finalAvoid
+  }
 }

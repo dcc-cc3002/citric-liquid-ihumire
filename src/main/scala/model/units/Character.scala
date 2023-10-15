@@ -56,4 +56,8 @@ trait Character {
   def increaseHp(value: Int): Unit
 
   def attackCharacter(value: Int): Int
+
+  def defendCharacter(atkDamage: Int,value: Int): Int
+
+  def avoidCharacter(atkDamage: Int,value: Int):Int
 }
