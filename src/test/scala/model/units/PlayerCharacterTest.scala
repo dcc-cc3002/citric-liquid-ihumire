@@ -10,6 +10,9 @@ class PlayerCharacterTest extends munit.FunSuite {
   private val attack = 1
   private val defense = 1
   private val evasion = 1
+  private val attack1 = -6
+  private val defense1 = -1
+  private val evasion1 = -2
   private var randomNumberGenerator: Random = _
 
   private var character: PlayerCharacter = _
@@ -18,7 +21,7 @@ class PlayerCharacterTest extends munit.FunSuite {
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
     character = new PlayerCharacter(name, maxHp, attack, defense, evasion)
-    character1 = new PlayerCharacter(name, maxHp, attack, defense, evasion,randomNumberGenerator)
+    character1 = new PlayerCharacter(name, maxHp, attack1, defense1, evasion1,randomNumberGenerator)
   }
 
   test("A character should have correctly set their attributes and have a new randomNumber") {
@@ -190,4 +193,27 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.knockPlayer()
     assertEquals(character.knockedOut, expected)
   }
+
+  test("A character should be able to give his final number of attack for the duel"){
+    // case having a positive number
+    val value: Int = character.rollDice() // value >= 1 && value <= 6
+    val expectedValue: Int = value + character.attack
+    val finalAttack: Int = character.attackCharacter(value)
+    assertEquals(finalAttack, expectedValue)
+
+    // case having a number less equal to zero
+    val value1: Int = character1.rollDice() // value >= 1 && value <= 6
+    val expectedValue1: Int = value1 + character1.attack
+    val finalAttack1: Int = character1.attackCharacter(value)
+    assertNotEquals(finalAttack1, expectedValue1)
+  }
+/*
+  test("A character should be able to give his final number of defense for the duel") {
+    val value: Int = character.rollDice() // roll atk
+    val value1: Int = character1.rollDice() // roll def
+    val expectedValue: Int = value + character.defense
+    val finalAttack: Int = character.attackCharacter(value)
+    assertEquals(finalAttack, expectedValue)
+  }
+*/
 }

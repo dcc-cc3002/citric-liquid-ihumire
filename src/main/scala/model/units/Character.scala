@@ -54,4 +54,6 @@ trait Character {
    * @param value The number of health points, bigger than 0, given to the character less than maxHp.
    */
   def increaseHp(value: Int): Unit
+
+  def attackCharacter(value: Int): Int
 }

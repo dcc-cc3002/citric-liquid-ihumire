@@ -21,11 +21,15 @@ abstract class AbstractCharacter(val name: String,
                                  val randomNumberGenerator: Random) extends Character {
 
   private var _currHp: Int = maxHp
+
   def currHp: Int = _currHp
+
   def currHp_=(newCurrHp: Int): Unit = {
     _currHp = math.max(0, newCurrHp)
   }
+
   private var _currStars: Int = 0
+
   def currStars: Int = _currStars
 
   def currStars_=(newCurrStars: Int): Unit = {
@@ -38,6 +42,7 @@ abstract class AbstractCharacter(val name: String,
   def rollDice(): Int = {
     randomNumberGenerator.nextInt(6) + 1
   }
+
   /**
    * A character increase his amount of stars by a specific value.
    *
@@ -46,6 +51,7 @@ abstract class AbstractCharacter(val name: String,
   def increaseStars(value: Int): Unit = {
     currStars += value
   }
+
   /**
    * A character decrease his amount of stars by a specific value.
    *
@@ -57,6 +63,7 @@ abstract class AbstractCharacter(val name: String,
       currStars = 0
     }
   }
+
   /**
    * A character decrease his health points by a specific value.
    *
@@ -68,6 +75,7 @@ abstract class AbstractCharacter(val name: String,
       currHp = 0
     }
   }
+
   /**
    * A character increase his health points by a specific value.
    *
@@ -77,6 +85,17 @@ abstract class AbstractCharacter(val name: String,
     currHp += value
     if (currHp > maxHp) {
       currHp = maxHp
+    }
+  }
+
+  def attackCharacter(value: Int): Int = {
+    var finalValue: Int = value + attack
+    if (finalValue <= 0) {
+      finalValue = 0
+      finalValue
+    }
+    else {
+      finalValue
     }
   }
 
