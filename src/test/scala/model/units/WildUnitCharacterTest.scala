@@ -10,6 +10,9 @@ class WildUnitCharacterTest extends munit.FunSuite{
   private val attack = 0
   private val defense = 0
   private val evasion = 0
+  private val attack1 = -2
+  private val defense1 = -2
+  private val evasion1 = -2
   private var randomNumberGenerator: Random = _
 
   private var wildUnit: WildUnitCharacter = _
@@ -19,15 +22,15 @@ class WildUnitCharacterTest extends munit.FunSuite{
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
     wildUnit = new WildUnitCharacter(name, maxHp, attack, defense, evasion)
-    wildUnit1 = new WildUnitCharacter(name, maxHp, attack, defense, evasion, randomNumberGenerator)
+    wildUnit1 = new WildUnitCharacter(name, maxHp, attack1, defense1, evasion1, randomNumberGenerator)
   }
 
   test("A wild unit should have correctly set their attributes"){
-    assertEquals(wildUnit1.name, name)
-    assertEquals(wildUnit1.maxHp, maxHp)
-    assertEquals(wildUnit1.attack, attack)
-    assertEquals(wildUnit1.defense, defense)
-    assertEquals(wildUnit1.evasion, evasion)
+    assertEquals(wildUnit.name, name)
+    assertEquals(wildUnit.maxHp, maxHp)
+    assertEquals(wildUnit.attack, attack)
+    assertEquals(wildUnit.defense, defense)
+    assertEquals(wildUnit.evasion, evasion)
   }
 
   // Two ways to test randomness (you can use any of them):
@@ -117,5 +120,43 @@ class WildUnitCharacterTest extends munit.FunSuite{
     val expected: Boolean = true
     wildUnit.killWildUnit()
     assertEquals(wildUnit.death, expected)
+  }
+
+  test("A wildUnit should be able to give his final number of attack for the duel") {
+    // case having a positive number
+    val value: Int = wildUnit.rollDice() // value >= 1 && value <= 6
+    val expectedValue: Int = value + wildUnit.attack
+    val finalAttack: Int = wildUnit.attackCharacter(value)
+    assertEquals(finalAttack, expectedValue)
+
+    // case having a number less equal to zero
+    val value1: Int = wildUnit1.rollDice() // value >= 1 && value <= 6
+    val expectedValue1: Int = value1 + wildUnit1.attack
+    val finalAttack1: Int = wildUnit1.attackCharacter(value)
+    assertNotEquals(finalAttack1, expectedValue1)
+  }
+
+  test("A wildUnit should be able to give his final number of defend for the duel") {
+    // both wildUnits roll dice, with values -> 1 <= value <=6
+    val value: Int = wildUnit.rollDice()
+    val value1: Int = wildUnit1.rollDice()
+    // wildUnit will attack
+    val finalAttack: Int = wildUnit.attackCharacter(value)
+    // wildUnit1 will avoid
+    val expectedValue: Int = math.max(1, finalAttack - (value1 + wildUnit1.defense))
+    val finalDefend: Int = wildUnit1.defendCharacter(finalAttack, value1)
+    assertEquals(finalDefend, expectedValue)
+  }
+
+  test("A wildUnit should be able to give his final number of avoid for the duel") {
+    // both wildUnits roll dice, with values -> 1 <= value <=6
+    val value: Int = wildUnit.rollDice()
+    val value1: Int = wildUnit1.rollDice()
+    // wildUnit will attack
+    val finalAttack: Int = wildUnit.attackCharacter(value)
+    // wildUnit1 will avoid
+    val expectedValue: Int = math.max(0, finalAttack - (value1 + wildUnit1.evasion))
+    val finalAvoid: Int = wildUnit1.avoidCharacter(finalAttack, value1)
+    assertEquals(finalAvoid, expectedValue)
   }
 }

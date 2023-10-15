@@ -30,10 +30,6 @@ import scala.util.Random
   * @param attack The player's capability to deal damage to opponents.
   * @param defense The player's capability to resist or mitigate damage from opponents.
   * @param evasion The player's skill to completely avoid certain attacks.
-  * @param currNorma The number of norma of the player.
-  * @param currStars The number of stars of the player.
-  * @param currVictories The number of victories of the player.
-  * @param currRoad The objective of the player. Roads: (1) Stars objective / (2) Victories objective
   * @param randomNumberGenerator A utility to generate random numbers. Defaults to a new `Random`
   *                              instance.
   *

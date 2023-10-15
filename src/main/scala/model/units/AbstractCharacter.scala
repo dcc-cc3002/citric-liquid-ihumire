@@ -59,9 +59,6 @@ abstract class AbstractCharacter(val name: String,
    */
   def decreaseStars(value: Int): Unit = {
     currStars -= value
-    if (currStars < 0) {
-      currStars = 0
-    }
   }
 
   /**
@@ -71,9 +68,6 @@ abstract class AbstractCharacter(val name: String,
    */
   def decreaseHp(value: Int): Unit = {
     currHp -= value
-    if (currHp < 0) {
-      currHp = 0
-    }
   }
 
   /**
