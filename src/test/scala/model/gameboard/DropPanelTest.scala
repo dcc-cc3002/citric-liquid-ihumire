@@ -94,4 +94,15 @@ class DropPanelTest extends FunSuite {
     drop.dropStars(player1, roll)
     assertEquals(player1.currStars, expectedStars)
   }
+
+  test("A bonus panel should be applied his action to a character") {
+    // player have stars
+    player1.increaseStars(10)
+    val notExpectedValue: Int = player1.currStars
+    drop.apply(player1)
+    assert(notExpectedValue > player1.currStars)
+    // player no have stars
+    drop.apply(player2)
+    assertEquals(player2.currStars, 0)
+  }
 }

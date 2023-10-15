@@ -25,4 +25,9 @@ class DropPanel extends AbstractPanel {
     val toDrop: Int = roll * player.currNorma
     player.decreaseStars(toDrop)
   }
+
+  override def apply(player: PlayerCharacter): Unit = {
+    val roll: Int = player.rollDice()
+    dropStars(player, roll)
+  }
 }

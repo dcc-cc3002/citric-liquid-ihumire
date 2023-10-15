@@ -77,4 +77,8 @@ abstract class AbstractPanel extends Panel {
       _nextPanels.remove(index)
     }
   }
+
+  def apply(player: PlayerCharacter): Unit = {
+
+  }
 }

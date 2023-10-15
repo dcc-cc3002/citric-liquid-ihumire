@@ -91,4 +91,10 @@ class BonusPanelTest extends FunSuite {
     bonus.giveStars(player2, roll)
     assertEquals(player2.currStars, expectedStars)
   }
+
+  test("A bonus panel should be applied his action to a character"){
+    val notExpectedValue: Int = player1.currStars
+    bonus.apply(player1)
+    assert(notExpectedValue < player1.currStars)
+  }
 }
