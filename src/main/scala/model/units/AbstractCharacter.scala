@@ -86,11 +86,8 @@ abstract class AbstractCharacter(val name: String,
     var finalValue: Int = value + attack
     if (finalValue <= 0) {
       finalValue = 0
-      finalValue
     }
-    else {
-      finalValue
-    }
+    finalValue
   }
 
   def defendCharacter(atkDamage: Int, value: Int): Int = {
