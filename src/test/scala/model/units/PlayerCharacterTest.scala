@@ -9,7 +9,7 @@ class PlayerCharacterTest extends munit.FunSuite {
   private val maxHp = 5
   private val attack = 1
   private val defense = 1
-  private val evasion = 1
+  private val evasion = 6
   private val attack1 = -6
   private val defense1 = -1
   private val evasion1 = -2
@@ -226,9 +226,16 @@ class PlayerCharacterTest extends munit.FunSuite {
     val value1: Int = character1.rollDice()
     // character will attack
     val finalAttack: Int = character.attackCharacter(value)
+    val expectedValue: Int = finalAttack
+
+    // character will avoid
+    val finalAvoid: Int = character.avoidCharacter(finalAttack, value)
+    assertEquals(finalAvoid, 0)
+
     // character1 will avoid
-    val expectedValue: Int = math.max(0, finalAttack - (value1 + character1.evasion))
-    val finalAvoid: Int = character1.avoidCharacter(finalAttack, value1)
-    assertEquals(finalAvoid, expectedValue)
+    val finalAvoid1: Int = character1.avoidCharacter(finalAttack, value1)
+    assertEquals(finalAvoid1, expectedValue)
+
+
   }
 }

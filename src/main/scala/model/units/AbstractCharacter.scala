@@ -96,7 +96,10 @@ abstract class AbstractCharacter(val name: String,
   }
 
   def avoidCharacter(atkDamage: Int, value: Int): Int = {
-    val finalAvoid: Int = math.max(0, atkDamage - (value + evasion))
+    var finalAvoid: Int = atkDamage
+    if (evasion + value > atkDamage) {
+      finalAvoid = 0
+    }
     finalAvoid
   }
 }
