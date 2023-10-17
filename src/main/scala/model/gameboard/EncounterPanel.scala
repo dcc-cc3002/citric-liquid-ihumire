@@ -16,7 +16,7 @@ import scala.util.Random
  * @author [[https://github.com/ihumire/ Ignacio Humire S.]]
  */
 
-class EncounterPanel extends AbstractPanel {
+class EncounterPanel extends AbstractPanel {/*
   /* Every type of wild unit without life*/
   var enemyChicken = new WildUnitCharacter("Chicken", 3, -1, -1, 1)
   var enemyRoboBall = new WildUnitCharacter("RoboBall", 3, -1, 1, -1)
@@ -55,5 +55,5 @@ class EncounterPanel extends AbstractPanel {
     if (wildUnitInPanel(0).death){
       wildUnitInPanel.remove(0)
     }
-  }
+  }*/
 }
