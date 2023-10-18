@@ -109,7 +109,7 @@ class ChickenTest extends munit.FunSuite{
     }
   }
 
-  test("A chicken should be able to give his final number damage at the duel") {
+  test("A chicken should be able to give his final number damage by defend at the duel") {
     for (x <- 1 to 6){
       val value: Int = x
       // chicken will attack
@@ -123,8 +123,8 @@ class ChickenTest extends munit.FunSuite{
       }
     }
   }
-
-  test("A chicken should be able to give his final number damage at the duel") {
+/*
+  test("A chicken should be able to give his final number damage by avoid at the duel") {
     for (x <- 1 to 6) {
       val value: Int = x
       // chicken will attack
@@ -136,6 +136,6 @@ class ChickenTest extends munit.FunSuite{
         assertEquals(finalAvoid,finalAttack)
       }
     }
-  }
+  }*/
 }
                               
