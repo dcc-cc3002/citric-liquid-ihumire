@@ -136,6 +136,8 @@ class ChickenTest extends munit.FunSuite{
         assertEquals(finalAvoid,finalAttack)
       }
     }
-  }*/
+  }
+  //separar los casos y predecir cada uno por separado
+ */
 }
                               

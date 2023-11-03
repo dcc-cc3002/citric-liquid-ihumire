@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import cl.uchile.dcc.citric.model.norm.{Norma, Norma1}
+
 import scala.util.Random
 
 /** The `PlayerCharacter` class represents a character or avatar in the game, encapsulating
@@ -44,11 +46,10 @@ class PlayerCharacter(name: String,
                       attack: Int,
                       defense: Int,
                       evasion: Int,
-                      randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator){
-
-  private var _currNorma: Int = 1
-  def currNorma: Int = _currNorma
-  def currNorma_=(newNorma: Int): Unit = {
+                      randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) {
+  private var _currNorma: Norma = new Norma1
+  def currNorma: Norma = _currNorma
+  def currNorma_=(newNorma: Norma): Unit = {
     _currNorma = newNorma
   }
 
@@ -81,10 +82,8 @@ class PlayerCharacter(name: String,
   /**
    * The character increase his level of Norma.
    */
-  def advanceToNorma(value: Int): Unit = {
-    if (value>=1 && value<=6) {
-      currNorma = value
-    }
+  def advanceNorma(value: Int): Unit = {
+
   }
   /**
    * The character increase his amount of victories by one.

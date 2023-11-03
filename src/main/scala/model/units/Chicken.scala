@@ -12,5 +12,4 @@ class Chicken(name: String,
   def this() = {
     this("Chicken", 3, -1, -1, 1, new Random())
   }
-
 }

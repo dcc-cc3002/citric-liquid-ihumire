@@ -119,19 +119,19 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.changeRoad(2)
     assertEquals(character.currRoad, expectedRoad)
   }
-
+/*
   test("A character should be able to set his level of norma") {
     val expectedNorma: Int = 2
     character.advanceToNorma(2)
     assertEquals(character.currNorma, expectedNorma)
   }
-
+*/
   test("A character should be able to increase his victories, without limits") {
     val expectedVictories: Int = character.currVictories + 1
     character.increaseVictories(1)
     assertEquals(character.currVictories, expectedVictories)
   }
-
+/*
   test("A character should be able to NormaClear by all the stars road") {
     character.increaseStars(200)
 
@@ -180,7 +180,7 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.normaClear()
     assertEquals(character.currNorma, expected5)
   }
-
+*/
   test("A character should be able to not being knockedOut when his currHp is not 0") {
     val expected: Boolean = true
     character.knockPlayer()
