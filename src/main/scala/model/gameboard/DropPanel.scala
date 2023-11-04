@@ -22,7 +22,7 @@ class DropPanel extends AbstractPanel {
    */
 
   def dropStars(player: PlayerCharacter, roll: Int): Unit = {
-    val toDrop: Int = roll * player.currNorma
+    val toDrop: Int = roll * player.normaToNumber()
     player.decreaseStars(toDrop)
   }
 

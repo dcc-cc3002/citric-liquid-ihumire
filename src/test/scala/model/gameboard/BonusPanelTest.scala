@@ -78,7 +78,7 @@ class BonusPanelTest extends FunSuite {
 
   test("Give stars to a character in a bonus panel (p1 version") {
     val roll: Int = player1.rollDice()
-    val toGive: Int = math.min(roll * player1.currNorma, roll * 3)
+    val toGive: Int = math.min(roll * player1.normaToNumber(), roll * 3)
     val expectedStars: Int = player1.currStars + toGive
     bonus.giveStars(player1, roll)
     assertEquals(player1.currStars, expectedStars)
@@ -86,7 +86,7 @@ class BonusPanelTest extends FunSuite {
 
   test("Give stars to a character in a bonus panel (p2 version)") {
     val roll: Int = player2.rollDice()
-    val toGive: Int = math.min(roll * player2.currNorma, roll * 3)
+    val toGive: Int = math.min(roll * player2.normaToNumber(), roll * 3)
     val expectedStars: Int = player2.currStars + toGive
     bonus.giveStars(player2, roll)
     assertEquals(player2.currStars, expectedStars)

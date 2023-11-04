@@ -1,6 +1,8 @@
 package cl.uchile.dcc.citric
 package model.units
 
+import cl.uchile.dcc.citric.model.norm.{Norma1, Norma2}
+
 import scala.util.Random
 
 class PlayerCharacterTest extends munit.FunSuite {
@@ -108,6 +110,17 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.currHp, expectedHp)
   }
 
+  test("A character clears his norma"){
+    character.increaseStars(10)
+    character.normaClear()
+    assert(character.currNorma.isInstanceOf[Norma2])
+  }
+
+  test("A character don't clears his norma") {
+    character.normaClear()
+    assert(character.currNorma.isInstanceOf[Norma1])
+  }
+
   test("A character should be able to set a road of stars (1)"){
     val expectedRoad: Int = 1
     character.changeRoad(1)
@@ -119,68 +132,13 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.changeRoad(2)
     assertEquals(character.currRoad, expectedRoad)
   }
-/*
-  test("A character should be able to set his level of norma") {
-    val expectedNorma: Int = 2
-    character.advanceToNorma(2)
-    assertEquals(character.currNorma, expectedNorma)
-  }
-*/
+
   test("A character should be able to increase his victories, without limits") {
     val expectedVictories: Int = character.currVictories + 1
     character.increaseVictories(1)
     assertEquals(character.currVictories, expectedVictories)
   }
-/*
-  test("A character should be able to NormaClear by all the stars road") {
-    character.increaseStars(200)
 
-    val expected1: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected1)
-
-    val expected2: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected2)
-
-    val expected3: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected3)
-
-    val expected4: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected4)
-
-    val expected5: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected5)
-  }
-
-  test ("A character should be able to NormaClear by all the victories road") {
-    character.changeRoad(2)
-    character.increaseVictories(14)
-
-    val expected1: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected1)
-
-    val expected2: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected2)
-
-    val expected3: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected3)
-
-    val expected4: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected4)
-
-    val expected5: Int = character.currNorma + 1
-    character.normaClear()
-    assertEquals(character.currNorma, expected5)
-  }
-*/
   test("A character should be able to not being knockedOut when his currHp is not 0") {
     val expected: Boolean = true
     character.knockPlayer()
@@ -192,6 +150,13 @@ class PlayerCharacterTest extends munit.FunSuite {
     val expected: Boolean = true
     character.knockPlayer()
     assertEquals(character.knockedOut, expected)
+  }
+
+  test("A character gives his current norma as a number"){
+    character.increaseStars(10)
+    character.normaClear()
+    val value:Int = character.normaToNumber()
+    assertEquals(value, 2)
   }
 
   test("A character should be able to give his final number of attack for the duel"){
@@ -235,7 +200,5 @@ class PlayerCharacterTest extends munit.FunSuite {
     // character1 will avoid
     val finalAvoid1: Int = character1.avoidCharacter(finalAttack, value1)
     assertEquals(finalAvoid1, expectedValue)
-
-
   }
 }

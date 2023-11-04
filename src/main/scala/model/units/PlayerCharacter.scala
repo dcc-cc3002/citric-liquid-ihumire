@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.units
 
-import cl.uchile.dcc.citric.model.norm.{Norma, Norma1}
+import cl.uchile.dcc.citric.model.norm.{Norma, Norma1, Norma2, Norma3}
 
 import scala.util.Random
 
@@ -47,12 +47,12 @@ class PlayerCharacter(name: String,
                       defense: Int,
                       evasion: Int,
                       randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) {
+
   private var _currNorma: Norma = new Norma1
   def currNorma: Norma = _currNorma
   def currNorma_=(newNorma: Norma): Unit = {
     _currNorma = newNorma
   }
-
   private var _currVictories: Int = 0
   def currVictories: Int = _currVictories
   def currVictories_=(newCurrVictories: Int): Unit = {
@@ -63,10 +63,6 @@ class PlayerCharacter(name: String,
   def currRoad_=(newCurrRoad: Int): Unit = {
     _currRoad = newCurrRoad
   }
-
-  /**
-   * The character can be KO.
-   */
   private var _knockedOut: Boolean = false
   def knockedOut: Boolean = _knockedOut
   def knockedOut_=(newKnockedOut: Boolean): Unit = {
@@ -74,16 +70,7 @@ class PlayerCharacter(name: String,
   }
 
   def changeRoad(value: Int): Unit = {
-    if (value == 1 || value == 2) {
-      currRoad = value
-    }
-  }
-
-  /**
-   * The character increase his level of Norma.
-   */
-  def advanceNorma(value: Int): Unit = {
-
+    if (value == 1 || value == 2) currRoad = value
   }
   /**
    * The character increase his amount of victories by one.
@@ -91,61 +78,17 @@ class PlayerCharacter(name: String,
   def increaseVictories(value: Int): Unit = {
     currVictories+=value
   }
-
-  /**
-   * The character NormaClears his self, updating his level of norma.
-   * The method considers the amount of stars, amount of victories, the level of norma
-   * and the road previously chosen.
-   */
-  def normaClear(): Unit = {
-
-    if (currNorma == 1) {
-      if ((currStars >= 10) || (currVictories >= 1)) {
-        advanceToNorma(2)
-      }
-    }
-    else if (currNorma == 2) {
-      if ((currRoad == 1) && (currStars >= 30)) {
-        advanceToNorma(3)
-      }
-      else if ((currRoad == 2) && (currVictories >= 3)) {
-        advanceToNorma(3)
-      }
-    }
-
-    else if (currNorma == 3) {
-      if ((currRoad == 1) && (currStars >= 70)) {
-        advanceToNorma(4)
-      }
-      else if ((currRoad == 2) && (currVictories >= 6)) {
-        advanceToNorma(4)
-      }
-    }
-
-    else if (currNorma == 4) {
-      if ((currRoad == 1) && (currStars >= 120)) {
-        advanceToNorma(5)
-      }
-      else if ((currRoad == 2) && (currVictories >= 10)) {
-        advanceToNorma(5)
-      }
-    }
-
-    else if (currNorma == 5) {
-      if ((currRoad == 1) && (currStars >= 200)) {
-        advanceToNorma(6)
-      }
-      else if ((currRoad == 2) && (currVictories >= 14)) {
-        advanceToNorma(6)
-      }
-    }
-  }
-  /**
-   * The character can determinate if him should be KO.
-   */
   def knockPlayer(): Unit = {
     if (currHp == 0) {
       knockedOut = true
     }
+  }
+  def normaToNumber(): Int = {
+    val value: Int = currNorma.toNumber()
+    value
+  }
+  def normaClear(): Unit = {
+    val boost = currNorma.checkBoost(currRoad, currStars, currVictories)
+    if (boost) currNorma = currNorma.upgrade()
   }
 }

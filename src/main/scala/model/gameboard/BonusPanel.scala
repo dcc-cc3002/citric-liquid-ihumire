@@ -23,7 +23,7 @@ class BonusPanel extends AbstractPanel {
    */
 
   def giveStars(player: PlayerCharacter, roll: Int): Unit = {
-    val toGive: Int = math.min(roll * player.currNorma, roll * 3)
+    val toGive: Int = math.min(roll * player.normaToNumber(), roll * 3)
     player.increaseStars(toGive)
   }
 

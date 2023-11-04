@@ -1,15 +1,16 @@
 package cl.uchile.dcc.citric
 package model.gameboard
 
-import model.units.{PlayerCharacter, WildUnitCharacter}
+import model.units.{Chicken, PlayerCharacter, RoboBall, Seagull, WildUnitCharacter}
 
 import munit.FunSuite
 
 import scala.collection.mutable.ArrayBuffer
 
-class EncounterPanelTest extends FunSuite {/*
+class EncounterPanelTest extends FunSuite {
   private var player1: PlayerCharacter = _
   private var player2: PlayerCharacter = _
+  private var chicken: Chicken = _
   private var neutral: NeutralPanel = _
   private var home: HomePanel = _
   private var bonus: BonusPanel = _
@@ -19,6 +20,7 @@ class EncounterPanelTest extends FunSuite {/*
   override def beforeEach(context: BeforeEach): Unit = {
     player1 = new PlayerCharacter("Molly", 5, 1, 1, 0)
     player2 = new PlayerCharacter("Kira", 5, 1, -1, 1)
+    chicken = new Chicken()
     neutral = new NeutralPanel
     home = new HomePanel
     bonus = new BonusPanel
@@ -82,20 +84,12 @@ class EncounterPanelTest extends FunSuite {/*
     drop.removePanel(neutral)
     assertEquals(drop.nextPanels, expectedNoPanel)
   }
-
-  test("Add a random wild unit to encounter panel only if is empty") {
-    val expectedChicken: ArrayBuffer[WildUnitCharacter] = ArrayBuffer(encounter.enemyChicken)
-    val expectedRoboBall: ArrayBuffer[WildUnitCharacter] = ArrayBuffer(encounter.enemyRoboBall)
-    val expectedSeagull: ArrayBuffer[WildUnitCharacter] = ArrayBuffer(encounter.enemySeagull)
-    encounter.addRandomWildUnit()
-    assert(encounter.wildUnitInPanel == expectedChicken || encounter.wildUnitInPanel == expectedRoboBall
-      || encounter.wildUnitInPanel == expectedSeagull)
-    encounter.addRandomWildUnit()
-    assert(encounter.wildUnitInPanel == expectedChicken || encounter.wildUnitInPanel == expectedRoboBall
-      || encounter.wildUnitInPanel == expectedSeagull)
+/*
+  test("Add random wild unit to encounter panel") {
 
   }
-
+    */
+/*
   test("Remove a wild unit from an encounter panel only if is death") {
     encounter.addRandomWildUnit()
     val expectedNothing: ArrayBuffer[WildUnitCharacter] = ArrayBuffer()

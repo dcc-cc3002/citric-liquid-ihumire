@@ -32,6 +32,7 @@ abstract class AbstractCharacter(val name: String,
 
   def currStars: Int = _currStars
 
+
   def currStars_=(newCurrStars: Int): Unit = {
     _currStars = math.max(0, newCurrStars)
   }

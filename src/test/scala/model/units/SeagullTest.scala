@@ -4,8 +4,8 @@ package model.units
 class SeagullTest extends munit.FunSuite{
   private val name = "Seagull"
   private val maxHp = 3
-  private val attack = -1
-  private val defense = 1
+  private val attack = 1
+  private val defense = -1
   private val evasion = -1
   private var seagull: Seagull = _
   private var seagull1: Seagull = _
