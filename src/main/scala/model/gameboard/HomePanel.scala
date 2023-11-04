@@ -13,7 +13,7 @@ import scala.collection.mutable.ArrayBuffer
  * @author [[https://github.com/ihumire/ Ignacio Humire S.]]
  */
 
-class HomePanel extends AbstractPanel {
+class HomePanel(val owner: PlayerCharacter) extends AbstractPanel {
 
   /** Heals a character from the list of characters currently on this panel.
    *

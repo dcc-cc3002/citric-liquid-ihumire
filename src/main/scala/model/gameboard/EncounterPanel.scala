@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.gameboard
 
-import model.units.{Chicken, RoboBall, Seagull, WildUnitCharacter}
+import model.units.{Character,AbstractCharacter,Chicken, RoboBall, Seagull}
 
 import scala.collection.mutable.ArrayBuffer
 import scala.util.Random
@@ -22,8 +22,7 @@ class EncounterPanel extends AbstractPanel {
    * In the game, a single wild unit might be on the panel until a player defeat him.
    *
    */
-  val wildUnitInPanel: ArrayBuffer[WildUnitCharacter] = new ArrayBuffer[WildUnitCharacter]()
-/*
+  val wildUnitInPanel: ArrayBuffer[Character] = new ArrayBuffer[Character]()
   /** Adds a random wild unit to the list of wildUnits only if is empty.
    *
    * This might be invoked once time when a player moves to this panel to have a fight with the
@@ -31,17 +30,18 @@ class EncounterPanel extends AbstractPanel {
    *
    */
   def addRandomWildUnit(): Unit = {
+    if (wildUnitInPanel.isEmpty) {
+      val enemies = ArrayBuffer[Character](new Chicken,new RoboBall(), new Seagull())
+      val randomNumber: Random = new Random()
+      wildUnitInPanel.addOne(enemies(randomNumber.nextInt(enemies.length)))
+    }
   }
-  /*
-  /** Remove the wild unit if him currHp is 0.
-   *
-   * This might be invoked every time before a duel with the player.
-   *
+
+  /** Remove the wild unit
    */
   def removeWildUnit(): Unit = {
-    wildUnitInPanel(0).killWildUnit()
-    if (wildUnitInPanel(0).death){
+    if (wildUnitInPanel.nonEmpty){
       wildUnitInPanel.remove(0)
     }
-  }*/*/
+  }
 }

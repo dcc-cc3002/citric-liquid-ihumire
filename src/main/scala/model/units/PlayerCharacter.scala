@@ -63,12 +63,6 @@ class PlayerCharacter(name: String,
   def currRoad_=(newCurrRoad: Int): Unit = {
     _currRoad = newCurrRoad
   }
-  private var _knockedOut: Boolean = false
-  def knockedOut: Boolean = _knockedOut
-  def knockedOut_=(newKnockedOut: Boolean): Unit = {
-    _knockedOut = (currHp == 0)
-  }
-
   def changeRoad(value: Int): Unit = {
     if (value == 1 || value == 2) currRoad = value
   }
@@ -77,11 +71,6 @@ class PlayerCharacter(name: String,
    */
   def increaseVictories(value: Int): Unit = {
     currVictories+=value
-  }
-  def knockPlayer(): Unit = {
-    if (currHp == 0) {
-      knockedOut = true
-    }
   }
   def normaToNumber(): Int = {
     val value: Int = currNorma.toNumber()

@@ -141,14 +141,14 @@ class PlayerCharacterTest extends munit.FunSuite {
 
   test("A character should be able to not being knockedOut when his currHp is not 0") {
     val expected: Boolean = true
-    character.knockPlayer()
+    character.knockCharacter()
     assertNotEquals(character.knockedOut, expected)
   }
 
   test("A character should be able to knockedOut when his currHp is 0"){
     character.decreaseHp(5)
     val expected: Boolean = true
-    character.knockPlayer()
+    character.knockCharacter()
     assertEquals(character.knockedOut, expected)
   }
 

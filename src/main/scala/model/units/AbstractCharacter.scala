@@ -103,4 +103,19 @@ abstract class AbstractCharacter(val name: String,
     }
     finalAvoid
   }
+
+
+  private var _knockedOut: Boolean = false
+
+  def knockedOut: Boolean = _knockedOut
+
+  def knockedOut_=(newKnockedOut: Boolean): Unit = {
+    _knockedOut = (currHp == 0)
+  }
+
+  def knockCharacter(): Unit = {
+    if (currHp == 0) {
+      knockedOut = true
+    }
+  }
 }

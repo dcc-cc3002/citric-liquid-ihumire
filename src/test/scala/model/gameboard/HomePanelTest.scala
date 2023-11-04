@@ -3,6 +3,7 @@ package model.gameboard
 
 import model.units.PlayerCharacter
 
+import cl.uchile.dcc.citric.model.norm.{Norma1, Norma2}
 import munit.FunSuite
 
 import scala.collection.mutable.ArrayBuffer
@@ -13,6 +14,7 @@ class HomePanelTest extends FunSuite {
   private var player2: PlayerCharacter = _
   private var neutral: NeutralPanel = _
   private var home: HomePanel = _
+  private var home2: HomePanel = _
   private var bonus: BonusPanel = _
   private var drop: DropPanel = _
 
@@ -20,9 +22,15 @@ class HomePanelTest extends FunSuite {
     player1 = new PlayerCharacter("Molly", 5, 1, 1, 0)
     player2 = new PlayerCharacter("Kira", 5, 1, -1, 1)
     neutral = new NeutralPanel
-    home = new HomePanel
+    home = new HomePanel(player1)
+    home2 = new HomePanel(player2)
     bonus = new BonusPanel
     drop = new DropPanel
+  }
+
+  test("HomePanel have an owner corretly setter"){
+    assertEquals(home.owner, player1)
+    assertEquals(home2.owner, player2)
   }
 
   test("Add character to home panel") {
@@ -56,20 +64,18 @@ class HomePanelTest extends FunSuite {
     home.healCharacter(player1)
     assertEquals(player1.currHp, expectedHp)
   }
-/*
+
   test("Do norma check to a character in a home panel, ending with a increase of norma") {
     player1.increaseStars(10)
-    val expectedNorma: Int = player1.currNorma + 1
     home.normaCheck(player1)
-    assertEquals(player1.currNorma, expectedNorma)
+    assert(player1.currNorma.isInstanceOf[Norma2])
   }
 
   test("Do norma check to a character in a home panel, ending with a stay of norma"){
-    val expectedNormaP1: Int = player1.currNorma + 1
     home.normaCheck(player1)
-    assertNotEquals(player1.currNorma, expectedNormaP1)
+    assert(player1.currNorma.isInstanceOf[Norma1])
   }
-*/
+
   test("Add a panel to nextPanels in home panel, having at 3 max") {
     val expectedOnePanel: ArrayBuffer[Panel] = ArrayBuffer(neutral)
     val expectedTwoPanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home)

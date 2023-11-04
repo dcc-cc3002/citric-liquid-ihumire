@@ -89,15 +89,15 @@ class ChickenTest extends munit.FunSuite{
 
   test("A chicken should be able to not being killed when his currHp is not 0") {
     val expected: Boolean = true
-    chicken.killWildUnit()
-    assertNotEquals(chicken.death, expected)
+    chicken.knockCharacter()
+    assertNotEquals(chicken.knockedOut, expected)
   }
 
   test("A chicken should be able to death when his currHp is 0") {
     chicken.decreaseHp(3)
     val expected: Boolean = true
-    chicken.killWildUnit()
-    assertEquals(chicken.death, expected)
+    chicken.knockCharacter()
+    assertEquals(chicken.knockedOut, expected)
   }
 
   test("A chicken should be able to give his final number of attack for the duel") {
@@ -123,21 +123,24 @@ class ChickenTest extends munit.FunSuite{
       }
     }
   }
-/*
+
   test("A chicken should be able to give his final number damage by avoid at the duel") {
-    for (x <- 1 to 6) {
-      val value: Int = x
-      // chicken will attack
-      val finalAttack: Int = chicken.attackCharacter(value)
-      for (y <- 1 to 6){
-        val value1: Int = y
-        // chicken 1 will defend
-        val finalAvoid: Int = chicken1.avoidCharacter(finalAttack, value1)
-        assertEquals(finalAvoid,finalAttack)
-      }
-    }
+
+    // both characters roll dice, with values -> 1 <= value <=6
+    val value: Int = chicken.rollDice()
+    val value1: Int = chicken1.rollDice()
+    // chicken will attack
+    val finalAttack: Int = chicken.attackCharacter(value)
+    val expectedValue: Int = finalAttack
+
+    // chicken will avoid
+    val finalAvoid: Int = chicken.avoidCharacter(finalAttack, value)
+    assertEquals(finalAvoid, 0)
+
+    // character1 will avoid
+    val finalAvoid1: Int = chicken1.avoidCharacter(finalAttack, value1)
+    assertEquals(finalAvoid1, expectedValue)
+
   }
-  //separar los casos y predecir cada uno por separado
- */
 }
                               

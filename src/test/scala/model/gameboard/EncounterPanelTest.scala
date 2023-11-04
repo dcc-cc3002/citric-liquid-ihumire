@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.gameboard
 
-import model.units.{Chicken, PlayerCharacter, RoboBall, Seagull, WildUnitCharacter}
+import model.units.{Chicken, PlayerCharacter, RoboBall, Seagull}
 
 import munit.FunSuite
 
@@ -22,7 +22,7 @@ class EncounterPanelTest extends FunSuite {
     player2 = new PlayerCharacter("Kira", 5, 1, -1, 1)
     chicken = new Chicken()
     neutral = new NeutralPanel
-    home = new HomePanel
+    home = new HomePanel(player1)
     bonus = new BonusPanel
     drop = new DropPanel
     encounter = new EncounterPanel
@@ -84,19 +84,18 @@ class EncounterPanelTest extends FunSuite {
     drop.removePanel(neutral)
     assertEquals(drop.nextPanels, expectedNoPanel)
   }
-/*
-  test("Add random wild unit to encounter panel") {
 
-  }
-    */
-/*
-  test("Remove a wild unit from an encounter panel only if is death") {
+  test("Add random wild unit to encounter panel") {
     encounter.addRandomWildUnit()
-    val expectedNothing: ArrayBuffer[WildUnitCharacter] = ArrayBuffer()
+    assert(encounter.wildUnitInPanel(0).isInstanceOf[Chicken]||
+          encounter.wildUnitInPanel(0).isInstanceOf[RoboBall]||
+          encounter.wildUnitInPanel(0).isInstanceOf[Seagull])
+  }
+
+  test("Remove a wild unit from an encounter panel when is death") {
+    encounter.addRandomWildUnit()
+    assert(encounter.wildUnitInPanel.nonEmpty)
     encounter.removeWildUnit()
-    assertNotEquals(encounter.wildUnitInPanel, expectedNothing)
-    encounter.wildUnitInPanel(0).decreaseHp(3)
-    encounter.removeWildUnit()
-    assertEquals(encounter.wildUnitInPanel, expectedNothing)
-  }*/
+    assert(encounter.wildUnitInPanel.isEmpty)
+  }
 }

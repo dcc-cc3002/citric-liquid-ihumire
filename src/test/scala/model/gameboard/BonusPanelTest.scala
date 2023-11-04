@@ -17,7 +17,7 @@ class BonusPanelTest extends FunSuite {
     player1 = new PlayerCharacter("Molly", 5, 1, 1, 0)
     player2 = new PlayerCharacter("Kira", 5, 1, -1, 1)
     neutral = new NeutralPanel
-    home = new HomePanel
+    home = new HomePanel(player1)
     bonus = new BonusPanel
     drop = new DropPanel
   }

@@ -87,15 +87,15 @@ class SeagullTest extends munit.FunSuite{
 
   test("A seagull should be able to not being killed when his currHp is not 0") {
     val expected: Boolean = true
-    seagull.killWildUnit()
-    assertNotEquals(seagull.death, expected)
+    seagull.knockCharacter()
+    assertNotEquals(seagull.knockedOut, expected)
   }
 
   test("A seagull should be able to death when his currHp is 0") {
     seagull.decreaseHp(3)
     val expected: Boolean = true
-    seagull.killWildUnit()
-    assertEquals(seagull.death, expected)
+    seagull.knockCharacter()
+    assertEquals(seagull.knockedOut, expected)
   }
 
   test("A seagull should be able to give his final number of attack for the duel") {
