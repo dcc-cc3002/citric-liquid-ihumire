@@ -78,16 +78,12 @@ abstract class AbstractCharacter(val name: String,
    */
   def increaseHp(value: Int): Unit = {
     currHp += value
-    if (currHp > maxHp) {
-      currHp = maxHp
-    }
+    if (currHp > maxHp) currHp = maxHp
   }
 
   def attackCharacter(value: Int): Int = {
     var finalValue: Int = value + attack
-    if (finalValue <= 0) {
-      finalValue = 0
-    }
+    if (finalValue <= 0) finalValue = 0
     finalValue
   }
 
@@ -98,12 +94,9 @@ abstract class AbstractCharacter(val name: String,
 
   def avoidCharacter(atkDamage: Int, value: Int): Int = {
     var finalAvoid: Int = atkDamage
-    if (evasion + value > atkDamage) {
-      finalAvoid = 0
-    }
+    if (evasion + value > atkDamage) finalAvoid = 0
     finalAvoid
   }
-
 
   private var _knockedOut: Boolean = false
 
@@ -114,8 +107,6 @@ abstract class AbstractCharacter(val name: String,
   }
 
   def knockCharacter(): Unit = {
-    if (currHp == 0) {
-      knockedOut = true
-    }
+    if (currHp == 0) knockedOut = true
   }
 }

@@ -121,19 +121,21 @@ class RoboBallTest extends munit.FunSuite{
       }
     }
   }
-/*
-  test("A roboBall should be able to give his final number damage at the duel") {
-    for (x <- 1 to 6) {
-      val value: Int = x
-      // roboBall will attack
-      val finalAttack: Int = roboBall.attackCharacter(value)
-      for (y <- 1 to 6){
-        val value1: Int = y
-        // roboBall 1 will defend
-        val finalAvoid: Int = roboBall1.avoidCharacter(finalAttack, value1)
-        assertEquals(finalAvoid,finalAttack)
-      }
-    }
-  }*/
+
+  test("A roboBall should be able to give his final number damage by avoid at the duel") {
+    // both characters roll dice, with values -> 1 <= value <=6
+    val value: Int = roboBall.rollDice()
+    val value1: Int = roboBall1.rollDice()
+    // roboBall will attack
+    val finalAttack: Int = roboBall.attackCharacter(value)
+
+    // roboBall will avoid
+    val finalAvoid: Int = roboBall.avoidCharacter(finalAttack, value)
+    assert(finalAvoid == 0 || finalAvoid == finalAttack)
+
+    // roboBall1 will avoid
+    val finalAvoid1: Int = roboBall1.avoidCharacter(finalAttack, value1)
+    assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
+  }
 }
                               

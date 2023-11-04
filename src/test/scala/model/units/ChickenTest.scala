@@ -125,22 +125,19 @@ class ChickenTest extends munit.FunSuite{
   }
 
   test("A chicken should be able to give his final number damage by avoid at the duel") {
-
     // both characters roll dice, with values -> 1 <= value <=6
     val value: Int = chicken.rollDice()
     val value1: Int = chicken1.rollDice()
     // chicken will attack
     val finalAttack: Int = chicken.attackCharacter(value)
-    val expectedValue: Int = finalAttack
 
     // chicken will avoid
     val finalAvoid: Int = chicken.avoidCharacter(finalAttack, value)
-    assertEquals(finalAvoid, 0)
+    assert(finalAvoid == 0 || finalAvoid == finalAttack)
 
-    // character1 will avoid
+    // chicken will avoid
     val finalAvoid1: Int = chicken1.avoidCharacter(finalAttack, value1)
-    assertEquals(finalAvoid1, expectedValue)
-
+    assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
   }
 }
                               

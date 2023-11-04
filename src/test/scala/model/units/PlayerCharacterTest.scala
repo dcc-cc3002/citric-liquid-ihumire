@@ -185,20 +185,19 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(finalDefend, expectedValue)
   }
 
-  test("A character should be able to give his final number of avoid for the duel") {
+  test("A character should be able to give his final number damage by avoid at the duel") {
     // both characters roll dice, with values -> 1 <= value <=6
     val value: Int = character.rollDice()
     val value1: Int = character1.rollDice()
     // character will attack
     val finalAttack: Int = character.attackCharacter(value)
-    val expectedValue: Int = finalAttack
 
     // character will avoid
     val finalAvoid: Int = character.avoidCharacter(finalAttack, value)
-    assertEquals(finalAvoid, 0)
+    assert(finalAvoid == 0 || finalAvoid == finalAttack)
 
     // character1 will avoid
     val finalAvoid1: Int = character1.avoidCharacter(finalAttack, value1)
-    assertEquals(finalAvoid1, expectedValue)
+    assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
   }
 }

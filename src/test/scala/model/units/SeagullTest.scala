@@ -121,19 +121,21 @@ class SeagullTest extends munit.FunSuite{
       }
     }
   }
-/*
-  test("A seagull should be able to give his final number damage at the duel") {
-    for (x <- 1 to 6) {
-      val value: Int = x
-      // seagull will attack
-      val finalAttack: Int = seagull.attackCharacter(value)
-      for (y <- 1 to 6){
-        val value1: Int = y
-        // seagull 1 will defend
-        val finalAvoid: Int = seagull1.avoidCharacter(finalAttack, value1)
-        assertEquals(finalAvoid,finalAttack)
-      }
-    }
-  }*/
+
+  test("A seagull should be able to give his final number damage by avoid at the duel") {
+    // both characters roll dice, with values -> 1 <= value <=6
+    val value: Int = seagull.rollDice()
+    val value1: Int = seagull1.rollDice()
+    // seagull will attack
+    val finalAttack: Int = seagull.attackCharacter(value)
+
+    // seagull will avoid
+    val finalAvoid: Int = seagull.avoidCharacter(finalAttack, value)
+    assert(finalAvoid == 0 || finalAvoid == finalAttack)
+
+    // seagull1 will avoid
+    val finalAvoid1: Int = seagull1.avoidCharacter(finalAttack, value1)
+    assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
+  }
 }
                               
