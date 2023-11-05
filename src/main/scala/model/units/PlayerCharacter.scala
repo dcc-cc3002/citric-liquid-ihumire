@@ -82,12 +82,36 @@ class PlayerCharacter(name: String,
   def normaClear(): Unit = {
     currNorma = currNorma.checkBoost(this)
   }
-  def transferHalf(character: Character): Unit = {
-    val value: Int = math.floorDiv(currStars, 2)
-    this.decreaseStars(value)
-    character.increaseStars(value)
+
+  def loseAgainst(character: Character): Unit = character.winsVsPlayer(this)
+
+  def winsVsPlayer(player: PlayerCharacter): Unit = {
+    val starsValue: Int = math.floorDiv(player.currStars, 2)
+    increaseStars(starsValue)
+    increaseVictories(2)
+    player.decreaseStars(starsValue)
   }
 
-  override def transferStars(character: Character): Int = currStars
+  def winsVsChicken(chicken: Chicken): Unit = {
+    val starsValue: Int = chicken.currStars
+    increaseStars(starsValue)
+    increaseVictories(1)
+    chicken.decreaseStars(starsValue)
+  }
 
+  def winsVsRoboBall(roboBall: RoboBall): Unit = {
+    val starsValue: Int = roboBall.currStars
+    increaseStars(starsValue)
+    increaseVictories(1)
+    roboBall.decreaseStars(starsValue)
+  }
+
+  def winsVsSeagull(seagull: Seagull): Unit = {
+    val starsValue: Int = seagull.currStars
+    increaseStars(starsValue)
+    increaseVictories(1)
+    seagull.decreaseStars(starsValue)
+  }
+
+  def 
 }

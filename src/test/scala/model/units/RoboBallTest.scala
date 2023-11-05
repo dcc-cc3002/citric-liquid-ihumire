@@ -7,12 +7,18 @@ class RoboBallTest extends munit.FunSuite{
   private val attack = -1
   private val defense = 1
   private val evasion = -1
-  private var roboBall: RoboBall = _
+  private var chicken: Chicken = _
   private var roboBall1: RoboBall = _
+  private var player: PlayerCharacter = _
+  private var roboBall: RoboBall = _
+  private var seagull: Seagull = _
 
   override def beforeEach(context: BeforeEach): Unit = {
-    roboBall = new RoboBall()
+    chicken = new Chicken()
     roboBall1 = new RoboBall()
+    player = new PlayerCharacter("Molly", 5, 1, 1, 0)
+    roboBall = new RoboBall()
+    seagull = new Seagull()
   }
 
   test("A roboBall should have correctly set their attributes") {
@@ -124,6 +130,54 @@ class RoboBallTest extends munit.FunSuite{
     // roboBall1 will avoid
     val finalAvoid1: Int = roboBall1.avoidCharacter(finalAttack, value1)
     assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
+  }
+
+  test("RoboBall lose against a Player") {
+    roboBall.increaseStars(33)
+    player.increaseStars(11)
+    val charStars: Int = roboBall.currStars
+    val char1Stars: Int = player.currStars
+    val expectedValue: Int = 0
+    val expectedValue1: Int = charStars + char1Stars
+    roboBall.loseAgainst(player)
+    assertEquals(roboBall.currStars, expectedValue)
+    assertEquals(player.currStars, expectedValue1)
+  }
+
+  test("RoboBall lose against a Chicken") {
+    roboBall.increaseStars(33)
+    chicken.increaseStars(11)
+    val charStars: Int = roboBall.currStars
+    val char1Stars: Int = chicken.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    roboBall.loseAgainst(chicken)
+    assertEquals(roboBall.currStars, expectedValue)
+    assertEquals(chicken.currStars, expectedValue1)
+  }
+
+  test("RoboBall lose against a RoboBall") {
+    roboBall.increaseStars(33)
+    roboBall1.increaseStars(11)
+    val charStars: Int = roboBall.currStars
+    val char1Stars: Int = roboBall1.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    roboBall.loseAgainst(roboBall1)
+    assertEquals(roboBall.currStars, expectedValue)
+    assertEquals(roboBall1.currStars, expectedValue1)
+  }
+
+  test("RoboBall lose against a Seagull") {
+    roboBall.increaseStars(33)
+    seagull.increaseStars(11)
+    val charStars: Int = roboBall.currStars
+    val char1Stars: Int = seagull.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    roboBall.loseAgainst(seagull)
+    assertEquals(roboBall.currStars, expectedValue)
+    assertEquals(seagull.currStars, expectedValue1)
   }
 }
                               

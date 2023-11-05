@@ -11,10 +11,15 @@ class ChickenTest extends munit.FunSuite{
   private val evasion = 1
   private var chicken: Chicken = _
   private var chicken1: Chicken = _
-
+  private var player: PlayerCharacter = _
+  private var roboBall: RoboBall = _
+  private var seagull: Seagull = _
   override def beforeEach(context: BeforeEach): Unit = {
     chicken = new Chicken()
     chicken1 = new Chicken()
+    player = new PlayerCharacter("Molly", 5, 1, 1, 0)
+    roboBall = new RoboBall()
+    seagull = new Seagull()
   }
 
   test("A chicken should have correctly set their attributes") {
@@ -126,6 +131,54 @@ class ChickenTest extends munit.FunSuite{
     // chicken will avoid
     val finalAvoid1: Int = chicken1.avoidCharacter(finalAttack, value1)
     assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
+  }
+
+  test("Chicken lose against a Player") {
+    chicken.increaseStars(33)
+    player.increaseStars(11)
+    val charStars: Int = chicken.currStars
+    val char1Stars: Int = player.currStars
+    val expectedValue: Int = 0
+    val expectedValue1: Int = charStars + char1Stars
+    chicken.loseAgainst(player)
+    assertEquals(chicken.currStars, expectedValue)
+    assertEquals(player.currStars, expectedValue1)
+  }
+
+  test("Chicken lose against a chicken") {
+    chicken.increaseStars(33)
+    chicken.increaseStars(11)
+    val charStars: Int = chicken.currStars
+    val char1Stars: Int = chicken.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    chicken.loseAgainst(chicken)
+    assertEquals(chicken.currStars, expectedValue)
+    assertEquals(chicken.currStars, expectedValue1)
+  }
+
+  test("Chicken lose against a RoboBall") {
+    chicken.increaseStars(33)
+    roboBall.increaseStars(11)
+    val charStars: Int = chicken.currStars
+    val char1Stars: Int = roboBall.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    chicken.loseAgainst(roboBall)
+    assertEquals(chicken.currStars, expectedValue)
+    assertEquals(roboBall.currStars, expectedValue1)
+  }
+
+  test("Chicken lose against a Seagull") {
+    chicken.increaseStars(33)
+    seagull.increaseStars(11)
+    val charStars: Int = chicken.currStars
+    val char1Stars: Int = seagull.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    chicken.loseAgainst(seagull)
+    assertEquals(chicken.currStars, expectedValue)
+    assertEquals(seagull.currStars, expectedValue1)
   }
 }
                               

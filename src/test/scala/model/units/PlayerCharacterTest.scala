@@ -23,11 +23,17 @@ class PlayerCharacterTest extends munit.FunSuite {
 
   private var character: PlayerCharacter = _
   private var character1: PlayerCharacter = _
+  private var chicken: Chicken = _
+  private var roboBall: RoboBall = _
+  private var seagull: Seagull = _
 
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
     character = new PlayerCharacter(name, maxHp, attack, defense, evasion)
     character1 = new PlayerCharacter(name, maxHp, attack1, defense1, evasion1,randomNumberGenerator)
+    chicken = new Chicken()
+    roboBall = new RoboBall()
+    seagull = new Seagull()
     roadS = new StarsRoad
     roadV = new VictoriesRoad
     roadA = new AllRoads
@@ -276,33 +282,52 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.normaClear()
   }
 
-  test("Character transfer a half to a Character1"){
+  test("Player lose against a Player"){
     character.increaseStars(33)
     character1.increaseStars(11)
     val charStars: Int = character.currStars
     val char1Stars: Int = character1.currStars
     val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
     val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
-    character.transferHalf(character1)
+    character.loseAgainst(character1)
     assertEquals(character.currStars, expectedValue)
     assertEquals(character1.currStars, expectedValue1)
   }
 
-  test("Character defated by character1"){
+  test("Player lose against a Chicken") {
     character.increaseStars(33)
-    character1.increaseStars(11)
+    chicken.increaseStars(11)
     val charStars: Int = character.currStars
-    val char1Stars: Int = character1.currStars
+    val char1Stars: Int = chicken.currStars
     val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
     val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
-    character1.decreaseHp(5)
-    character1.transferStars(character)
+    character.loseAgainst(chicken)
     assertEquals(character.currStars, expectedValue)
-    assertEquals(character1.currStars, expectedValue1)
+    assertEquals(chicken.currStars, expectedValue1)
   }
 
-  test("Character not defated by character1") {
-
+  test("Player lose against a RoboBall") {
+    character.increaseStars(33)
+    roboBall.increaseStars(11)
+    val charStars: Int = character.currStars
+    val char1Stars: Int = roboBall.currStars
+    val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
+    val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
+    character.loseAgainst(roboBall)
+    assertEquals(character.currStars, expectedValue)
+    assertEquals(roboBall.currStars, expectedValue1)
   }
 
+  test("Player lose against a Seagull") {
+    character.increaseStars(33)
+    seagull.increaseStars(11)
+    val charStars: Int = character.currStars
+    val char1Stars: Int = seagull.currStars
+    val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
+    val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
+    character.loseAgainst(seagull)
+    assertEquals(character.currStars, expectedValue)
+    assertEquals(seagull.currStars, expectedValue1)
+  }
 }
+

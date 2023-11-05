@@ -115,16 +115,4 @@ abstract class AbstractCharacter(val name: String,
   def knockCharacter(): Unit = {
     if (currHp == 0) knockedOut = true
   }
-
-  def transferStars(player: PlayerCharacter): Unit = {
-  }
-
-  def transferStars(wild: WildUnitCharacter): Unit = {
-  }
-
-  def transferVictories(player: PlayerCharacter): Unit = {
-  }
-
-  def transferVictories(wild: WildUnitCharacter): Unit = {
-  }
 }
