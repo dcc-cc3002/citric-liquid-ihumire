@@ -19,13 +19,20 @@ abstract class AbstractCharacter(val name: String,
                                  val defense: Int,
                                  val evasion: Int,
                                  val randomNumberGenerator: Random) extends Character {
-
   private var _currHp: Int = maxHp
 
   def currHp: Int = _currHp
 
   def currHp_=(newCurrHp: Int): Unit = {
-    _currHp = math.max(0, newCurrHp)
+    if (newCurrHp < 0) {
+      _currHp = 0
+    }
+    else if (newCurrHp > maxHp){
+      _currHp = maxHp
+    }
+    else{
+      _currHp = newCurrHp
+    }
   }
 
   private var _currStars: Int = 0
@@ -78,7 +85,6 @@ abstract class AbstractCharacter(val name: String,
    */
   def increaseHp(value: Int): Unit = {
     currHp += value
-    if (currHp > maxHp) currHp = maxHp
   }
 
   def attackCharacter(value: Int): Int = {
@@ -103,7 +109,7 @@ abstract class AbstractCharacter(val name: String,
   def knockedOut: Boolean = _knockedOut
 
   def knockedOut_=(newKnockedOut: Boolean): Unit = {
-    _knockedOut = (currHp == 0)
+    _knockedOut = newKnockedOut
   }
 
   def knockCharacter(): Unit = {

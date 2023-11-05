@@ -2,7 +2,10 @@ package cl.uchile.dcc.citric
 package model.gameboard
 
 import model.units.PlayerCharacter
+
+import cl.uchile.dcc.citric.model.norm.Norma1
 import munit.FunSuite
+
 import scala.collection.mutable.ArrayBuffer
 
 class BonusPanelTest extends FunSuite {

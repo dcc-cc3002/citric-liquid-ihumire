@@ -2,6 +2,9 @@ package cl.uchile.dcc.citric
 package model.gameboard
 
 import model.units.PlayerCharacter
+
+import cl.uchile.dcc.citric.model.norm.Norma1
+
 import scala.collection.mutable.ArrayBuffer
 import munit.FunSuite
 
@@ -60,10 +63,10 @@ class NeutralPanelTest extends FunSuite {
     neutral.addPanel(neutral)
     neutral.addPanel(home)
     neutral.addPanel(bonus)
-    val expectedNoPanel: ArrayBuffer[Panel] = ArrayBuffer()
-    val expectedOnePanel: ArrayBuffer[Panel] = ArrayBuffer(neutral)
-    val expectedTwoPanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home)
-    val expectedThreePanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home, bonus)
+    val expectedNoPanel: ArrayBuffer[Panel] = ArrayBuffer[Panel]()
+    val expectedOnePanel: ArrayBuffer[Panel] = ArrayBuffer[Panel](neutral)
+    val expectedTwoPanels: ArrayBuffer[Panel] = ArrayBuffer[Panel](neutral, home)
+    val expectedThreePanels: ArrayBuffer[Panel] = ArrayBuffer[Panel](neutral, home, bonus)
     assertEquals(neutral.nextPanels, expectedThreePanels)
     neutral.removePanel(bonus)
     assertEquals(neutral.nextPanels, expectedTwoPanels)
@@ -74,6 +77,19 @@ class NeutralPanelTest extends FunSuite {
     /* Extra remove do nothing */
     neutral.removePanel(neutral)
     assertEquals(neutral.nextPanels, expectedNoPanel)
+  }
+
+  test("NeutralPanel has no effect"){
+    val eHp: Int = player1.currHp
+    val eStars: Int = player1.currStars
+    val eVictories: Int = player1.currVictories
+    val eRoad: Int = player1.currRoad
+    neutral.apply(player1)
+    assertEquals(player1.currHp, eHp)
+    assertEquals(player1.currStars, eStars)
+    assertEquals(player1.currVictories, eVictories)
+    assertEquals(player1.currRoad, eRoad)
+    assert(player1.currNorma.isInstanceOf[Norma1])
   }
 
 }
