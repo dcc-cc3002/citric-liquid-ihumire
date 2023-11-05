@@ -4,7 +4,7 @@ package model.norm
 import cl.uchile.dcc.citric.model.units.PlayerCharacter
 
 trait Norma {
-  def checkBoost(valueRoad: Int, valueStars: Int, valueVictories: Int): Boolean
-  def upgrade(): Norma
+  def checkBoost(player: PlayerCharacter): Norma
+
   def toNumber(): Int
 }

@@ -3,7 +3,7 @@ package model.gameboard
 
 import model.units.PlayerCharacter
 
-import cl.uchile.dcc.citric.model.norm.{Norma1, Norma2}
+import cl.uchile.dcc.citric.model.norm.{Norma, Norma1, Norma2}
 import munit.FunSuite
 
 import scala.collection.mutable.ArrayBuffer
@@ -109,5 +109,14 @@ class HomePanelTest extends FunSuite {
     /* Extra remove do nothing */
     home.removePanel(neutral)
     assertEquals(home.nextPanels, expectedNoPanel)
+  }
+
+  test("A home panel should be applied his action to a character") {
+    player1.decreaseHp(2)
+    player1.increaseStars(10)
+    val notExpectedHp: Int = player1.currHp
+    home.apply(player1)
+    assert(notExpectedHp < player1.currHp)
+    assert(player1.currNorma.isInstanceOf[Norma2])
   }
 }

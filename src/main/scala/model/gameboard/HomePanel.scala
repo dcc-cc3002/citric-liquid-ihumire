@@ -3,6 +3,8 @@ package model.gameboard
 
 import model.units.PlayerCharacter
 
+import cl.uchile.dcc.citric.model.norm.Norma
+
 import scala.collection.mutable.ArrayBuffer
 
 /** The `HomePanel` class represents a panel in the game.
@@ -25,7 +27,6 @@ class HomePanel(val owner: PlayerCharacter) extends AbstractPanel {
   def healCharacter(player: PlayerCharacter): Unit = {
     player.increaseHp(1)
   }
-
   /** Do a NormaCheck to a character from the list of characters currently on this panel.
    *
    * A normaCheck invoke normaClear of the character to check.
@@ -34,5 +35,10 @@ class HomePanel(val owner: PlayerCharacter) extends AbstractPanel {
    */
   def normaCheck(player: PlayerCharacter): Unit = {
     player.normaClear()
+  }
+
+  override def apply(player: PlayerCharacter): Unit = {
+    normaCheck(player)
+    healCharacter(player)
   }
 }

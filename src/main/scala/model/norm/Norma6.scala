@@ -1,12 +1,11 @@
 package cl.uchile.dcc.citric
 package model.norm
 
+import model.units.PlayerCharacter
+
 class Norma6 extends Norma {
-  def checkBoost(road: Int, stars: Int, victories: Int): Boolean = {
-    true
+  def checkBoost(player: PlayerCharacter): Norma = {
+    this
   }
-
-  def upgrade(): Norma = this
-
   override def toNumber(): Int = 6
 }

@@ -140,5 +140,9 @@ class ChickenTest extends munit.FunSuite{
     val finalAvoid1: Int = chicken1.avoidCharacter(finalAttack, value1)
     assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
   }
+
+  test("The chicken drops "){
+
+  }
 }
                               

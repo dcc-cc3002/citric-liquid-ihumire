@@ -1,24 +1,26 @@
 package cl.uchile.dcc.citric
 package model.norm
 
+import model.units.PlayerCharacter
+
 class Norma5 extends Norma {
-  def checkBoost(road: Int, stars: Int, victories: Int): Boolean = {
-    var shouldBoost: Boolean = false
-    if (road == 1) {
-      if (stars >= 200) {
-        shouldBoost = true
+  def checkBoost(player: PlayerCharacter): Norma = {
+    if (player.currRoad == 1) {
+      if (player.currStars >= 200) {
+        new Norma6
       }
-      shouldBoost
+      else {
+        this
+      }
     }
     else {
-      if (victories >= 14) {
-        shouldBoost = true
+      if (player.currVictories >= 14) {
+        new Norma6
       }
-      shouldBoost
+      else {
+        this
+      }
     }
   }
-
-  def upgrade(): Norma = new Norma6
-
   def toNumber(): Int = 5
 }

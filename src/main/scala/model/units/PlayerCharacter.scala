@@ -77,7 +77,6 @@ class PlayerCharacter(name: String,
     value
   }
   def normaClear(): Unit = {
-    val boost = currNorma.checkBoost(currRoad, currStars, currVictories)
-    if (boost) currNorma = currNorma.upgrade()
+    currNorma = currNorma.checkBoost(this)
   }
 }

@@ -200,8 +200,4 @@ class PlayerCharacterTest extends munit.FunSuite {
     val finalAvoid1: Int = character1.avoidCharacter(finalAttack, value1)
     assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
   }
-
-  test("Character's currHp have correctly setter in a number bigger or equals than 0"){
-
-  }
 }
