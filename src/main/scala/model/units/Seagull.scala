@@ -11,5 +11,6 @@ class Seagull(name: String,
               randomNumberGenerator: Random) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) {
   def this() = {
     this("Seagull", 3, 1, -1, -1, new Random())
+    this.increaseStars(2)
   }
 }

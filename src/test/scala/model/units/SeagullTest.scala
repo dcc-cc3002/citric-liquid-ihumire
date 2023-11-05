@@ -21,6 +21,7 @@ class SeagullTest extends munit.FunSuite{
     assertEquals(seagull.attack, attack)
     assertEquals(seagull.defense, defense)
     assertEquals(seagull.evasion, evasion)
+    assertEquals(seagull.currStars,2)
   }
 
   test("A seagull should be able to roll a dice") {

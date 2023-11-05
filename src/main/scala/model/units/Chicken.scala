@@ -11,5 +11,6 @@ class Chicken(name: String,
               randomNumberGenerator: Random) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator){
   def this() = {
     this("Chicken", 3, -1, -1, 1, new Random())
+    this.increaseStars(3)
   }
 }

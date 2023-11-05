@@ -23,6 +23,7 @@ class ChickenTest extends munit.FunSuite{
     assertEquals(chicken.attack, attack)
     assertEquals(chicken.defense, defense)
     assertEquals(chicken.evasion, evasion)
+    assertEquals(chicken.currStars,3)
   }
 
   test("A chicken should be able to roll a dice") {

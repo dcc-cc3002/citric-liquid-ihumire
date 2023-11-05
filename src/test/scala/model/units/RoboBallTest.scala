@@ -21,6 +21,7 @@ class RoboBallTest extends munit.FunSuite{
     assertEquals(roboBall.attack, attack)
     assertEquals(roboBall.defense, defense)
     assertEquals(roboBall.evasion, evasion)
+    assertEquals(roboBall.currStars, 2)
   }
 
   test("A roboBall should be able to roll a dice") {

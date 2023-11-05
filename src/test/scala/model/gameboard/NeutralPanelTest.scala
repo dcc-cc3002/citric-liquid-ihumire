@@ -3,7 +3,7 @@ package model.gameboard
 
 import model.units.PlayerCharacter
 
-import cl.uchile.dcc.citric.model.norm.Norma1
+import cl.uchile.dcc.citric.model.norm.{Norma, Norma1}
 
 import scala.collection.mutable.ArrayBuffer
 import munit.FunSuite
@@ -84,12 +84,13 @@ class NeutralPanelTest extends FunSuite {
     val eStars: Int = player1.currStars
     val eVictories: Int = player1.currVictories
     val eRoad: Int = player1.currRoad
+    val eNorma: Norma = player1.currNorma
     neutral.apply(player1)
     assertEquals(player1.currHp, eHp)
     assertEquals(player1.currStars, eStars)
     assertEquals(player1.currVictories, eVictories)
     assertEquals(player1.currRoad, eRoad)
-    assert(player1.currNorma.isInstanceOf[Norma1])
+    assertEquals(player1.currNorma, eNorma)
   }
 
 }
