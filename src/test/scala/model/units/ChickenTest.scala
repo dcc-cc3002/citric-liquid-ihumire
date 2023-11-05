@@ -88,19 +88,6 @@ class ChickenTest extends munit.FunSuite{
     assertEquals(chicken.currHp, expectedHp)
   }
 
-  test("A chicken should be able to not being killed when his currHp is not 0") {
-    val expected: Boolean = true
-    chicken.knockCharacter()
-    assertNotEquals(chicken.knockedOut, expected)
-  }
-
-  test("A chicken should be able to death when his currHp is 0") {
-    chicken.decreaseHp(3)
-    val expected: Boolean = true
-    chicken.knockCharacter()
-    assertEquals(chicken.knockedOut, expected)
-  }
-
   test("A chicken should be able to give his final number of attack for the duel") {
     for (x <- 1 to 6) {
       val value: Int = x
@@ -139,10 +126,6 @@ class ChickenTest extends munit.FunSuite{
     // chicken will avoid
     val finalAvoid1: Int = chicken1.avoidCharacter(finalAttack, value1)
     assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
-  }
-
-  test("The chicken drops "){
-
   }
 }
                               

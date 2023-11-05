@@ -2,6 +2,7 @@ package cl.uchile.dcc.citric
 package model.units
 
 import cl.uchile.dcc.citric.model.norm.{Norma, Norma1, Norma2, Norma3}
+import cl.uchile.dcc.citric.model.roads.{AllRoads, StarsRoad, VictoriesRoad, Road}
 
 import scala.util.Random
 
@@ -53,18 +54,20 @@ class PlayerCharacter(name: String,
   def currNorma_=(newNorma: Norma): Unit = {
     _currNorma = newNorma
   }
+
   private var _currVictories: Int = 0
   def currVictories: Int = _currVictories
   def currVictories_=(newCurrVictories: Int): Unit = {
     _currVictories = newCurrVictories
   }
-  private var _currRoad: Int = 1
-  def currRoad: Int = _currRoad
-  def currRoad_=(newCurrRoad: Int): Unit = {
+
+  private var _currRoad: Road = new AllRoads
+  def currRoad: Road = _currRoad
+  def currRoad_=(newCurrRoad: Road): Unit = {
     _currRoad = newCurrRoad
   }
-  def changeRoad(value: Int): Unit = {
-    if (value == 1 || value == 2) currRoad = value
+  def changeRoad(road: Road): Unit = {
+    currRoad = currRoad.clearRoad(road)
   }
   /**
    * The character increase his amount of victories by one.
@@ -79,4 +82,5 @@ class PlayerCharacter(name: String,
   def normaClear(): Unit = {
     currNorma = currNorma.checkBoost(this)
   }
+
 }

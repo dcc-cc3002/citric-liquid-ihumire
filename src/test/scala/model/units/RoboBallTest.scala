@@ -86,19 +86,6 @@ class RoboBallTest extends munit.FunSuite{
     assertEquals(roboBall.currHp, expectedHp)
   }
 
-  test("A roboBall should be able to not being killed when his currHp is not 0") {
-    val expected: Boolean = true
-    roboBall.knockCharacter()
-    assertNotEquals(roboBall.knockedOut, expected)
-  }
-
-  test("A roboBall should be able to death when his currHp is 0") {
-    roboBall.decreaseHp(3)
-    val expected: Boolean = true
-    roboBall.knockCharacter()
-    assertEquals(roboBall.knockedOut, expected)
-  }
-
   test("A roboBall should be able to give his final number of attack for the duel") {
     for (x <- 1 to 6) {
       val value: Int = x

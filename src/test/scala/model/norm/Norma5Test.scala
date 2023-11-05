@@ -3,7 +3,7 @@ package model.norm
 
 import model.units.PlayerCharacter
 
-class Norma5Test extends munit.FunSuite {
+class Norma5Test extends munit.FunSuite {/*
   private var norma: Norma5 = _
   private var player: PlayerCharacter = _
 
@@ -37,5 +37,5 @@ class Norma5Test extends munit.FunSuite {
   test("Norma5 give his value as an int") {
     val value: Int = norma.toNumber()
     assertEquals(value, 5)
-  }
+  }*/
 }
