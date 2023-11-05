@@ -7,4 +7,5 @@ import model.norm.Norma
 trait Road {
   def clearRoad(road: Road): Road
   def makeRoad(): Road
+  def myRoad(norm: Norma, player: PlayerCharacter): Norma
 }

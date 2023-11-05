@@ -60,4 +60,9 @@ trait Character {
   def defendCharacter(atkDamage: Int, value: Int): Int
 
   def avoidCharacter(atkDamage: Int, value: Int): Int
+
+  def transferStars(character: Character): Int/*
+  def transferPlayer(player: PlayerCharacter): Int
+  def transferWildUnit(wild: WildUnitCharacter): Int*/
+
 }

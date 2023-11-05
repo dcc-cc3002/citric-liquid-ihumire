@@ -6,4 +6,5 @@ import model.units.PlayerCharacter
 class AllRoads extends Road{
   def clearRoad(road: Road): Road = road.makeRoad()
   def makeRoad(): Road = new AllRoads
+  def myRoad(norm: Norma, player: PlayerCharacter): Norma = norm.checkAll(player)
 }

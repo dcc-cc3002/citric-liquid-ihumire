@@ -82,5 +82,12 @@ class PlayerCharacter(name: String,
   def normaClear(): Unit = {
     currNorma = currNorma.checkBoost(this)
   }
+  def transferHalf(character: Character): Unit = {
+    val value: Int = math.floorDiv(currStars, 2)
+    this.decreaseStars(value)
+    character.increaseStars(value)
+  }
+
+  override def transferStars(character: Character): Int = currStars
 
 }

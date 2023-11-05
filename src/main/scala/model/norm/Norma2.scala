@@ -3,23 +3,30 @@ package model.norm
 
 import model.units.PlayerCharacter
 
+import cl.uchile.dcc.citric.model.roads.{AllRoads, StarsRoad, VictoriesRoad}
+
 class Norma2 extends Norma{
-  def checkBoost(player: PlayerCharacter): Norma = {
-    if (player.currRoad == 1) checkByStars(player)
-    else checkByVictories(player)
+  def checkBoost(player: PlayerCharacter): Norma = player.currRoad.myRoad(this, player)
+
+  def checkStars(player: PlayerCharacter): Norma = {
+    var norm: Norma = new Norma2
+    if (player.currStars >= 30) norm = new Norma3
+    norm
   }
 
-  def checkByStars(player: PlayerCharacter): Norma = {
-    var retNorma: Norma = this
-    if (player.currStars >= 30) retNorma = new Norma6
-    retNorma
+  def checkVictories(player: PlayerCharacter): Norma = {
+    var norm: Norma = new Norma2
+    if (player.currVictories >= 3) norm = new Norma3
+    norm
   }
 
-  def checkByVictories(player: PlayerCharacter): Norma = {
-    var retNorma: Norma = this
-    if (player.currVictories >= 13) retNorma = new Norma6
-    retNorma
+  def checkAll(player: PlayerCharacter): Norma = {
+    var norm: Norma = new Norma2
+    if (player.currStars >= 30) norm = new Norma3
+    else if (player.currVictories >= 3) norm = new Norma3
+    norm
   }
+
 
   def toNumber(): Int = 2
 }

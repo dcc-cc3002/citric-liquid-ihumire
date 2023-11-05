@@ -1,12 +1,7 @@
 package cl.uchile.dcc.citric
 package model.units
 
-import cl.uchile.dcc.citric.model.norm.{Norma1, Norma2, Norma3, Norma4, Norma5, Norma6}
-import cl.uchile.dcc.citric.model.roads.{AllRoads, StarsRoad, VictoriesRoad}
-
-import scala.util.Random
-
-class PlayerCharacterTest extends munit.FunSuite {
+class WildUnitCharacterTest extends munit.FunSuite {/*
 
   private val name = "testPlayer"
   private val maxHp = 5
@@ -17,9 +12,6 @@ class PlayerCharacterTest extends munit.FunSuite {
   private val defense1 = -1
   private val evasion1 = -2
   private var randomNumberGenerator: Random = _
-  private var roadS: StarsRoad = _
-  private var roadV: VictoriesRoad = _
-  private var roadA: AllRoads = _
 
   private var character: PlayerCharacter = _
   private var character1: PlayerCharacter = _
@@ -28,9 +20,6 @@ class PlayerCharacterTest extends munit.FunSuite {
     randomNumberGenerator = new Random(11)
     character = new PlayerCharacter(name, maxHp, attack, defense, evasion)
     character1 = new PlayerCharacter(name, maxHp, attack1, defense1, evasion1,randomNumberGenerator)
-    roadS = new StarsRoad
-    roadV = new VictoriesRoad
-    roadA = new AllRoads
   }
 
   test("A character should have correctly set their attributes and have a new randomNumber") {
@@ -117,10 +106,40 @@ class PlayerCharacterTest extends munit.FunSuite {
     assertEquals(character.currHp, expectedHp)
   }
 
+  test("A character clears his norma"){
+    character.increaseStars(10)
+    character.normaClear()
+    assert(character.currNorma.isInstanceOf[Norma2])
+  }
+
+  test("A character don't clears his norma") {
+    character.normaClear()
+    assert(character.currNorma.isInstanceOf[Norma1])
+  }
+
+  test("A character should be able to set a road of stars (1)"){
+    val expectedRoad: Int = 1
+    character.changeRoad(1)
+    assertEquals(character.currRoad, expectedRoad)
+  }
+
+  test("A character should be able to set a road of victories (2)") {
+    val expectedRoad: Int = 2
+    character.changeRoad(2)
+    assertEquals(character.currRoad, expectedRoad)
+  }
+
   test("A character should be able to increase his victories, without limits") {
     val expectedVictories: Int = character.currVictories + 1
     character.increaseVictories(1)
     assertEquals(character.currVictories, expectedVictories)
+  }
+
+  test("A character gives his current norma as a number"){
+    character.increaseStars(10)
+    character.normaClear()
+    val value:Int = character.normaToNumber()
+    assertEquals(value, 2)
   }
 
   test("A character should be able to give his final number of attack for the duel"){
@@ -163,146 +182,5 @@ class PlayerCharacterTest extends munit.FunSuite {
     // character1 will avoid
     val finalAvoid1: Int = character1.avoidCharacter(finalAttack, value1)
     assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
-  }
-
-  test("Change to star road") {
-    character.changeRoad(roadS)
-    assert(character.currRoad.isInstanceOf[StarsRoad])
-    character.changeRoad(roadS)
-    assert(character.currRoad.isInstanceOf[StarsRoad])
-  }
-
-  test("Change to victories road") {
-    character.changeRoad(roadV)
-    assert(character.currRoad.isInstanceOf[VictoriesRoad])
-    character.changeRoad(roadV)
-    assert(character.currRoad.isInstanceOf[VictoriesRoad])
-  }
-
-  test("Change to all roads") {
-    character.changeRoad(roadA)
-    assert(character.currRoad.isInstanceOf[AllRoads])
-    character.changeRoad(roadA)
-    assert(character.currRoad.isInstanceOf[AllRoads])
-  }
-
-  test("A character clears his norma by star road") {
-    character.increaseStars(200)
-    character.changeRoad(roadS)
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma2])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma3])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma4])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma5])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma6])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma6])
-  }
-
-  test("A character clears his norma by victories road") {
-    character.increaseVictories(14)
-    character.changeRoad(roadV)
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma2])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma3])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma4])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma5])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma6])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma6])
-  }
-
-  test("A character clears his norma by all roads (Stars)") {
-    character.increaseStars(200)
-    character.changeRoad(roadA)
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma2])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma3])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma4])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma5])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma6])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma6])
-  }
-
-  test("A character clears his norma by all roads (victories)") {
-    character.increaseVictories(14)
-    character.changeRoad(roadA)
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma2])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma3])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma4])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma5])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma6])
-    character.normaClear()
-    assert(character.currNorma.isInstanceOf[Norma6])
-  }
-
-  test("A character gives his current norma as a number") {
-    character.increaseStars(200)
-    val value1: Int = character.normaToNumber()
-    assertEquals(value1, 1)
-    character.normaClear()
-    val value2: Int = character.normaToNumber()
-    assertEquals(value2, 2)
-    character.normaClear()
-    val value3: Int = character.normaToNumber()
-    assertEquals(value3, 3)
-    character.normaClear()
-    val value4: Int = character.normaToNumber()
-    assertEquals(value4, 4)
-    character.normaClear()
-    val value5: Int = character.normaToNumber()
-    assertEquals(value5, 5)
-    character.normaClear()
-    val value6: Int = character.normaToNumber()
-    assertEquals(value6, 6)
-    character.normaClear()
-  }
-
-  test("Character transfer a half to a Character1"){
-    character.increaseStars(33)
-    character1.increaseStars(11)
-    val charStars: Int = character.currStars
-    val char1Stars: Int = character1.currStars
-    val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
-    val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
-    character.transferHalf(character1)
-    assertEquals(character.currStars, expectedValue)
-    assertEquals(character1.currStars, expectedValue1)
-  }
-
-  test("Character defated by character1"){
-    character.increaseStars(33)
-    character1.increaseStars(11)
-    val charStars: Int = character.currStars
-    val char1Stars: Int = character1.currStars
-    val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
-    val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
-    character1.decreaseHp(5)
-    character1.transferStars(character)
-    assertEquals(character.currStars, expectedValue)
-    assertEquals(character1.currStars, expectedValue1)
-  }
-
-  test("Character not defated by character1") {
-
-  }
-
+  }*/
 }

@@ -103,4 +103,28 @@ abstract class AbstractCharacter(val name: String,
     if (evasion + value > atkDamage) finalAvoid = 0
     finalAvoid
   }
+
+  private var _knockedOut: Boolean = false
+
+  def knockedOut: Boolean = _knockedOut
+
+  def knockedOut_=(newKnockedOut: Boolean): Unit = {
+    _knockedOut = newKnockedOut
+  }
+
+  def knockCharacter(): Unit = {
+    if (currHp == 0) knockedOut = true
+  }
+
+  def transferStars(player: PlayerCharacter): Unit = {
+  }
+
+  def transferStars(wild: WildUnitCharacter): Unit = {
+  }
+
+  def transferVictories(player: PlayerCharacter): Unit = {
+  }
+
+  def transferVictories(wild: WildUnitCharacter): Unit = {
+  }
 }
