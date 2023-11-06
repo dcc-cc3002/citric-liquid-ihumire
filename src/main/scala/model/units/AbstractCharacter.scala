@@ -135,4 +135,14 @@ abstract class AbstractCharacter(val name: String,
   def knockCharacter(): Unit = {
     if (currHp == 0) knockedOut = true
   }
+
+  def transferStarsTo(character: Character): Unit = {
+    knockCharacter()
+    if (knockedOut) loseStarsAgainst(character)
+  }
+
+  def giveVicTo(character: Character): Unit = {
+    knockCharacter()
+    if (knockedOut) loseAgainst(character)
+  }
 }

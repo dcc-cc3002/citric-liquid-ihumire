@@ -78,7 +78,5 @@ abstract class AbstractPanel extends Panel {
     }
   }
 
-  def apply(player: PlayerCharacter): Unit = {
-
-  }
+  def apply(player: PlayerCharacter): Unit = {}
 }

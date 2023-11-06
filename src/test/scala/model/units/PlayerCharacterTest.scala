@@ -355,5 +355,100 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.loseAgainst(seagull)
     assertEquals(character.currVictories, charVictories)
   }
+
+  test("A player should be able to not being knockedOut when his currHp is not 0") {
+    val expected: Boolean = true
+    character.knockCharacter()
+    assertNotEquals(character.knockedOut, expected)
+  }
+
+  test("A player should be able to knockedOut when his currHp is 0") {
+    character.decreaseHp(5)
+    val expected: Boolean = true
+    character.knockCharacter()
+    assertEquals(character.knockedOut, expected)
+  }
+
+  test("A player have to transfer stars to the player who beats him") {
+   character.increaseStars(33)
+   character1.increaseStars(11)
+   val charStars: Int = character.currStars
+   val char1Stars: Int = character1.currStars
+   val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
+   val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
+   character.decreaseHp(5)
+   character.transferStarsTo(character1)
+   assertEquals(character.currStars, expectedValue)
+   assertEquals(character1.currStars, expectedValue1)
+  }
+
+  test("A player have to transfer stars to the chicken who beats him") {
+    character.increaseStars(33)
+    chicken.increaseStars(11)
+    val charStars: Int = character.currStars
+    val char1Stars: Int = chicken.currStars
+    val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
+    val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
+    character.decreaseHp(5)
+    character.transferStarsTo(chicken)
+    assertEquals(character.currStars, expectedValue)
+    assertEquals(chicken.currStars, expectedValue1)
+  }
+
+  test("A player have to transfer stars to the roboBall who beats him") {
+    character.increaseStars(33)
+    roboBall.increaseStars(11)
+    val charStars: Int = character.currStars
+    val char1Stars: Int = roboBall.currStars
+    val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
+    val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
+    character.decreaseHp(5)
+    character.transferStarsTo(roboBall)
+    assertEquals(character.currStars, expectedValue)
+    assertEquals(roboBall.currStars, expectedValue1)
+  }
+
+  test("A player have to transfer stars to the seagull who beats him") {
+    character.increaseStars(33)
+    seagull.increaseStars(11)
+    val charStars: Int = character.currStars
+    val char1Stars: Int = seagull.currStars
+    val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
+    val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
+    character.decreaseHp(5)
+    character.transferStarsTo(seagull)
+    assertEquals(character.currStars, expectedValue)
+    assertEquals(seagull.currStars, expectedValue1)
+  }
+
+  test("A player have to give victories to the player who beats him") {
+    val charVictories: Int = character.currVictories
+    val char1Victories: Int = character1.currVictories + 2
+    character.decreaseHp(5)
+    character.giveVicTo(character1)
+    assertEquals(character.currVictories, charVictories)
+    assertEquals(character1.currVictories, char1Victories)
+  }
+
+  test("A player haven't to give victories to the chicken who beats him") {
+    val charVictories: Int = character.currVictories
+    character.decreaseHp(5)
+    character.giveVicTo(chicken)
+    assertEquals(character.currVictories, charVictories)
+  }
+
+  test("A player haven't to give victories to the roboBall who beats him") {
+    val charVictories: Int = character.currVictories
+    character.decreaseHp(5)
+    character.giveVicTo(roboBall)
+    assertEquals(character.currVictories, charVictories)
+  }
+
+  test("A player haven't to give victories to the seagull who beats him") {
+    val charVictories: Int = character.currVictories
+    character.decreaseHp(5)
+    character.giveVicTo(seagull)
+    assertEquals(character.currVictories, charVictories)
+  }
 }
 

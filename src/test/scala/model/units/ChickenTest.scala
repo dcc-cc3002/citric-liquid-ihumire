@@ -147,14 +147,14 @@ class ChickenTest extends munit.FunSuite{
 
   test("Chicken lose stars against a chicken") {
     chicken.increaseStars(33)
-    chicken.increaseStars(11)
+    chicken1.increaseStars(11)
     val charStars: Int = chicken.currStars
-    val char1Stars: Int = chicken.currStars
+    val char1Stars: Int = chicken1.currStars
     val expectedValue: Int = charStars
     val expectedValue1: Int = char1Stars
-    chicken.loseStarsAgainst(chicken)
+    chicken.loseStarsAgainst(chicken1)
     assertEquals(chicken.currStars, expectedValue)
-    assertEquals(chicken.currStars, expectedValue1)
+    assertEquals(chicken1.currStars, expectedValue1)
   }
 
   test("Chicken lose stars against a RoboBall") {
@@ -196,6 +196,92 @@ class ChickenTest extends munit.FunSuite{
   }
 
   test("Chicken lose against a Seagull") {
+    chicken.loseAgainst(seagull)
+  }
+
+  test("A chicken should be able to not being knockedOut when his currHp is not 0") {
+    val expected: Boolean = true
+    chicken.knockCharacter()
+    assertNotEquals(chicken.knockedOut, expected)
+  }
+  test("A player should be able to knockedOut when his currHp is 0") {
+    chicken.decreaseHp(3)
+    val expected: Boolean = true
+    chicken.knockCharacter()
+    assertEquals(chicken.knockedOut, expected)
+  }
+
+  test("A chicken have to transfer stars to the player who beats him") {
+    chicken.increaseStars(33)
+    player.increaseStars(11)
+    val charStars: Int = chicken.currStars
+    val char1Stars: Int = player.currStars
+    val expectedValue: Int = 0
+    val expectedValue1: Int = charStars + char1Stars
+    chicken.decreaseHp(3)
+    chicken.transferStarsTo(player)
+    assertEquals(chicken.currStars, expectedValue)
+    assertEquals(player.currStars, expectedValue1)
+  }
+
+  test("A chicken haven't transfer stars to the chicken who beats him") {
+    chicken.increaseStars(33)
+    chicken1.increaseStars(11)
+    val charStars: Int = chicken.currStars
+    val char1Stars: Int = chicken1.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    chicken.decreaseHp(3)
+    chicken.transferStarsTo(chicken1)
+    assertEquals(chicken.currStars, expectedValue)
+    assertEquals(chicken1.currStars, expectedValue1)
+  }
+
+  test("A chicken haven't transfer stars to the roboBall who beats him") {
+    chicken.increaseStars(33)
+    roboBall.increaseStars(11)
+    val charStars: Int = chicken.currStars
+    val char1Stars: Int = roboBall.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    chicken.decreaseHp(3)
+    chicken.transferStarsTo(roboBall)
+    assertEquals(chicken.currStars, expectedValue)
+    assertEquals(roboBall.currStars, expectedValue1)
+  }
+
+  test("A chicken haven't transfer stars to the seagull who beats him") {
+    chicken.increaseStars(33)
+    seagull.increaseStars(11)
+    val charStars: Int = chicken.currStars
+    val char1Stars: Int = seagull.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    chicken.decreaseHp(3)
+    chicken.transferStarsTo(seagull)
+    assertEquals(chicken.currStars, expectedValue)
+    assertEquals(seagull.currStars, expectedValue1)
+  }
+
+  test("A chicken have to give victories to the player who beats him") {
+    val charVictories: Int = player.currVictories + 1
+    chicken.decreaseHp(3)
+    chicken.giveVicTo(player)
+    assertEquals(player.currVictories, charVictories)
+  }
+
+  test("A chicken haven't to give victories to the chicken who beats him") {
+    chicken.decreaseHp(3)
+    chicken.loseAgainst(chicken1)
+  }
+
+  test("A chicken haven't to give victories to the roboBall who beats him") {
+    chicken.decreaseHp(3)
+    chicken.loseAgainst(roboBall)
+  }
+
+  test("A chicken haven't to give victories to the seagull who beats him") {
+    chicken.decreaseHp(3)
     chicken.loseAgainst(seagull)
   }
 }

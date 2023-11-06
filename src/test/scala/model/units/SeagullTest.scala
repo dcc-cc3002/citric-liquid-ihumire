@@ -197,5 +197,91 @@ class SeagullTest extends munit.FunSuite{
   test("Seagull lose against a Seagull") {
     seagull.loseAgainst(seagull1)
   }
+
+  test("A seagull should be able to not being knockedOut when his currHp is not 0") {
+    val expected: Boolean = true
+    seagull.knockCharacter()
+    assertNotEquals(seagull.knockedOut, expected)
+  }
+  test("A seagull should be able to knockedOut when his currHp is 0") {
+    seagull.decreaseHp(5)
+    val expected: Boolean = true
+    seagull.knockCharacter()
+    assertEquals(seagull.knockedOut, expected)
+  }
+
+  test("A seagull have to transfer stars to the player who beats him") {
+    seagull.increaseStars(33)
+    player.increaseStars(11)
+    val charStars: Int = seagull.currStars
+    val char1Stars: Int = player.currStars
+    val expectedValue: Int = 0
+    val expectedValue1: Int = charStars + char1Stars
+    seagull.decreaseHp(3)
+    seagull.transferStarsTo(player)
+    assertEquals(seagull.currStars, expectedValue)
+    assertEquals(player.currStars, expectedValue1)
+  }
+
+  test("A seagull haven't transfer stars to the chicken who beats him") {
+    seagull.increaseStars(33)
+    chicken.increaseStars(11)
+    val charStars: Int = seagull.currStars
+    val char1Stars: Int = chicken.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    seagull.decreaseHp(3)
+    seagull.transferStarsTo(chicken)
+    assertEquals(seagull.currStars, expectedValue)
+    assertEquals(chicken.currStars, expectedValue1)
+  }
+
+  test("A seagull haven't transfer stars to the roboBall who beats him") {
+    seagull.increaseStars(33)
+    roboBall.increaseStars(11)
+    val charStars: Int = seagull.currStars
+    val char1Stars: Int = roboBall.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    seagull.decreaseHp(3)
+    seagull.transferStarsTo(roboBall)
+    assertEquals(seagull.currStars, expectedValue)
+    assertEquals(roboBall.currStars, expectedValue1)
+  }
+
+  test("A seagull haven't transfer stars to the seagull who beats him") {
+    seagull.increaseStars(33)
+    seagull1.increaseStars(11)
+    val charStars: Int = seagull.currStars
+    val char1Stars: Int = seagull1.currStars
+    val expectedValue: Int = charStars
+    val expectedValue1: Int = char1Stars
+    seagull.decreaseHp(3)
+    seagull.transferStarsTo(seagull1)
+    assertEquals(seagull.currStars, expectedValue)
+    assertEquals(seagull1.currStars, expectedValue1)
+  }
+
+  test("A seagull have to give victories to the player who beats him") {
+    val charVictories: Int = player.currVictories + 1
+    seagull.decreaseHp(3)
+    seagull.giveVicTo(player)
+    assertEquals(player.currVictories, charVictories)
+  }
+
+  test("A seagull haven't to give victories to the chicken who beats him") {
+    seagull.decreaseHp(3)
+    seagull.loseAgainst(chicken)
+  }
+
+  test("A seagull haven't to give victories to the roboBall who beats him") {
+    seagull.decreaseHp(3)
+    seagull.loseAgainst(roboBall)
+  }
+
+  test("A seagull haven't to give victories to the seagull who beats him") {
+    seagull.decreaseHp(3)
+    seagull.loseAgainst(seagull1)
+  }
 }
                               

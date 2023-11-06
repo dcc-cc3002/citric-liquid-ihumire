@@ -62,9 +62,13 @@ trait Character {
   def avoidCharacter(atkDamage: Int, value: Int): Int
 
   def loseStarsAgainst(character: Character): Unit
+
   def winStarsVsPlayer(player: PlayerCharacter): Unit
+
   def winStarsVsChicken(chicken: Chicken): Unit
+
   def winStarsVsRoboBall(roboBall: RoboBall): Unit
+
   def winStarsVsSeagull(seagull: Seagull): Unit
 
   def loseAgainst(character: Character): Unit
@@ -76,4 +80,7 @@ trait Character {
   def winVsRoboBall(roboBall: RoboBall): Unit
 
   def winVsSeagull(seagull: Seagull): Unit
+
+  def transferStarsTo(character: Character): Unit
+  def giveVicTo(character: Character): Unit
 }
