@@ -49,12 +49,10 @@ trait Character {
    *
    */
   val randomNumberGenerator: Random
-
   /**
    * Rolls a dice
    */
   def rollDice(): Int
-
   /**
    * A character increase his amount of stars by a specific value.
    *
@@ -79,7 +77,6 @@ trait Character {
    * @param value The number of health points, bigger than 0, given to the character less than maxHp.
    */
   def increaseHp(value: Int): Unit
-
   /**
    * Performs an attack action with a given value and returns the result.
    *
@@ -116,7 +113,6 @@ trait Character {
    * @return An integer representing the result of the evasion action, which may include the extent of damage avoided or other evasion-related effects.
    */
   def avoidCharacter(atkDamage: Int, value: Int): Int
-
   /**
    * Deducts stars from the character as a result of an interaction with another character.
    *
@@ -125,7 +121,6 @@ trait Character {
    * @param character The character with whom the interaction results in losing stars.
    */
   def loseStarsAgainst(character: Character): Unit
-
   /**
    * Awards stars to the character as a result of a successful interaction with a player character.
    *
@@ -134,7 +129,6 @@ trait Character {
    * @param player The player character with whom the interaction results in winning stars.
    */
   def winStarsVsPlayer(player: PlayerCharacter): Unit
-
   /**
    * Awards stars to the character as a result of a successful interaction with a Chicken.
    *
@@ -147,12 +141,11 @@ trait Character {
   /**
    * Awards stars to the character as a result of a successful interaction with a RoboBall.
    *
-   * This method is invoked when the character wins stars in an interaction with a RoboBall.
+   * This method is called when the character wins stars in an interaction with a RoboBall.
    *
    * @param roboBall The RoboBall character with whom the interaction results in winning stars.
    */
   def winStarsVsRoboBall(roboBall: RoboBall): Unit
-
   /**
    * Awards stars to the character as a result of a successful interaction with a Seagull.
    *

@@ -50,22 +50,58 @@ class PlayerCharacter(name: String,
                       randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) {
 
   private var _currNorma: Norma = new Norma1
+
+  /**
+   * The current Norma of the player character.
+   */
   def currNorma: Norma = _currNorma
+
+  /**
+   * Sets the current Norma of the player character.
+   *
+   * @param newNorma The new Norma to set.
+   */
   def currNorma_=(newNorma: Norma): Unit = {
     _currNorma = newNorma
   }
 
   private var _currVictories: Int = 0
+
+  /**
+   * The current number of victories of the player character.
+   */
   def currVictories: Int = _currVictories
+
+  /**
+   * Sets the current number of victories of the player character.
+   *
+   * @param newCurrVictories The new number of victories to set.
+   */
   def currVictories_=(newCurrVictories: Int): Unit = {
     _currVictories = newCurrVictories
   }
 
   private var _currRoad: Road = new AllRoads
+
+  /**
+   * The current road chosen by the player character.
+   */
   def currRoad: Road = _currRoad
+
+  /**
+   * Sets the current road chosen by the player character.
+   *
+   * @param newCurrRoad The new road to set.
+   */
   def currRoad_=(newCurrRoad: Road): Unit = {
     _currRoad = newCurrRoad
   }
+
+  /**
+   * Changes the player character's current road to the specified road.
+   *
+   * @param road The road to change to.
+   */
   def changeRoad(road: Road): Unit = {
     currRoad = currRoad.clearRoad(road)
   }
@@ -75,28 +111,63 @@ class PlayerCharacter(name: String,
   def increaseVictories(value: Int): Unit = {
     currVictories+=value
   }
+
+  /**
+   * Converts the current Norma of the player character to a numerical value.
+   *
+   * @return The numerical value representing the current Norma.
+   */
   def normaToNumber(): Int = {
     val value: Int = currNorma.toNumber()
     value
   }
+
+  /**
+   * Clears the current Norma of the player character and updates it based on specific conditions.
+   */
   def normaClear(): Unit = {
     currNorma = currNorma.checkBoost(this)
   }
-
+  /**
+   * Handles the situation when the player character loses stars to another character.
+   *
+   * @param character The character to lose stars to.
+   */
   def loseStarsAgainst(character: Character): Unit = character.winStarsVsPlayer(this)
 
+  /**
+   * Awards stars to the character as a result of a successful interaction with a Chicken.
+   *
+   * This method is called when the character wins stars in an interaction with a Chicken.
+   *
+   * @param chicken The Chicken character with whom the interaction results in winning stars.
+   */
   override def winStarsVsChicken(chicken: Chicken): Unit = {
     val starsValue: Int = chicken.currStars
     increaseStars(starsValue)
     chicken.decreaseStars(starsValue)
   }
 
+  /**
+   * Awards stars to the character as a result of a successful interaction with a RoboBall.
+   *
+   * This method is called when the character wins stars in an interaction with a RoboBall.
+   *
+   * @param roboBall The RoboBall character with whom the interaction results in winning stars.
+   */
   override def winStarsVsRoboBall(roboBall: RoboBall): Unit = {
     val starsValue: Int = roboBall.currStars
     increaseStars(starsValue)
     roboBall.decreaseStars(starsValue)
   }
 
+  /**
+   * Awards stars to the character as a result of a successful interaction with a Seagull.
+   *
+   * This method is called when the character wins stars in an interaction with a Seagull.
+   *
+   * @param seagull The Seagull character with whom the interaction results in winning stars.
+   */
   override def winStarsVsSeagull(seagull: Seagull): Unit = {
     val starsValue: Int = seagull.currStars
     increaseStars(starsValue)
