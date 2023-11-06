@@ -174,20 +174,55 @@ class PlayerCharacter(name: String,
     seagull.decreaseStars(starsValue)
   }
 
+  /**
+   * Handles the character losing a battle or interaction against another character.
+   *
+   * This method is called when the character loses a battle or interaction against another character.
+   *
+   * @param character The character against whom the interaction results in losing.
+   */
   def loseAgainst(character: Character): Unit = character.winVsPlayer(this)
 
+  /**
+   * Handles the character winning a battle or interaction against a player character.
+   *
+   * This method is invoked when the character wins a battle or interaction against a player character.
+   *
+   * @param player The player character against whom the interaction results in winning.
+   */
   override def winVsPlayer(player: PlayerCharacter): Unit = {
     increaseVictories(2)
   }
 
+  /**
+   * Handles the character winning a battle or interaction against a Chicken.
+   *
+   * This method is called when the character wins a battle or interaction against a Chicken.
+   *
+   * @param chicken The Chicken character against whom the interaction results in winning.
+   */
   override def winVsChicken(chicken: Chicken): Unit = {
     increaseVictories(1)
   }
 
+  /**
+   * Handles the character winning a battle or interaction against a RoboBall.
+   *
+   * This method is invoked when the character wins a battle or interaction against a RoboBall.
+   *
+   * @param roboBall The RoboBall character against whom the interaction results in winning.
+   */
   override def winVsRoboBall(roboBall: RoboBall): Unit = {
     increaseVictories(1)
   }
 
+  /**
+   * Handles the character winning a battle or interaction against a Seagull.
+   *
+   * This method is called when the character wins a battle or interaction against a Seagull.
+   *
+   * @param seagull The Seagull character against whom the interaction results in winning.
+   */
   override def winVsSeagull(seagull: Seagull): Unit = {
     increaseVictories(1)
   }
