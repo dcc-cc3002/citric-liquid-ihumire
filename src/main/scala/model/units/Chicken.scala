@@ -14,20 +14,7 @@ class Chicken(name: String,
     this.increaseStars(3)
   }
 
-  def loseAgainst(character: Character): Unit = character.winsVsChicken(this)
+  def loseStarsAgainst(character: Character): Unit = character.winStarsVsChicken(this)
 
-  def winsVsPlayer(player: PlayerCharacter): Unit = {
-    val starsValue: Int = math.floorDiv(player.currStars, 2)
-    increaseStars(starsValue)
-    player.decreaseStars(starsValue)
-  }
-
-  def winsVsChicken(chicken: Chicken): Unit = {
-  }
-
-  def winsVsRoboBall(roboBall: RoboBall): Unit = {
-  }
-
-  def winsVsSeagull(seagull: Seagull): Unit = {
-  }
+  def loseAgainst(character: Character): Unit = character.winVsChicken(this)
 }

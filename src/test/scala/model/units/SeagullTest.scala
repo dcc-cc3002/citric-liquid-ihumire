@@ -139,7 +139,7 @@ class SeagullTest extends munit.FunSuite{
     val char1Stars: Int = player.currStars
     val expectedValue: Int = 0
     val expectedValue1: Int = charStars + char1Stars
-    seagull.loseAgainst(player)
+    seagull.loseStarsAgainst(player)
     assertEquals(seagull.currStars, expectedValue)
     assertEquals(player.currStars, expectedValue1)
   }
@@ -151,7 +151,7 @@ class SeagullTest extends munit.FunSuite{
     val char1Stars: Int = chicken.currStars
     val expectedValue: Int = charStars
     val expectedValue1: Int = char1Stars
-    seagull.loseAgainst(chicken)
+    seagull.loseStarsAgainst(chicken)
     assertEquals(seagull.currStars, expectedValue)
     assertEquals(chicken.currStars, expectedValue1)
   }
@@ -163,7 +163,7 @@ class SeagullTest extends munit.FunSuite{
     val char1Stars: Int = roboBall.currStars
     val expectedValue: Int = charStars
     val expectedValue1: Int = char1Stars
-    seagull.loseAgainst(roboBall)
+    seagull.loseStarsAgainst(roboBall)
     assertEquals(seagull.currStars, expectedValue)
     assertEquals(roboBall.currStars, expectedValue1)
   }
@@ -175,9 +175,27 @@ class SeagullTest extends munit.FunSuite{
     val char1Stars: Int = seagull1.currStars
     val expectedValue: Int = charStars
     val expectedValue1: Int = char1Stars
-    seagull.loseAgainst(seagull1)
+    seagull.loseStarsAgainst(seagull1)
     assertEquals(seagull.currStars, expectedValue)
     assertEquals(seagull1.currStars, expectedValue1)
+  }
+
+  test("Seagull lose against a Player") {
+    val charVictories: Int = player.currVictories + 1
+    seagull.loseAgainst(player)
+    assertEquals(player.currVictories, charVictories)
+  }
+
+  test("Seagull lose against a Chicken") {
+    seagull.loseAgainst(chicken)
+  }
+
+  test("Seagull lose against a RoboBall") {
+    seagull.loseAgainst(roboBall)
+  }
+
+  test("Seagull lose against a Seagull") {
+    seagull.loseAgainst(seagull1)
   }
 }
                               

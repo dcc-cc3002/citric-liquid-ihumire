@@ -104,6 +104,26 @@ abstract class AbstractCharacter(val name: String,
     finalAvoid
   }
 
+  def winStarsVsPlayer(player: PlayerCharacter): Unit = {
+    val starsValue: Int = math.floorDiv(player.currStars, 2)
+    increaseStars(starsValue)
+    player.decreaseStars(starsValue)
+  }
+
+  def winStarsVsChicken(chicken: Chicken): Unit = {}
+
+  def winStarsVsRoboBall(roboBall: RoboBall): Unit = {}
+
+  def winStarsVsSeagull(seagull: Seagull): Unit = {}
+
+  def winVsPlayer(player: PlayerCharacter): Unit = {}
+
+  def winVsChicken(chicken: Chicken): Unit = {}
+
+  def winVsRoboBall(roboBall: RoboBall): Unit = {}
+
+  def winVsSeagull(seagull: Seagull): Unit = {}
+
   private var _knockedOut: Boolean = false
 
   def knockedOut: Boolean = _knockedOut

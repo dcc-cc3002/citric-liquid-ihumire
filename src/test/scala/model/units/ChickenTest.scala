@@ -133,52 +133,70 @@ class ChickenTest extends munit.FunSuite{
     assert(finalAvoid1 == 0 || finalAvoid1 == finalAttack)
   }
 
-  test("Chicken lose against a Player") {
+  test("Chicken lose stars against a Player") {
     chicken.increaseStars(33)
     player.increaseStars(11)
     val charStars: Int = chicken.currStars
     val char1Stars: Int = player.currStars
     val expectedValue: Int = 0
     val expectedValue1: Int = charStars + char1Stars
-    chicken.loseAgainst(player)
+    chicken.loseStarsAgainst(player)
     assertEquals(chicken.currStars, expectedValue)
     assertEquals(player.currStars, expectedValue1)
   }
 
-  test("Chicken lose against a chicken") {
+  test("Chicken lose stars against a chicken") {
     chicken.increaseStars(33)
     chicken.increaseStars(11)
     val charStars: Int = chicken.currStars
     val char1Stars: Int = chicken.currStars
     val expectedValue: Int = charStars
     val expectedValue1: Int = char1Stars
-    chicken.loseAgainst(chicken)
+    chicken.loseStarsAgainst(chicken)
     assertEquals(chicken.currStars, expectedValue)
     assertEquals(chicken.currStars, expectedValue1)
   }
 
-  test("Chicken lose against a RoboBall") {
+  test("Chicken lose stars against a RoboBall") {
     chicken.increaseStars(33)
     roboBall.increaseStars(11)
     val charStars: Int = chicken.currStars
     val char1Stars: Int = roboBall.currStars
     val expectedValue: Int = charStars
     val expectedValue1: Int = char1Stars
-    chicken.loseAgainst(roboBall)
+    chicken.loseStarsAgainst(roboBall)
     assertEquals(chicken.currStars, expectedValue)
     assertEquals(roboBall.currStars, expectedValue1)
   }
 
-  test("Chicken lose against a Seagull") {
+  test("Chicken lose stars against a Seagull") {
     chicken.increaseStars(33)
     seagull.increaseStars(11)
     val charStars: Int = chicken.currStars
     val char1Stars: Int = seagull.currStars
     val expectedValue: Int = charStars
     val expectedValue1: Int = char1Stars
-    chicken.loseAgainst(seagull)
+    chicken.loseStarsAgainst(seagull)
     assertEquals(chicken.currStars, expectedValue)
     assertEquals(seagull.currStars, expectedValue1)
+  }
+
+  test("Chicken lose against a Player") {
+    val charVictories: Int = player.currVictories + 1
+    chicken.loseAgainst(player)
+    assertEquals(player.currVictories, charVictories)
+  }
+
+  test("Chicken lose against a Chicken") {
+    chicken.loseAgainst(chicken1)
+  }
+
+  test("Chicken lose against a RoboBall") {
+    chicken.loseAgainst(roboBall)
+  }
+
+  test("Chicken lose against a Seagull") {
+    chicken.loseAgainst(seagull)
   }
 }
                               

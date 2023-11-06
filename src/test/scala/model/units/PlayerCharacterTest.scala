@@ -282,52 +282,78 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.normaClear()
   }
 
-  test("Player lose against a Player"){
+  test("Player lose stars against a Player"){
     character.increaseStars(33)
     character1.increaseStars(11)
     val charStars: Int = character.currStars
     val char1Stars: Int = character1.currStars
     val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
     val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
-    character.loseAgainst(character1)
+    character.loseStarsAgainst(character1)
     assertEquals(character.currStars, expectedValue)
     assertEquals(character1.currStars, expectedValue1)
   }
 
-  test("Player lose against a Chicken") {
+  test("Player lose stars against a Chicken") {
     character.increaseStars(33)
     chicken.increaseStars(11)
     val charStars: Int = character.currStars
     val char1Stars: Int = chicken.currStars
     val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
     val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
-    character.loseAgainst(chicken)
+    character.loseStarsAgainst(chicken)
     assertEquals(character.currStars, expectedValue)
     assertEquals(chicken.currStars, expectedValue1)
   }
 
-  test("Player lose against a RoboBall") {
+  test("Player lose stars against a RoboBall") {
     character.increaseStars(33)
     roboBall.increaseStars(11)
     val charStars: Int = character.currStars
     val char1Stars: Int = roboBall.currStars
     val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
     val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
-    character.loseAgainst(roboBall)
+    character.loseStarsAgainst(roboBall)
     assertEquals(character.currStars, expectedValue)
     assertEquals(roboBall.currStars, expectedValue1)
   }
 
-  test("Player lose against a Seagull") {
+  test("Player lose stars against a Seagull") {
     character.increaseStars(33)
     seagull.increaseStars(11)
     val charStars: Int = character.currStars
     val char1Stars: Int = seagull.currStars
     val expectedValue: Int = charStars - math.floorDiv(charStars, 2)
     val expectedValue1: Int = char1Stars + math.floorDiv(charStars, 2)
-    character.loseAgainst(seagull)
+    character.loseStarsAgainst(seagull)
     assertEquals(character.currStars, expectedValue)
     assertEquals(seagull.currStars, expectedValue1)
+  }
+
+  test("Player lose against a Player") {
+    val charVictories: Int = character.currVictories
+    val char1Victories: Int = character1.currVictories + 2
+    character.loseAgainst(character1)
+    assertEquals(character.currVictories, charVictories)
+    assertEquals(character1.currVictories, char1Victories)
+  }
+
+  test("Player lose against a Chicken") {
+    val charVictories: Int = character.currVictories
+    character.loseAgainst(chicken)
+    assertEquals(character.currVictories, charVictories)
+  }
+
+  test("Player lose against a RoboBall") {
+    val charVictories: Int = character.currVictories
+    character.loseAgainst(roboBall)
+    assertEquals(character.currVictories, charVictories)
+  }
+
+  test("Player lose against a Seagull") {
+    val charVictories: Int = character.currVictories
+    character.loseAgainst(seagull)
+    assertEquals(character.currVictories, charVictories)
   }
 }
 

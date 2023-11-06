@@ -83,35 +83,41 @@ class PlayerCharacter(name: String,
     currNorma = currNorma.checkBoost(this)
   }
 
-  def loseAgainst(character: Character): Unit = character.winsVsPlayer(this)
+  def loseStarsAgainst(character: Character): Unit = character.winStarsVsPlayer(this)
 
-  def winsVsPlayer(player: PlayerCharacter): Unit = {
-    val starsValue: Int = math.floorDiv(player.currStars, 2)
-    increaseStars(starsValue)
-    increaseVictories(2)
-    player.decreaseStars(starsValue)
-  }
-
-  def winsVsChicken(chicken: Chicken): Unit = {
+  override def winStarsVsChicken(chicken: Chicken): Unit = {
     val starsValue: Int = chicken.currStars
     increaseStars(starsValue)
-    increaseVictories(1)
     chicken.decreaseStars(starsValue)
   }
 
-  def winsVsRoboBall(roboBall: RoboBall): Unit = {
+  override def winStarsVsRoboBall(roboBall: RoboBall): Unit = {
     val starsValue: Int = roboBall.currStars
     increaseStars(starsValue)
-    increaseVictories(1)
     roboBall.decreaseStars(starsValue)
   }
 
-  def winsVsSeagull(seagull: Seagull): Unit = {
+  override def winStarsVsSeagull(seagull: Seagull): Unit = {
     val starsValue: Int = seagull.currStars
     increaseStars(starsValue)
-    increaseVictories(1)
     seagull.decreaseStars(starsValue)
   }
 
-  def 
+  def loseAgainst(character: Character): Unit = character.winVsPlayer(this)
+
+  override def winVsPlayer(player: PlayerCharacter): Unit = {
+    increaseVictories(2)
+  }
+
+  override def winVsChicken(chicken: Chicken): Unit = {
+    increaseVictories(1)
+  }
+
+  override def winVsRoboBall(roboBall: RoboBall): Unit = {
+    increaseVictories(1)
+  }
+
+  override def winVsSeagull(seagull: Seagull): Unit = {
+    increaseVictories(1)
+  }
 }
