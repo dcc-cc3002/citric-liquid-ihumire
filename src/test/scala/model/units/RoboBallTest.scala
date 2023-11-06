@@ -230,10 +230,10 @@ class RoboBallTest extends munit.FunSuite{
     val char1Stars: Int = chicken.currStars
     val expectedValue: Int = charStars
     val expectedValue1: Int = char1Stars
-    chicken.decreaseHp(3)
+    roboBall.decreaseHp(3)
     roboBall.transferStarsTo(chicken)
-    assertEquals(chicken.currStars, expectedValue)
-    assertEquals(roboBall.currStars, expectedValue1)
+    assertEquals(roboBall.currStars, expectedValue)
+    assertEquals(chicken.currStars, expectedValue1)
   }
 
   test("A roboBall haven't transfer stars to the roboBall who beats him") {

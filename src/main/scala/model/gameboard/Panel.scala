@@ -49,5 +49,10 @@ trait Panel {
     */
   def removeCharacter(player: PlayerCharacter): Unit
 
+  /**
+   * Apply the panel's effect to a player character.
+   *
+   * @param player The player character on which the panel's effect will be applied.
+   */
   def apply(player: PlayerCharacter): Unit
 }
