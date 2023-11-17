@@ -9,9 +9,9 @@ purpose is to serve as an educational tool, teaching foundational programming co
 
 ---
 
-## Diagrama de estados
+## State Diagram
 
-![Diagrama de estados](docs/diagrama-estados.png)
+![State_Diagram](docs/diagrama-estados.png)
 
 <div style="text-align:center;">
     <img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License">
