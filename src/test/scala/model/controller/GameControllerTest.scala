@@ -19,7 +19,8 @@ class GameControllerTest extends munit.FunSuite {
     assert(controller.state.isInstanceOf[ChapterState])
   }
 
-  test("The controller change to the correct state by roll a dice"){
-    controller.rollDice()
+  test("The controller "){
+    controller.newGame()
+
   }
 }

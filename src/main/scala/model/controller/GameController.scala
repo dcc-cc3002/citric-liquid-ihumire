@@ -1,7 +1,7 @@
 package cl.uchile.dcc.citric
 package model.controller
 
-import cl.uchile.dcc.citric.model.states.{AbsGameState, GameState, PreGameState}
+import cl.uchile.dcc.citric.model.states.{AbsGameState, GameState, PreGameState, ChapterState}
 
 class GameController extends{
   // Estado actual del juego
@@ -11,11 +11,14 @@ class GameController extends{
     state.newGame()
   }
 
+  def newChapter(): Unit = {
+    state.newChapter()
+  }
+
   def rollDice(): Unit = {
     state.rollDice()
   }
 
   def doEffect(): Unit = {
-    /* ... */
   }
 }
