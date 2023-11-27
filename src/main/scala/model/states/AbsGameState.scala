@@ -9,5 +9,10 @@ abstract class AbsGameState extends GameState{
   def ko(): Unit = {}
   def normaSixReach(): Unit = {}
   def rollDice(): Unit = {}
+  def suffRoll():Unit = {}
+  def stillKo(): Unit = {}
+  def chooseDirection(): Unit = {}
+  def stopEarly(): Unit = {}
+  def notMoves(): Unit = {}
   def doEffect(): Unit = {}
 }
