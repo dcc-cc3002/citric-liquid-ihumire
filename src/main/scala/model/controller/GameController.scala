@@ -3,7 +3,7 @@ package model.controller
 
 import cl.uchile.dcc.citric.model.states.{AbsGameState, GameState, PreGameState, ChapterState}
 
-class GameController extends{
+class GameController{
   // Estado actual del juego
   var state: GameState = new PreGameState(this)
 
