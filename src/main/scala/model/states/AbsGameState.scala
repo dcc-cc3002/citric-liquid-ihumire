@@ -14,5 +14,9 @@ abstract class AbsGameState extends GameState{
   def chooseDirection(): Unit = {}
   def stopEarly(): Unit = {}
   def notMoves(): Unit = {}
-  def doEffect(): Unit = {}
+  def attackCharacter(): Unit = {}
+  def defendCharacter(): Unit = {}
+  def avoidCharacter(): Unit = {}
+  def endCombat(): Unit = {}
+  def applyEffect(): Unit = {}
 }

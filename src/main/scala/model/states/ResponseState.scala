@@ -3,12 +3,12 @@ package model.states
 
 import model.controller.GameController
 
-class MovePlayerState(controller: GameController) extends AbsGameState{
-  override def chooseDirection(): Unit = {}
-  override def stopEarly(): Unit = {
+class ResponseState(controller:GameController) extends AbsGameState {
+  override def defendCharacter(): Unit = {
     controller.state = new CombatState(controller)
   }
-  override def notMoves(): Unit = {
+
+  override def avoidCharacter(): Unit = {
     controller.state = new CombatState(controller)
   }
 }
