@@ -24,11 +24,11 @@ trait GameState {
 
   def notMoves(): Unit
 
-  def attackCharacter(): Unit
+  def attacking(): Unit
 
-  def defendCharacter(): Unit
+  def defending(): Unit
 
-  def avoidCharacter(): Unit
+  def avoiding(): Unit
 
   def endCombat(): Unit
 
