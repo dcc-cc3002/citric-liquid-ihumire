@@ -5,7 +5,7 @@ import model.controller.GameController
 
 class ChapterState(controller: GameController) extends AbsGameState {
   override def newChapter(): Unit = {
-    currChapter+=1
+    controller.currChapter += 1
   }
   override def playTurn(): Unit = {
     controller.state = new PlayerTurnState(controller)

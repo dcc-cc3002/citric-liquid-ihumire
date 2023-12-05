@@ -4,9 +4,18 @@ package model.controller
 import cl.uchile.dcc.citric.model.states.{AbsGameState, GameState, PreGameState, ChapterState}
 
 class GameController{
-  // Estado actual del juego
-  var state: GameState = new PreGameState(this)
+  private var _state: GameState = new PreGameState(this)
+  def state: GameState = _state
+  def state_=(newState: GameState): Unit = {
+    _state = newState
+  }
 
+  private var _currChapter: Int = 1
+  def currChapter: Int = _currChapter
+
+  def currChapter_=(newCurrChapter: Int): Unit = {
+    _currChapter = newCurrChapter
+  }
   def newGame(): Unit = state.newGame()
 
   def newChapter(): Unit = state.newChapter()
