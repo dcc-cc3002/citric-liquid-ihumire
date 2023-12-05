@@ -25,6 +25,10 @@ import scala.util.Random
  */
 trait Character {
   /**
+   * Indicates whether the character is knocked out.
+   */
+  def knockedOut(): Boolean
+  /**
    * Rolls a dice
    */
   def rollDice(): Int
