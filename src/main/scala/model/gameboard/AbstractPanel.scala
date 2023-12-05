@@ -16,7 +16,7 @@ abstract class AbstractPanel extends Panel {
    * In the game, multiple characters might be on the same panel at once, e.g., if multiple players
    * land on the same space.
    */
-  protected val _characters: ArrayBuffer[PlayerCharacter] = new ArrayBuffer[PlayerCharacter]()
+  private val _characters: ArrayBuffer[PlayerCharacter] = new ArrayBuffer[PlayerCharacter]()
 
   /**
    * Get a copy of the array of characters currently on this panel.
@@ -33,7 +33,7 @@ abstract class AbstractPanel extends Panel {
    *
    * @return A copy of the list of Panel instances that are adjacent or connected to this panel.
    */
-  protected val _nextPanels: ArrayBuffer[Panel] = new ArrayBuffer[Panel]()
+  private val _nextPanels: ArrayBuffer[Panel] = new ArrayBuffer[Panel]()
 
   /**
    * Get a copy of the array of panels that are directly connected to this one.
