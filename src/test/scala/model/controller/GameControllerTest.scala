@@ -3,6 +3,9 @@ package model.controller
 
 import model.states.{ChapterState, CombatState, EndState, MovePlayerState, PanelState, PlayerTurnState, PreGameState, RecoveryState, ResponseState}
 
+import cl.uchile.dcc.citric.exceptions.InvalidActionException
+import org.junit.Assert
+
 class GameControllerTest extends munit.FunSuite {
   private var controller1: GameController = _
   private var controller2: GameController = _
@@ -18,6 +21,10 @@ class GameControllerTest extends munit.FunSuite {
 
   test("The controller have an initial state"){
     assert(controller1.state.isInstanceOf[PreGameState])
+  }
+
+  test("Wrong state test for PreGame") {
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
   }
 
   test("The controller pass to chapter state"){
