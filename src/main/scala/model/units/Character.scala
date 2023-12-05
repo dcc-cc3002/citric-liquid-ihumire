@@ -25,31 +25,6 @@ import scala.util.Random
  */
 trait Character {
   /**
-   * The name of the character.
-   */
-  val name: String
-  /**
-   * The maximum amount of Hit Points (HP) the character can have.
-   */
-  val maxHp: Int
-  /**
-   * The character's attack power.
-   */
-  val attack: Int
-  /**
-   * The character's defense power.
-   */
-  val defense: Int
-  /**
-   * The character's evasion power.
-   */
-  val evasion: Int
-  /**
-   * A random number generator for various game actions.
-   *
-   */
-  val randomNumberGenerator: Random
-  /**
    * Rolls a dice
    */
   def rollDice(): Int

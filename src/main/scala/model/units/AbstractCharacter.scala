@@ -9,20 +9,46 @@ import scala.util.Random
  * This abstract class serves as a foundation for all character types, providing common characteristics
  * and behaviors. It includes methods for rolling a dice, managing stars, and handling health points.
  *
- * @param name The name of the character.
- * @param maxHp The maximum health points the character can have.
- * @param attack The character's attack power.
- * @param defense The character's defense power.
- * @param evasion The character's evasion ability.
- * @param randomNumberGenerator A random number generator for dice rolling.
+ * @param _name The name of the character.
+ * @param _maxHp The maximum health points the character can have.
+ * @param _attack The character's attack power.
+ * @param _defense The character's defense power.
+ * @param _evasion The character's evasion ability.
+ * @param _randomNumberGenerator A random number generator for dice rolling.
  * @author [[https://github.com/ihumire Ignacio Humire S.]]
  */
-abstract class AbstractCharacter(val name: String,
-                                 val maxHp: Int,
-                                 val attack: Int,
-                                 val defense: Int,
-                                 val evasion: Int,
-                                 val randomNumberGenerator: Random) extends Character {
+abstract class AbstractCharacter(private val _name: String,
+                                 private val _maxHp: Int,
+                                 private val _attack: Int,
+                                 private val _defense: Int,
+                                 private val _evasion: Int,
+                                 private val _randomNumberGenerator: Random) extends Character {
+  /**
+   * Getter name
+   */
+  def name: String = _name
+  /**
+   * Getter maxHp
+   */
+  def maxHp: Int = _maxHp
+
+  /**
+   * Getter attack
+   */
+  def attack: Int = _attack
+  /**
+   * Getter defense
+   */
+  def defense: Int = _defense
+  /**
+   * Getter evasion
+   */
+  def evasion: Int = _evasion
+  /**
+   * Getter randomNumberGenerator
+   */
+  def randomNumberGenerator: Random = _randomNumberGenerator
+
   private var _currHp: Int = maxHp
   /**
    * Current health points of the character.
