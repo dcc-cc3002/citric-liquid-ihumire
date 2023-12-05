@@ -23,13 +23,27 @@ class GameControllerTest extends munit.FunSuite {
     assert(controller1.state.isInstanceOf[PreGameState])
   }
 
-  test("Wrong state test for PreGame") {
-    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
-  }
-
-  test("The controller pass to chapter state"){
+  test("Valid Transitions from PreGameState"){
     controller1.newGame()
     assert(controller1.state.isInstanceOf[ChapterState])
+  }
+
+  test("Invalid Transitions from PregameState"){
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.playTurn())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.ko())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.normaSixReach())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stillKo())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.suffRoll())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.rollDice())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.chooseDirection())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stopEarly())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.notMoves())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.attacking())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.defending())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.avoiding())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.endCombat())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.applyEffect())
   }
 
   test("The controller starts a new chapter"){
@@ -39,7 +53,7 @@ class GameControllerTest extends munit.FunSuite {
     assertEquals(controller1.currChapter, expChapter)
   }
 
-  test("The controller go to different states from Chapter State"){
+  test("Valid Transitions from ChapterState"){
     // To PlayerTurnState
     controller1.newGame()
     controller1.playTurn()
@@ -57,8 +71,23 @@ class GameControllerTest extends munit.FunSuite {
     controller4.newChapter()
     assert(controller4.state.isInstanceOf[ChapterState])
   }
+  test("Invalid Transitions from ChapterState") {
+    controller1.newGame()
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newGame())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stillKo())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.suffRoll())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.rollDice())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.chooseDirection())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stopEarly())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.notMoves())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.attacking())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.defending())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.avoiding())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.endCombat())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.applyEffect())
+  }
 
-  test("The controller go to different states from Recovery State") {
+  test("Valid Transitions from RecoveryState") {
     // To ChapterState
     controller1.newGame()
     controller1.ko()
@@ -71,14 +100,52 @@ class GameControllerTest extends munit.FunSuite {
     assert(controller2.state.isInstanceOf[PlayerTurnState])
   }
 
-  test("The controller go to MovePlayer states from PlayerTurn State") {
+  test("Invalid Transitions from RecoveryState") {
+    controller1.newGame()
+    controller1.ko()
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newGame())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.playTurn())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.ko())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.normaSixReach())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.rollDice())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.chooseDirection())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stopEarly())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.notMoves())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.attacking())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.defending())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.avoiding())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.endCombat())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.applyEffect())
+  }
+
+  test("Valid Transitions from PlayerTurnState") {
     controller1.newGame()
     controller1.playTurn()
     controller1.rollDice()
     assert(controller1.state.isInstanceOf[MovePlayerState])
   }
+  test("Invalid Transitions from PlayerTurnState") {
+    controller1.newGame()
+    controller1.playTurn()
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newGame())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.playTurn())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.ko())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.normaSixReach())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stillKo())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.suffRoll())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.chooseDirection())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stopEarly())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.notMoves())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.attacking())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.defending())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.avoiding())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.endCombat())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.applyEffect())
+  }
 
-  test("The controller go to different states from MovePlayer State") {
+  test("Valid Transitions from MovePlayerState") {
     // To MovePlayerState
     controller1.newGame()
     controller1.playTurn()
@@ -99,7 +166,26 @@ class GameControllerTest extends munit.FunSuite {
     assert(controller3.state.isInstanceOf[CombatState])
   }
 
-  test("The controller go to different states from Combat State") {
+  test("Invalid Transitions from MovePlayerState") {
+    controller1.newGame()
+    controller1.playTurn()
+    controller1.rollDice()
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newGame())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.playTurn())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.ko())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.normaSixReach())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stillKo())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.suffRoll())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.rollDice())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.attacking())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.defending())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.avoiding())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.endCombat())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.applyEffect())
+  }
+
+  test("Valid Transitions from CombatState") {
     // To ResponseState
     controller1.newGame()
     controller1.playTurn()
@@ -116,7 +202,28 @@ class GameControllerTest extends munit.FunSuite {
     assert(controller2.state.isInstanceOf[PanelState])
   }
 
-  test("The controller go to different states from Response State") {
+  test("Invalid Transitions from CombatState") {
+    controller1.newGame()
+    controller1.playTurn()
+    controller1.rollDice()
+    controller1.stopEarly()
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newGame())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.playTurn())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.ko())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.normaSixReach())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stillKo())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.suffRoll())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.rollDice())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.chooseDirection())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stopEarly())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.notMoves())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.defending())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.avoiding())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.applyEffect())
+  }
+
+  test("Valid Transitions from ResponseState") {
     // To CombatState by defending
     controller1.newGame()
     controller1.playTurn()
@@ -135,7 +242,29 @@ class GameControllerTest extends munit.FunSuite {
     assert(controller2.state.isInstanceOf[CombatState])
   }
 
-  test("The controller go to Chapter State from Panel State") {
+  test("Invalid Transitions from ResponseState") {
+    controller1.newGame()
+    controller1.playTurn()
+    controller1.rollDice()
+    controller1.stopEarly()
+    controller1.attacking()
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newGame())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.playTurn())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.ko())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.normaSixReach())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stillKo())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.suffRoll())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.rollDice())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.chooseDirection())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stopEarly())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.notMoves())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.attacking())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.endCombat())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.applyEffect())
+  }
+
+  test("Valid Transitions from PanelState") {
     // To ChapterState
     controller1.newGame()
     controller1.playTurn()
@@ -144,5 +273,27 @@ class GameControllerTest extends munit.FunSuite {
     controller1.endCombat()
     controller1.applyEffect()
     assert(controller1.state.isInstanceOf[ChapterState])
+  }
+  test("Invalid Transitions from PanelState") {
+    controller1.newGame()
+    controller1.playTurn()
+    controller1.rollDice()
+    controller1.stopEarly()
+    controller1.endCombat()
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newGame())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.newChapter())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.playTurn())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.ko())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.normaSixReach())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stillKo())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.suffRoll())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.rollDice())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.chooseDirection())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.stopEarly())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.notMoves())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.attacking())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.defending())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.avoiding())
+    Assert.assertThrows(classOf[InvalidActionException], () => controller1.endCombat())
   }
 }
