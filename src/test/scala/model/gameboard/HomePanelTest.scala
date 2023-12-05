@@ -52,30 +52,6 @@ class HomePanelTest extends FunSuite {
     assertNotEquals(home.characters, expectedCharacters)
   }
 
-  test("Heal a character in a home panel with maxHp") {
-    val expectedHp: Int = player1.currHp + 1
-    home.healCharacter(player1)
-    assertNotEquals(player1.currHp, expectedHp)
-  }
-
-  test("Heal a character in a home panel with not maxHp") {
-    player1.decreaseHp(2)
-    val expectedHp: Int = player1.currHp + 1
-    home.healCharacter(player1)
-    assertEquals(player1.currHp, expectedHp)
-  }
-
-  test("Do norma check to a character in a home panel, ending with a increase of norma") {
-    player1.increaseStars(10)
-    home.normaCheck(player1)
-    assert(player1.currNorma.isInstanceOf[Norma2])
-  }
-
-  test("Do norma check to a character in a home panel, ending with a stay of norma"){
-    home.normaCheck(player1)
-    assert(player1.currNorma.isInstanceOf[Norma1])
-  }
-
   test("Add a panel to nextPanels in home panel, having at 3 max") {
     val expectedOnePanel: ArrayBuffer[Panel] = ArrayBuffer(neutral)
     val expectedTwoPanels: ArrayBuffer[Panel] = ArrayBuffer(neutral, home)

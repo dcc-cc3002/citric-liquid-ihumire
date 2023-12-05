@@ -20,33 +20,12 @@ import scala.collection.mutable.ArrayBuffer
 
 class HomePanel(val owner: PlayerCharacter) extends AbstractPanel {
   /**
-   * Heals a character from the list of characters currently on this panel.
-   *
-   * This method might be invoked when a player moves into this panel.
-   *
-   * @param player The player character to heal on this panel.
-   */
-  def healCharacter(player: PlayerCharacter): Unit = {
-    player.increaseHp(1)
-  }
-
-  /**
-   * Performs a NormaCheck for a character from the list of characters currently on this panel.
-   *
-   * A NormaCheck invokes the NormaClear method of the character to check.
-   *
-   * @param player The player character to perform a NormaCheck on.
-   */
-  def normaCheck(player: PlayerCharacter): Unit = {
-    player.normaClear()
-  }
-  /**
    * Apply the panel's effects, including performing a NormaCheck and healing a player character.
    *
    * @param player The player character on which the panel's effects will be applied.
    */
   override def apply(player: PlayerCharacter): Unit = {
-    normaCheck(player)
-    healCharacter(player)
+    player.normaClear()
+    player.increaseHp(1)
   }
 }
