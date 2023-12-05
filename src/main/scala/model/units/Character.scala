@@ -196,5 +196,7 @@ trait Character {
    * @param character The character to whom the victory is given.
    */
   def giveVicTo(character: Character): Unit
+  def startCombatVs(enemy: Character): Unit
+  def responseVs(attacker: Character, atk: Int): Unit
 
 }

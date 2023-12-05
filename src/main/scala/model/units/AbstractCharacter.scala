@@ -283,4 +283,11 @@ abstract class AbstractCharacter(private val _name: String,
     knockCharacter()
     if (knockedOut) loseAgainst(character)
   }
+  def startCombatVs(enemy: Character): Unit = {
+    if (!knockedOut && !enemy.knockedOut()) {
+      val roll: Int = rollDice()
+      val atk: Int = attackCharacter(roll)
+      enemy.responseVs(this,atk)
+    }
+  }
 }
