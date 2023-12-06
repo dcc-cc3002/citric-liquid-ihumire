@@ -198,5 +198,5 @@ trait Character {
   def giveVicTo(character: Character): Unit
   def startCombatVs(enemy: Character): Unit
   def responseVs(attacker: Character, atk: Int): Unit
-
+  def recieveCounterVs(replyUser: Character, atkReply: Int): Unit
 }

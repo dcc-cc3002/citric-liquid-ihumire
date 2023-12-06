@@ -287,7 +287,38 @@ abstract class AbstractCharacter(private val _name: String,
     if (!knockedOut && !enemy.knockedOut()) {
       val roll: Int = rollDice()
       val atk: Int = attackCharacter(roll)
-      enemy.responseVs(this,atk)
+      enemy.responseVs(this, atk)
     }
+  }
+  def responseVs(character: Character, atk: Int): Unit = {
+    val roll: Int = rollDice()
+    val defOrEva: Int = rollDice()
+    var dmg: Int = defendCharacter(atk, roll)
+    if (defOrEva <= 3) {
+      dmg = avoidCharacter(atk, roll)
+    }
+    decreaseHp(dmg)
+    knockCharacter()
+    if (knockedOut) {
+      loseStarsAgainst(character)
+      loseAgainst(character)
+    }
+    else {
+      val rollR: Int = rollDice()
+      val atkR: Int = attackCharacter(rollR)
+      character.recieveCounterVs(this, atkR)
+    }
+  }
+
+  def recieveCounterVs(replyUser: Character, atkReply: Int): Unit = {
+    val rollR: Int = rollDice()
+    val defOrEva: Int = rollDice()
+    var dmg: Int = defendCharacter(atkReply, rollR)
+    if (defOrEva <= 3) {
+      dmg = avoidCharacter(atkReply, rollR)
+    }
+    decreaseHp(dmg)
+    transferStarsTo(replyUser)
+    giveVicTo(replyUser)
   }
 }

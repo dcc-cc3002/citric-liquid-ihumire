@@ -42,12 +42,5 @@ class Chicken(name: String, maxHp: Int, attack: Int, defense: Int, evasion: Int,
    * @param character The character to win a victory against Chicken.
    */
   def loseAgainst(character: Character): Unit = character.winVsChicken(this)
-  def responseVs(character: Character, atk: Int): Unit = {
-    val roll: Int = rollDice()
-    val dmg: Int = defendCharacter(atk,roll)
-    decreaseHp(dmg)
-    transferStarsTo(character)
-    giveVicTo(character)
-  }
 }
 

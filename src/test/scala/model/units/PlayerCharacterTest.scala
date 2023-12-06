@@ -450,5 +450,55 @@ class PlayerCharacterTest extends munit.FunSuite {
     character.giveVicTo(seagull)
     assertEquals(character.currVictories, charVictories)
   }
+
+  test("Player vs player duel"){
+    character.decreaseHp(2)
+    character1.decreaseHp(3)
+    val startHpChar: Int = character.currHp
+    val startHpChar1: Int = character1.currHp
+    character.startCombatVs(character1)
+    assert(0 <= character.currHp && character.currHp <= startHpChar)
+    assert(0 <= character1.currHp && character1.currHp <= startHpChar1)
+  }
+
+  test("Player vs Player duel") {
+    character.decreaseHp(2)
+    character1.decreaseHp(3)
+    val startHpChar: Int = character.currHp
+    val startHpChar1: Int = character1.currHp
+    character.startCombatVs(character1)
+    assert(0 <= character.currHp && character.currHp <= startHpChar)
+    assert(0 <= character1.currHp && character1.currHp <= startHpChar1)
+  }
+
+  test("Player vs Chicken duel") {
+    character.decreaseHp(2)
+    chicken.decreaseHp(1)
+    val startHpChar: Int = character.currHp
+    val startHpChicken: Int = chicken.currHp
+    character.startCombatVs(chicken)
+    assert(0 <= character.currHp && character.currHp <= startHpChar)
+    assert(0 <= chicken.currHp && chicken.currHp <= startHpChicken)
+  }
+
+  test("Player vs RoboBall duel") {
+    character.decreaseHp(2)
+    roboBall.decreaseHp(1)
+    val startHpChar: Int = character.currHp
+    val startHpRoboBall: Int = roboBall.currHp
+    character.startCombatVs(roboBall)
+    assert(0 <= character.currHp && character.currHp <= startHpChar)
+    assert(0 <= roboBall.currHp && roboBall.currHp <= startHpRoboBall)
+  }
+
+  test("Player vs Seagull duel") {
+    character.decreaseHp(2)
+    seagull.decreaseHp(1)
+    val startHpChar: Int = character.currHp
+    val startHpSeagull: Int = seagull.currHp
+    character.startCombatVs(seagull)
+    assert(0 <= character.currHp && character.currHp <= startHpChar)
+    assert(0 <= seagull.currHp && seagull.currHp <= startHpSeagull)
+  }
 }
 
