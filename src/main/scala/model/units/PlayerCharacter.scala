@@ -51,9 +51,21 @@ class PlayerCharacter(name: String,
                       defense: Int,
                       evasion: Int,
                       randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) with Subject {
+  /** List of observers registered to this player character. */
   val observers: ListBuffer[Observer] = ListBuffer[Observer]()
+
+  /**
+   * Adds an observer to the list of observers for this player character.
+   *
+   * @param observer The observer to be added.
+   */
   def addObserver(observer: Observer): Unit = observers += observer
 
+  /**
+   * Notifies all registered observers with a specific response.
+   *
+   * @param response The response to be sent to observers.
+   */
   def notifyObservers(response: Any): Unit = {
     for (o <- observers) {
       o.update(this, response)

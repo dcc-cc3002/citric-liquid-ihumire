@@ -196,7 +196,33 @@ trait Character {
    * @param character The character to whom the victory is given.
    */
   def giveVicTo(character: Character): Unit
+
+  /**
+   * Initiates combat against an enemy character in the game.
+   *
+   * This method allows the character to start a combat encounter with another character in the game.
+   *
+   * @param enemy The character with whom the combat is initiated.
+   */
   def startCombatVs(enemy: Character): Unit
+
+  /**
+   * Responds to an incoming attack during combat, providing the attack value.
+   *
+   * This method is called when the character responds to an attack from another character during combat.
+   *
+   * @param attacker The character initiating the attack.
+   * @param atk      The attack value associated with the incoming attack.
+   */
   def responseVs(attacker: Character, atk: Int): Unit
+
+  /**
+   * Receives a counterattack during combat, providing the counterattack value.
+   *
+   * This method is called when the character receives a counterattack from another character during combat.
+   *
+   * @param replyUser The character initiating the counterattack.
+   * @param atkReply  The counterattack value associated with the incoming counterattack.
+   */
   def recieveCounterVs(replyUser: Character, atkReply: Int): Unit
 }
