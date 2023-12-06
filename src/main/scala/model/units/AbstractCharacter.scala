@@ -283,40 +283,81 @@ abstract class AbstractCharacter(private val _name: String,
     knockCharacter()
     if (knockedOut) loseAgainst(character)
   }
+
+  /**
+   * Initiates combat with another character and performs the necessary actions during the combat sequence.
+   *
+   * This method allows the player character to start a combat encounter with another character. The combat sequence
+   * involves rolling dice for attack, initiating a response from the enemy character, and processing the outcome based
+   * on defensive actions, evasions, and counter-attacks.
+   *
+   * @param enemy The character with whom the combat is initiated.
+   */
   def startCombatVs(enemy: Character): Unit = {
+    // Check if neither character is knocked out
     if (!knockedOut && !enemy.knockedOut()) {
+      // Roll a dice for attack
       val roll: Int = rollDice()
       val atk: Int = attackCharacter(roll)
+      // Initiate the enemy character's response
       enemy.responseVs(this, atk)
     }
   }
+
+  /**
+   * Handles the response from an enemy character during combat.
+   *
+   * This method represents the response of an enemy character during a combat encounter. It involves rolling dice for
+   * defense or evasion, calculating damage, and determining the outcome of the combat sequence, including potential
+   * counter-attacks.
+   *
+   * @param character The character initiating the attack.
+   * @param atk       The attack value initiated by the attacking character.
+   */
   def responseVs(character: Character, atk: Int): Unit = {
+    // Roll a dice for defense and evasion
     val roll: Int = rollDice()
     val defOrEva: Int = rollDice()
+    // Initialize damage based on defense or evasion
     var dmg: Int = defendCharacter(atk, roll)
     if (defOrEva <= 3) {
       dmg = avoidCharacter(atk, roll)
     }
+    // Decrease health points, apply knock effects, and handle outcomes
     decreaseHp(dmg)
     knockCharacter()
     if (knockedOut) {
       loseStarsAgainst(character)
       loseAgainst(character)
-    }
-    else {
+    } else {
+      // Roll for a counter-attack
       val rollR: Int = rollDice()
       val atkR: Int = attackCharacter(rollR)
+      // Initiate the counter-attack from this character
       character.recieveCounterVs(this, atkR)
     }
   }
 
+  /**
+   * Handles the response from this character during a counter-attack.
+   *
+   * This method represents the response of this character during a counter-attack initiated after successfully defending
+   * against an enemy character's attack. It involves rolling dice for defense or evasion, calculating damage, and
+   * determining the outcome of the counter-attack.
+   *
+   * @param replyUser The character initiating the counter-attack.
+   * @param atkReply  The attack value initiated by the character during the counter-attack.
+   */
   def recieveCounterVs(replyUser: Character, atkReply: Int): Unit = {
+    // Roll a dice for defense and evasion
     val rollR: Int = rollDice()
     val defOrEva: Int = rollDice()
+    // Initialize damage based on defense or evasion
     var dmg: Int = defendCharacter(atkReply, rollR)
     if (defOrEva > 3) {
       dmg = avoidCharacter(atkReply, rollR)
     }
+    // Decrease health points, apply knock effects, and handle outcomes
     decreaseHp(dmg)
     knockCharacter()
     if (knockedOut) {
