@@ -24,37 +24,26 @@ class EncounterPanel extends AbstractPanel {
    */
   private val _wildUnitInPanel: ArrayBuffer[Character] = new ArrayBuffer[Character]()
   def wildUnitInPanel: ArrayBuffer[Character] = _wildUnitInPanel.clone()
-  /**
-   * Adds a random wild unit to the list of wild units only if it is empty.
-   * Then do a
-   * This method might be invoked when a player moves to this panel to have a fight with the
-   * wild unit present on the panel.
-   */
-  /*def addRandomWildUnit(): Unit = {
-    if (wildUnitInPanel.isEmpty) {
-      val enemies = ArrayBuffer[Character](new Chicken,new RoboBall(), new Seagull())
-      val randomNumber: Random = new Random()
-      _wildUnitInPanel.addOne(enemies(randomNumber.nextInt(enemies.length)))
-    }
-  }
+
   /**
    * Remove the wild unit from the panel.
    */
   def removeWildUnit(): Unit = {
-    if (wildUnitInPanel.nonEmpty){
+    if (wildUnitInPanel.nonEmpty) {
       _wildUnitInPanel.remove(0)
     }
-  }*/
-
+  }
+  /**
+   * Adds a random wild unit to the list of wild units only if it is empty.
+   *
+   * This method might be invoked when a player moves to this panel to have a fight with the
+   * wild unit present on the panel.
+   */
   override def apply(player: PlayerCharacter): Unit = {
     if (wildUnitInPanel.isEmpty) {
       val enemies = ArrayBuffer[Character](new Chicken(), new RoboBall(), new Seagull())
       val randomNumber: Random = new Random()
       _wildUnitInPanel.addOne(enemies(randomNumber.nextInt(enemies.length)))
-    }/*
-    var enemy: Character = wildUnitInPanel(0)
-    if (enemy.knockedOut()){
-      _wildUnitInPanel.remove(0)
-    }*/
+    }
   }
 }

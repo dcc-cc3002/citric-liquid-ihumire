@@ -84,20 +84,13 @@ class EncounterPanelTest extends FunSuite {
     drop.removePanel(neutral)
     assertEquals(drop.nextPanels, expectedNoPanel)
   }
-/*
-  test("Add random wild unit to encounter panel") {
-    encounter.addRandomWildUnit()
-    assert(encounter.wildUnitInPanel(0).isInstanceOf[Chicken]||
-          encounter.wildUnitInPanel(0).isInstanceOf[RoboBall]||
-          encounter.wildUnitInPanel(0).isInstanceOf[Seagull])
-  }
 
   test("Remove a wild unit from an encounter panel when is death") {
-    encounter.addRandomWildUnit()
+    encounter.apply(player1)
     assert(encounter.wildUnitInPanel.nonEmpty)
     encounter.removeWildUnit()
     assert(encounter.wildUnitInPanel.isEmpty)
-  }*/
+  }
 
   test("An encounter panel should be applied his action to a character"){
     encounter.apply(player1)
