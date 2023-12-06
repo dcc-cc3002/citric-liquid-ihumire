@@ -9,6 +9,8 @@ import cl.uchile.dcc.citric.model.roads.{AllRoads, StarsRoad, VictoriesRoad}
  * The `Norma3` class represents a specific Norma level for a character in the game.
  * This Norma level defines advanced character status and requirements to achieve an even higher Norma level, Norma4.
  * Players need to fulfill certain criteria related to stars and victories to progress to Norma4.
+ *
+ * @author [[https://github.com/ihumire Ignacio Humire S.]]
  */
 class Norma3 extends Norma {
   /**
