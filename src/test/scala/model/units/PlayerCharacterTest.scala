@@ -30,7 +30,7 @@ class PlayerCharacterTest extends munit.FunSuite {
   override def beforeEach(context: BeforeEach): Unit = {
     randomNumberGenerator = new Random(11)
     character = new PlayerCharacter(name, maxHp, attack, defense, evasion)
-    character1 = new PlayerCharacter(name, maxHp, attack1, defense1, evasion1,randomNumberGenerator)
+    character1 = new PlayerCharacter(name, 10, attack1, defense1, evasion1,randomNumberGenerator)
     chicken = new Chicken()
     roboBall = new RoboBall()
     seagull = new Seagull()
@@ -461,9 +461,18 @@ class PlayerCharacterTest extends munit.FunSuite {
     assert(0 <= character1.currHp && character1.currHp <= startHpChar1)
   }
 
-  test("Player vs Player duel") {
+  test("Player vs Player duel 1") {
     character.decreaseHp(2)
     character1.decreaseHp(3)
+    val startHpChar: Int = character.currHp
+    val startHpChar1: Int = character1.currHp
+    character.startCombatVs(character1)
+    assert(0 <= character.currHp && character.currHp <= startHpChar)
+    assert(0 <= character1.currHp && character1.currHp <= startHpChar1)
+  }
+
+  test("Player vs Player duel 2") {
+    character.decreaseHp(4)
     val startHpChar: Int = character.currHp
     val startHpChar1: Int = character1.currHp
     character.startCombatVs(character1)

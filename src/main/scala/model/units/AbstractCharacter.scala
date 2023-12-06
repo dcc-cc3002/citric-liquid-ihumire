@@ -314,11 +314,14 @@ abstract class AbstractCharacter(private val _name: String,
     val rollR: Int = rollDice()
     val defOrEva: Int = rollDice()
     var dmg: Int = defendCharacter(atkReply, rollR)
-    if (defOrEva <= 3) {
+    if (defOrEva > 3) {
       dmg = avoidCharacter(atkReply, rollR)
     }
     decreaseHp(dmg)
-    transferStarsTo(replyUser)
-    giveVicTo(replyUser)
+    knockCharacter()
+    if (knockedOut) {
+      loseStarsAgainst(replyUser)
+      loseAgainst(replyUser)
+    }
   }
 }
