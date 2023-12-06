@@ -51,10 +51,10 @@ class PlayerCharacter(name: String,
                       defense: Int,
                       evasion: Int,
                       randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) with Subject {
-  private val observers: ListBuffer[Observer] = ListBuffer[Observer]()
+  val observers: ListBuffer[Observer] = ListBuffer[Observer]()
   def addObserver(observer: Observer): Unit = observers += observer
 
-  def notifyObservers(response: Any) = {
+  def notifyObservers(response: Any): Unit = {
     for (o <- observers) {
       o.update(this, response)
     }

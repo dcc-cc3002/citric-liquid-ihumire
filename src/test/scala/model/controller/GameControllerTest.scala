@@ -296,4 +296,22 @@ class GameControllerTest extends munit.FunSuite {
     Assert.assertThrows(classOf[InvalidActionException], () => controller1.avoiding())
     Assert.assertThrows(classOf[InvalidActionException], () => controller1.endCombat())
   }
+
+  test("Players have an observer"){
+    controller1.startNewGame()
+    for(p <- controller1.players){
+      assert(p.observers(0).isInstanceOf[GameController])
+    }
+  }
+
+  test("Player win by reach norma 6") {
+    controller1.startNewGame()
+    controller1.players(0).increaseStars(200)
+    controller1.players(0).normaClear()
+    controller1.players(0).normaClear()
+    controller1.players(0).normaClear()
+    controller1.players(0).normaClear()
+    controller1.players(0).normaClear()
+    assert(controller1.state.isInstanceOf[EndState])
+  }
 }

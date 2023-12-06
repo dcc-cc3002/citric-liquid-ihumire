@@ -26,13 +26,20 @@ class GameController extends Observer {
     println("Norma six reach by " + observable)
     normaSixReach()
   }
-
+  val players: ListBuffer[PlayerCharacter] = ListBuffer[PlayerCharacter]()
   def startNewGame(): Unit = {
-    val players: ListBuffer[PlayerCharacter] = ListBuffer[PlayerCharacter]()
-    var player1: PlayerCharacter = new PlayerCharacter("Molly", 5, 2, 1, 1)
-    var player2: PlayerCharacter = new PlayerCharacter("Kira", 5, 2, -2, 1)
-    var player3: PlayerCharacter = new PlayerCharacter("Luna", 5, 1, 0, 2)
-    var player4: PlayerCharacter = new PlayerCharacter("Erick", 5, 0, 3, -1)
+    val player1: PlayerCharacter = new PlayerCharacter("Molly", 5, 2, 1, 1)
+    val player2: PlayerCharacter = new PlayerCharacter("Kira", 5, 2, -2, 1)
+    val player3: PlayerCharacter = new PlayerCharacter("Luna", 5, 1, 0, 2)
+    val player4: PlayerCharacter = new PlayerCharacter("Erick", 5, 0, 3, -1)
+
+    players+=player1
+    players+=player2
+    players+=player3
+    players+=player4
+
+    for (p <- players) p.addObserver(this)
+    newGame()
   }
   def newGame(): Unit = state.newGame()
 
