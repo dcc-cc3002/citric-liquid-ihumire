@@ -10,20 +10,32 @@ class Norma5 extends Norma {
 
   def checkStars(player: PlayerCharacter): Norma = {
     var norm: Norma = new Norma5
-    if (player.currStars >= 200) norm = new Norma6
+    if (player.currStars >= 200) {
+      norm = new Norma6
+      player.notifyObservers("Norma six reach")
+    }
     norm
   }
 
   def checkVictories(player: PlayerCharacter): Norma = {
     var norm: Norma = new Norma5
-    if (player.currVictories >= 14) norm = new Norma6
+    if (player.currVictories >= 14) {
+      norm = new Norma6
+      player.notifyObservers("Norma six reach")
+    }
     norm
   }
 
   def checkAll(player: PlayerCharacter): Norma = {
     var norm: Norma = new Norma5
-    if (player.currStars >= 200) norm = new Norma6
-    else if (player.currVictories >= 14) norm = new Norma6
+    if (player.currStars >= 200) {
+      norm = new Norma6
+      player.notifyObservers("Norma six reach")
+    }
+    else if (player.currVictories >= 14) {
+      norm = new Norma6
+      player.notifyObservers("Norma six reach")
+    }
     norm
   }
 

@@ -2,8 +2,11 @@ package cl.uchile.dcc.citric
 package model.units
 
 import cl.uchile.dcc.citric.model.norm.{Norma, Norma1, Norma2, Norma3}
-import cl.uchile.dcc.citric.model.roads.{AllRoads, StarsRoad, VictoriesRoad, Road}
+import cl.uchile.dcc.citric.model.observable.Subject
+import cl.uchile.dcc.citric.model.observer.Observer
+import cl.uchile.dcc.citric.model.roads.{AllRoads, Road, StarsRoad, VictoriesRoad}
 
+import scala.collection.mutable.ListBuffer
 import scala.util.Random
 
 /** The `PlayerCharacter` class represents a character or avatar in the game, encapsulating
@@ -47,7 +50,15 @@ class PlayerCharacter(name: String,
                       attack: Int,
                       defense: Int,
                       evasion: Int,
-                      randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) {
+                      randomNumberGenerator: Random = new Random()) extends AbstractCharacter (name, maxHp, attack, defense, evasion, randomNumberGenerator) with Subject {
+  private val observers: ListBuffer[Observer] = ListBuffer[Observer]()
+  def addObserver(observer: Observer): Unit = observers += observer
+
+  def notifyObservers(response: Any) = {
+    for (o <- observers) {
+      o.update(this, response)
+    }
+  }
 
   private var _currNorma: Norma = new Norma1
 
