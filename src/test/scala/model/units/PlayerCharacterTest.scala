@@ -1,5 +1,5 @@
 package cl.uchile.dcc.citric
-package model
+package model.units
 
 import scala.util.Random
 
@@ -11,9 +11,14 @@ class PlayerCharacterTest extends munit.FunSuite {
   */
   private val name = "testPlayer"
   private val maxHp = 10
+  var currHp = 10
   private val attack = 1
   private val defense = 1
   private val evasion = 1
+  var currNorma = 1
+  var currStars = 0
+  var currVictories = 0
+  var currRoad = 0
   private val randomNumberGenerator = new Random(11)
   /* Add any other constants you need here... */
 
@@ -31,9 +36,14 @@ class PlayerCharacterTest extends munit.FunSuite {
     character = new PlayerCharacter(
       name,
       maxHp,
+      currHp,
       attack,
       defense,
       evasion,
+      currNorma,
+      currStars,
+      currVictories,
+      currRoad,
       randomNumberGenerator
     )
   }
@@ -41,9 +51,34 @@ class PlayerCharacterTest extends munit.FunSuite {
   test("A character should have correctly set their attributes") {
     assertEquals(character.name, name)
     assertEquals(character.maxHp, maxHp)
+    assertEquals(character.currHp, currHp)
     assertEquals(character.attack, attack)
     assertEquals(character.defense, defense)
     assertEquals(character.evasion, evasion)
+    assertEquals(character.currNorma, currNorma)
+    assertEquals(character.currStars, currStars)
+    assertEquals(character.currVictories, currVictories)
+    assertEquals(character.currRoad, currRoad)
+  }
+
+  test("A character should be able to increase his level of norma") {
+    val expectedNorma: Int = character.currNorma + 1
+    character.advanceNorma()
+    assertEquals(character.currNorma, expectedNorma)
+  }
+
+  test("A character should be able to increase his value of stars") {
+    val valueToGive: Int = 10
+    val expectedStars: Int = character.currStars + valueToGive
+    character.increaseStars(valueToGive)
+    assertEquals(character.currStars, expectedStars)
+  }
+
+  test("A character should be able to decrease his value of stars") {
+    val valueToDrop: Int = 10
+    val expectedStars: Int = character.currStars - valueToDrop
+    character.decreaseStars(valueToDrop)
+    assertEquals(character.currStars, expectedStars)
   }
 
   // Two ways to test randomness (you can use any of them):
@@ -60,9 +95,10 @@ class PlayerCharacterTest extends munit.FunSuite {
   // are always the same for the same seed.
   test("A character should be able to roll a dice with a fixed seed") {
     val other =
-      new PlayerCharacter(name, maxHp, attack, defense, evasion, new Random(11))
+      new PlayerCharacter(name, maxHp, currHp, attack, defense, evasion, currNorma, currStars, currVictories, currRoad, new Random(11))
     for (_ <- 1 to 10) {
       assertEquals(character.rollDice(), other.rollDice())
     }
   }
+
 }

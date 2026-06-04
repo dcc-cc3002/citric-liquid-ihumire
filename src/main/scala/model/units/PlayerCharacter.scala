@@ -1,5 +1,5 @@
 package cl.uchile.dcc.citric
-package model
+package model.units
 
 import scala.util.Random
 
@@ -35,17 +35,52 @@ import scala.util.Random
   * @author [[https://github.com/joelriquelme/ Joel Riquelme P.]]
   * @author [[https://github.com/r8vnhill/ Ignacio Slater M.]]
   * @author [[https://github.com/Seivier/ Vicente González B.]]
-  * @author [[https://github.com/~Your github account~/ ~Your Name~]]
+  * @author [[https://github.com/ihumire/ Ignacio Humire S.]]
   */
 class PlayerCharacter(val name: String,
               val maxHp: Int,
+              var currHp: Int,
               val attack: Int,
               val defense: Int,
               val evasion: Int,
+              var currNorma: Int,
+              var currStars: Int,
+              var currVictories: Int,
+              var currRoad: Int,
               val randomNumberGenerator: Random = new Random()) {
 
-  /** Rolls a dice and returns a value between 1 to 6. */
+  /**
+   * Rolls a dice and returns a value between 1 to 6.
+   */
   def rollDice(): Int = {
     randomNumberGenerator.nextInt(6) + 1
   }
+
+  /**
+   * The character increase his level of Norma.
+   */
+  def advanceNorma(): Unit = {
+    if (currNorma <= 5) {
+      currNorma += 1
+    }
+  }
+
+  /**
+   * The character increase his amount of stars by a specific value.
+   * @param value The number of stars given to the character bigger than 0.
+   */
+  def increaseStars(value: Int): Unit = {
+    currStars += value
+  }
+
+  /**
+   * The character decrease his amount of stars by a specific value.
+   *
+   * @param value The number of stars drop it by the character bigger than 0.
+   */
+  def decreaseStars(value: Int): Unit = {
+    currStars -= value
+  }
+
+  // define norma clear in the future for question about the road to go.
 }
