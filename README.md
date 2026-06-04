@@ -9,12 +9,9 @@ purpose is to serve as an educational tool, teaching foundational programming co
 
 ---
 
-## For Students
+## State Diagram
 
-The remainder of this README is yours to complete. Take this opportunity to describe your
-contributions, the design decisions you've made, and any other information you deem necessary.
-
-
+![State_Diagram](docs/diagrama-estados.png)
 
 <div style="text-align:center;">
     <img src="https://i.creativecommons.org/l/by/4.0/88x31.png" alt="Creative Commons License">
